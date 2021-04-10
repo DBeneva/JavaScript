@@ -1,4 +1,4 @@
-function getPriceDiscount(area) {
+function getYardGreening(area) {
     const price = area * 7.61;
     const discount = 0.18 * price;
     const finalPrice = price - discount;
@@ -7,4 +7,4 @@ function getPriceDiscount(area) {
 The discount is: ${discount.toFixed(2)} lv.`;
 }
 
-console.log(getPriceDiscount(540));
+console.log(getYardGreening(540));
