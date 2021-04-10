@@ -1,4 +1,4 @@
-function bonusPoints(num) {
+function getBonus(num) {
     num = Number(num);
     let bonusPoints = 0;
 
@@ -16,15 +16,14 @@ function bonusPoints(num) {
         bonusPoints += 2;
     }
 
-    console.log(bonusPoints);
-    console.log(num + bonusPoints);
+    return `${bonusPoints}\n${num + bonusPoints}`;
 }
 
-function bonusPointsTernary(num) {
+function getBonusTern(num) {
     num = Number(num);
-    let bonusPoints = getBonus() + getAdditionalBonus();
+    const bonusPoints = getBonus() + getAdditionalBonus();
 
-    console.log(`${bonusPoints}\n${num + bonusPoints}`);
+    return `${bonusPoints}\n${num + bonusPoints}`;
 
     function getBonus() {
         return num <= 100 ? 5 :
@@ -38,8 +37,8 @@ function bonusPointsTernary(num) {
     }
 }
 
-bonusPoints('20');
+console.log(getBonus('20'));
 
 console.log('====================');
 
-bonusPointsTernary('20');
+console.log(getBonusTern('20'));

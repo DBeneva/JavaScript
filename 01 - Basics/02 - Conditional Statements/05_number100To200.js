@@ -1,27 +1,25 @@
-function numbers(num) {
+function getRange(num) {
     num = Number(num);
 
     if (num < 100) {
-        console.log('Less than 100');
+        return 'Less than 100';
     } else if (num <= 200) {
-        console.log('Between 100 and 200');
+        return 'Between 100 and 200';
     } else {
-        console.log('Greater than 200');
+        return 'Greater than 200';
     }
 }
 
-function numbersTernary(num) {
+function getRangeTern(num) {
     num = Number(num);
 
-    let result = num < 100 ? 'Less than 100' :
+    return num < 100 ? 'Less than 100' :
         num <= 200 ? 'Between 100 and 200' :
             'Greater than 200';
-
-    console.log(result);
 }
 
-numbers('342');
+console.log(getRange('342'));
 
 console.log('====================');
 
-numbersTernary(142);
+console.log(getRangeTern(142));

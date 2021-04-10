@@ -1,4 +1,4 @@
-function areaOfFigures([figure, sideA, sideB]) {
+function getArea([figure, sideA, sideB]) {
     let area = 0;
     
     if (figure == 'square') {
@@ -11,10 +11,10 @@ function areaOfFigures([figure, sideA, sideB]) {
         area = sideA * sideB / 2;
     }
 
-    console.log(area.toFixed(3));
+    return area.toFixed(3);
 }
 
-function areaOfFiguresObj([figure, ...sides]) {
+function getAreaObj([figure, ...sides]) {
     let [sideA, sideB] = sides.map(Number);
 
     const calculations = {
@@ -24,11 +24,11 @@ function areaOfFiguresObj([figure, ...sides]) {
         triangle: sideA * sideB / 2
     };
 
-    console.log(calculations[figure].toFixed(3));
+    return calculations[figure].toFixed(3);
 }
 
-areaOfFigures(['rectangle', '3', '4']);
+console.log(getArea(['rectangle', '3', '4']));
 
 console.log('====================');
 
-areaOfFiguresObj(['rectangle', 3, 4]);
+console.log(getAreaObj(['rectangle', 3, 4]));

@@ -1,17 +1,17 @@
-function password(password) {
+function login(password) {
     if (password == 's3cr3t!P@ssw0rd') {
-        console.log('Welcome');
+        return 'Welcome';
     } else {
-        console.log('Wrong password!');
+        return 'Wrong password!';
     }
 }
 
-function passwordTernary(password) {
-    console.log(password == 's3cr3t!P@ssw0rd' ? 'Welcome' : 'Wrong password!');
+function loginTern(password) {
+    return password == 's3cr3t!P@ssw0rd' ? 'Welcome' : 'Wrong password!';
 }
 
-password('fdfdg');
+console.log(login('fdfdg'));
 
 console.log('====================');
 
-passwordTernary('123456');
+console.log(loginTern('123456'));
