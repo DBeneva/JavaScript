@@ -1,24 +1,19 @@
-function oneToTen() {
-    console.log(1);
-    console.log(2);
-    console.log(3);
-    console.log(4);
-    console.log(5);
-    console.log(6);
-    console.log(7);
-    console.log(8);
-    console.log(9);
-    console.log(10);
+function getOneToTen() {
+    return '1\n2\n3\n4\n5\n6\n7\n8\n9\n10';
 }
 
-function oneToTenForLoop() {
+function getOneToTenLoop() {
+    const result = [];
+
     for (let i = 1; i <= 10; i++) {
-        console.log(i);
+        result.push(i);
     }
+
+    return result.join('\n');
 }
 
-oneToTen();
+console.log(getOneToTen());
 
 console.log('====================');
 
-oneToTenForLoop();
+console.log(getOneToTenLoop());

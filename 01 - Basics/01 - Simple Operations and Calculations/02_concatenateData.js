@@ -1,5 +1,5 @@
 function concatenateData(firstName, lastName, age, town) {
-    console.log(`You are ${firstName} ${lastName}, a ${age}-years old person from ${town}.`);
+    return `You are ${firstName} ${lastName}, a ${age}-years old person from ${town}.`;
 }
 
-concatenateData('John', 'Smith', '35', 'London');
+console.log(concatenateData('John', 'Smith', '35', 'London'));

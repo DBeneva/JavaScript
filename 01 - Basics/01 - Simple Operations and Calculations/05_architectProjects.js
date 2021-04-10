@@ -1,8 +1,7 @@
-function architectProjects(name, projects) {
-    let hoursNeeded = projects * 3;
-    let outputLine = `The architect ${name} will need ${hoursNeeded} hours to complete ${projects} project/s.`;
-    
-    console.log(outputLine);
+function getHours(name, projects) {
+    const hoursNeeded = projects * 3;
+
+    return `The architect ${name} will need ${hoursNeeded} hours to complete ${projects} project/s.`;
 }
 
-architectProjects('George', 4);
+console.log(getHours('George', 4));

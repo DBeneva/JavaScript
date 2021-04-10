@@ -1,28 +1,28 @@
-function numbers1To9(num) {    
+function getWord(num) {    
     if (num == 1) {
-        console.log('one');
+        return 'one';
     } else if (num == 2) {
-        console.log('two');
+        return 'two';
     } else if (num == 3) {
-        console.log('three');
+        return 'three';
     } else if (num == 4) {
-        console.log('four');
+        return 'four';
     } else if (num == 5) {
-        console.log('five');
+        return 'five';
     } else if (num == 6) {
-        console.log('six');
+        return 'six';
     } else if (num == 7) {
-        console.log('seven');
+        return 'seven';
     } else if (num == 8) {
-        console.log('eight');
+        return 'eight';
     } else if (num == 9) {
-        console.log('nine');
+        return 'nine';
     } else {
-        console.log('number too big');
+        return 'number too big';
     }
 }
 
-function numbers1To9Obj(num) {
+function getWordObj(num) {
     const numWord = {
         1: 'one',
         2: 'two',
@@ -35,11 +35,11 @@ function numbers1To9Obj(num) {
         9: 'nine',
     };
     
-    console.log(numWord[num] ? numWord[num] : 'number too big');
+    return numWord[num] ? numWord[num] : 'number too big';
 }
 
-numbers1To9('1');
+console.log(getWord('1'));
 
 console.log('====================');
 
-numbers1To9Obj('3');
+console.log(getWordObj('3'));

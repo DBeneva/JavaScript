@@ -1,13 +1,13 @@
-function greeting(name) {
-    console.log('Hello, ' + name + '!');
+function greet(name) {
+    return 'Hello, ' + name + '!';
 }
 
-function greetingInterpolation(name) {
-    console.log(`Hello, ${name}!`);
+function greetInt(name) {
+    return `Hello, ${name}!`;
 }
 
-greeting('John');
+console.log(greet('John'));
 
 console.log('====================');
 
-greetingInterpolation('John');
+console.log(greetInt('John'));

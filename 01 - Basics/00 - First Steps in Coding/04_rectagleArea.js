@@ -1,5 +1,5 @@
-function rectagleArea(a, b) {
-    console.log(a * b);
+function getRectagleArea(a, b) {
+    return a * b;
 }
 
-rectagleArea(2, 7);
+console.log(getRectagleArea(2, 7));

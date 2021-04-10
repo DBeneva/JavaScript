@@ -1,8 +1,8 @@
-function aquarium(length, width, height, occupiedPart) {
-    let volumeDm = length * width * height / 1000;
-    let volumeWater = volumeDm - occupiedPart / 100 * volumeDm;
+function getVolumeWater(length, width, height, occupiedPart) {
+    const volumeDm = length * width * height / 1000;
+    const volumeWater = volumeDm - occupiedPart / 100 * volumeDm;
     
-    console.log(volumeWater.toFixed(3));
+    return volumeWater.toFixed(3);
 }
 
-aquarium(85, 75, 47, 17);
+console.log(getVolumeWater(85, 75, 47, 17));

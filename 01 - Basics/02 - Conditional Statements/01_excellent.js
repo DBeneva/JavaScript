@@ -1,15 +1,15 @@
-function excellent(grade) {
+function getExcellent(grade) {
     if (Number(grade) >= 5.5) {
-        console.log('Excellent!');
+        return 'Excellent!';
     }
 }
 
-function excellentTernary(grade) {
-    console.log(Number(grade) >= 5.5 ? 'Excellent!' : '');
+function excellentTern(grade) {
+    return Number(grade) >= 5.5 ? 'Excellent!' : '';
 }
 
-excellent('5.6');
+console.log(getExcellent('5.6'));
 
 console.log('====================');
 
-excellentTernary('5.6');
+console.log(excellentTern('5.6'));

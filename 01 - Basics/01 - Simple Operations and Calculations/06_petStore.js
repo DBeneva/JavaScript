@@ -1,6 +1,7 @@
-function petStore(dogs, other) {
-    let totalPrice = dogs * 2.5 + other * 4;
-    console.log(`${totalPrice.toFixed(2)} lv.`);
+function getPrice(dogs, other) {
+    const totalPrice = dogs * 2.5 + other * 4;
+
+    return `${totalPrice.toFixed(2)} lv.`;
 }
 
-petStore(5, 4);
+console.log(getPrice(5, 4));

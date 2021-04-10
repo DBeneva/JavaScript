@@ -1,22 +1,22 @@
-function greaterNumber(first, second) {
+function getGreater(first, second) {
     first = Number(first);
     second = Number(second);
 
     if (first > second) {
-        console.log(first);
+        return first;
     } else {
-        console.log(second);
+        return second;
     }
 }
 
-function greaterNumberTernary(...input) {
-    let [first, second] = input.map(Number);
+function getGreaterTern(...input) {
+    const [first, second] = input.map(Number);
 
-    console.log(first > second ? first : second);
+    return first > second ? first : second;
 }
 
-greaterNumber('5', '17');
+console.log(getGreater('5', '17'));
 
 console.log('====================');
 
-greaterNumberTernary('5', '17');
+console.log(getGreaterTern('5', '17'));
