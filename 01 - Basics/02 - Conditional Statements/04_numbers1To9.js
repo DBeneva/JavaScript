@@ -1,4 +1,4 @@
-function getWord(num) {    
+function numToWord(num) {    
     if (num == 1) {
         return 'one';
     } else if (num == 2) {
@@ -22,7 +22,7 @@ function getWord(num) {
     }
 }
 
-function getWordObj(num) {
+function numToWordObj(num) {
     const numWord = {
         1: 'one',
         2: 'two',
@@ -38,8 +38,8 @@ function getWordObj(num) {
     return numWord[num] ? numWord[num] : 'number too big';
 }
 
-console.log(getWord('1'));
+console.log(numToWord('1'));
 
 console.log('====================');
 
-console.log(getWordObj('3'));
+console.log(numToWordObj('3'));

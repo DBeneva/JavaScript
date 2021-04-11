@@ -1,4 +1,4 @@
-function getGreater(first, second) {
+function getGreaterNumber(first, second) {
     first = Number(first);
     second = Number(second);
 
@@ -9,14 +9,14 @@ function getGreater(first, second) {
     }
 }
 
-function getGreaterTern(...input) {
+function getGreaterNumberTern(...input) {
     const [first, second] = input.map(Number);
 
     return first > second ? first : second;
 }
 
-console.log(getGreater('5', '17'));
+console.log(getGreaterNumber('5', '17'));
 
 console.log('====================');
 
-console.log(getGreaterTern('5', '17'));
+console.log(getGreaterNumberTern('5', '17'));

@@ -4,34 +4,33 @@ function harvest([area, grapesPerSquareMeter, wineLitersNeeded, workers]) {
     wineLitersNeeded = Number(wineLitersNeeded);
     workers = Number(workers);
 
-    let grapesTotal = grapesPerSquareMeter * area;
-    let grapesForWine = grapesTotal * 0.4;
-    let wineTotal = grapesForWine / 2.5;
-    let difference = Math.abs(wineLitersNeeded - wineTotal);
+    const grapesForWine = grapesPerSquareMeter * area * 0.4;
+    const wineTotal = grapesForWine / 2.5;
+    const difference = Math.abs(wineLitersNeeded - wineTotal);
 
     if (wineTotal < wineLitersNeeded) {
-        console.log(`It will be a tough winter! More ${Math.floor(difference)} liters wine needed.`);
+        return `It will be a tough winter! More ${Math.floor(difference)} liters wine needed.`;
     } else {
-        console.log(`Good harvest this year! Total wine: ${Math.floor(wineTotal)} liters.`);
-        console.log(`${Math.ceil(difference)} liters left -> ${Math.ceil(difference / workers)} liters per person.`);
+        return `Good harvest this year! Total wine: ${Math.floor(wineTotal)} liters.
+${Math.ceil(difference)} liters left -> ${Math.ceil(difference / workers)} liters per person.`;
     }
 }
 
-function harvestTernary(input) {
-    let [area, grapesPerSquareMeter, wineLitersNeeded, workers] = input.map(Number);
-    let wineTotal = grapesPerSquareMeter * area * 0.4 / 2.5;
-    let difference = Math.abs(wineLitersNeeded - wineTotal);
+function harvestTern(input) {
+    const [area, grapesPerSquareMeter, wineLitersNeeded, workers] = input.map(Number);
+    const wineTotal = grapesPerSquareMeter * area * 0.4 / 2.5;
+    const difference = Math.abs(wineLitersNeeded - wineTotal);
 
-    let result = wineTotal < wineLitersNeeded ?
+    const result = wineTotal < wineLitersNeeded ?
         `It will be a tough winter! More ${Math.floor(difference)} liters wine needed.` :
         `Good harvest this year! Total wine:${Math.floor(wineTotal)} liters.\
         \n${Math.ceil(difference)} liters left -> ${Math.ceil(difference / workers)} liters per person.`;
 
-    console.log(result);
+    return result;
 }
 
-harvest([650, 2, 175, 3]);
+console.log(harvest([650, 2, 175, 3]));
 
 console.log('====================');
 
-harvestTernary([650, 2, 175, 3]);
+console.log(harvestTern([650, 2, 175, 3]));

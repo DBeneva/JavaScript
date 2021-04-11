@@ -1,4 +1,4 @@
-function getBonus(num) {
+function getBonusPoints(num) {
     num = Number(num);
     let bonusPoints = 0;
 
@@ -19,7 +19,7 @@ function getBonus(num) {
     return `${bonusPoints}\n${num + bonusPoints}`;
 }
 
-function getBonusTern(num) {
+function getBonusPointsTern(num) {
     num = Number(num);
     const bonusPoints = getBonus() + getAdditionalBonus();
 
@@ -37,8 +37,8 @@ function getBonusTern(num) {
     }
 }
 
-console.log(getBonus('20'));
+console.log(getBonusPoints('20'));
 
 console.log('====================');
 
-console.log(getBonusTern('20'));
+console.log(getBonusPointsTern('20'));

@@ -1,4 +1,4 @@
-function timeIn15Minutes([hours, minutes]) {
+function getTimeIn15Minutes([hours, minutes]) {
     hours = Number(hours);
     minutes = Number(minutes) + 15;
 
@@ -15,19 +15,19 @@ function timeIn15Minutes([hours, minutes]) {
         minutes = '0' + minutes;
     }
     
-    console.log(`${hours}:${minutes}`);
+    return `${hours}:${minutes}`;
 }
 
-function timeIn15MinutesTernary(input) {
+function getTimeIn15MinutesTern(input) {
     let [hours, minutes] = input.map(Number);
     let minutesPlus15 = hours * 60 + minutes + 15;
     let hoursIn15Mins = Math.floor(minutesPlus15 / 60) == 24 ? 0 : Math.floor(minutesPlus15 / 60);
     
-    console.log(`${hoursIn15Mins}:${(minutesPlus15 % 60).toString().padStart(2, '0')}`);
+    return `${hoursIn15Mins}:${(minutesPlus15 % 60).toString().padStart(2, '0')}`;
 }
 
-timeIn15Minutes([23, 50]);
+console.log(getTimeIn15Minutes([23, 50]));
 
 console.log('====================');
 
-timeIn15MinutesTernary([23, 59]);
+console.log(getTimeIn15MinutesTern([23, 59]));

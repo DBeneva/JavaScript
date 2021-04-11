@@ -1,4 +1,4 @@
-function metricConverter([num, from, to]) {
+function convertUnits([num, from, to]) {
     num = Number(num);
     let result = 0;
 
@@ -22,10 +22,10 @@ function metricConverter([num, from, to]) {
         }
     }
 
-    console.log(result.toFixed(3));
+    return result.toFixed(3);
 }
 
-function metricConverterObj([num, from, to]) {
+function convertUnitsObj([num, from, to]) {
     num = Number(num);
 
     const units = {
@@ -43,11 +43,11 @@ function metricConverterObj([num, from, to]) {
         }
     };
 
-    console.log(units[from][to].toFixed(3));
+    return units[from][to].toFixed(3);
 }
 
-metricConverter([12, 'mm', 'm']);
+console.log(convertUnits([12, 'mm', 'm']));
 
 console.log('====================');
 
-metricConverterObj([12, 'mm', 'm']);
+console.log(convertUnitsObj([12, 'mm', 'm']));

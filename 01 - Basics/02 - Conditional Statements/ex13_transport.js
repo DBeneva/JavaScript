@@ -1,4 +1,4 @@
-function transport(distance, dayOrNight) {
+function getTransportPrice(distance, dayOrNight) {
     distance = Number(distance);
 
     let taxi = 0.7;
@@ -12,15 +12,15 @@ function transport(distance, dayOrNight) {
     }
 
     if (distance < 20) {
-        console.log(taxi.toFixed(2));
+        return taxi.toFixed(2);
     } else if (distance < 100) {
-        console.log(bus.toFixed(2));
+        return bus.toFixed(2);
     } else {
-        console.log(train.toFixed(2));
+        return train.toFixed(2);
     }
 }
 
-function transportObj(distance, dayOrNight) {
+function getTransportPriceObj(distance, dayOrNight) {
     distance = Number(distance);
 
     const prices = {
@@ -29,15 +29,15 @@ function transportObj(distance, dayOrNight) {
         train: 0.06 * distance
     };
 
-    let result = distance < 20 ? prices.taxi :
+    const result = distance < 20 ? prices.taxi :
         distance < 100 ? prices.bus :
             prices.train;
 
-    console.log(result.toFixed(2));
+    return result.toFixed(2);
 }
 
-transport(180, 'night');
+console.log(getTransportPrice(180, 'night'));
 
 console.log('====================');
 
-transportObj(180, 'night');
+console.log(getTransportPriceObj(180, 'night'));

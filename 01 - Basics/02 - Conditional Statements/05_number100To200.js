@@ -1,4 +1,4 @@
-function getRange(num) {
+function getNumRange(num) {
     num = Number(num);
 
     if (num < 100) {
@@ -10,7 +10,7 @@ function getRange(num) {
     }
 }
 
-function getRangeTern(num) {
+function getNumRangeTern(num) {
     num = Number(num);
 
     return num < 100 ? 'Less than 100' :
@@ -18,8 +18,8 @@ function getRangeTern(num) {
             'Greater than 200';
 }
 
-console.log(getRange('342'));
+console.log(getNumRange('342'));
 
 console.log('====================');
 
-console.log(getRangeTern(142));
+console.log(getNumRangeTern(142));
