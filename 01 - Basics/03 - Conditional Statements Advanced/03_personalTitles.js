@@ -1,22 +1,19 @@
 function getPersonalTitle([age, sex]) {
     age = Number(age);
-    let title = '';
 
     if (sex == 'm') {
         if (age < 16) {
-            title = 'Master';
+            return 'Master';
         } else {
-            title = 'Mr.';
+            return 'Mr.';
         }
     } else if (sex == 'f') {
         if (age < 16) {
-            title = 'Miss';
+            return 'Miss';
         } else {
-            title = 'Ms.';
+            return 'Ms.';
         }
     }
-
-    return title;
 }
 
 function getPersonalTitleObj([age, sex]) {

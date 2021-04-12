@@ -1,19 +1,16 @@
 function getDayOfTheWeek(num) {
     num = Number(num);
-    let output = '';
 
     switch (num) {
-        case 1: output = 'Monday'; break;
-        case 2: output = 'Tuesday'; break;
-        case 3: output = 'Wednesday'; break;
-        case 4: output = 'Thursday'; break;
-        case 5: output = 'Friday'; break;
-        case 6: output = 'Saturday'; break;
-        case 7: output = 'Sunday'; break;
-        default: output = 'Error'; break;
+        case 1: return 'Monday';
+        case 2: return 'Tuesday';
+        case 3: return 'Wednesday';
+        case 4: return 'Thursday';
+        case 5: return 'Friday';
+        case 6: return 'Saturday';
+        case 7: return 'Sunday';
+        default: return 'Error';
     }
-
-    return output;
 }
 
 function getDayOfTheWeekObj(num) {
@@ -34,4 +31,4 @@ console.log(getDayOfTheWeek(58));
 
 console.log('====================');
 
-console.log(getDayOfTheWeekObj(5));
+console.log(getDayOfTheWeekObj('5'));

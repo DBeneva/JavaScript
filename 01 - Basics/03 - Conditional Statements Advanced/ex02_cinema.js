@@ -1,7 +1,7 @@
-function cinema(projection, rows, coloumns) {
+function getCinemaIncome(projection, rows, coloumns) {
     rows = Number(rows);
     coloumns = Number(coloumns);
-    let seats = rows * coloumns;
+    const seats = rows * coloumns;
     let income = 0;
 
     switch (projection) {
@@ -10,7 +10,23 @@ function cinema(projection, rows, coloumns) {
         case 'Discount': income = seats * 5; break;
     }
     
-    console.log(income.toFixed(2) + ' leva');
+    return income.toFixed(2) + ' leva';
 }
 
-cinema('Discount', 12, 30);
+function getCinemaIncomeObj(projection, ...rowsCols) {
+    const [rows, columns] = rowsCols.map(Number);
+    const seats = rows * columns;
+    const ticketPrice = {
+        Premiere: 12,
+        Normal: 7.5,
+        Discount: 5
+    };
+
+    return (seats * ticketPrice[projection]).toFixed(2) + ' leva';
+}
+
+console.log(getCinemaIncome('Discount', 12, 30));
+
+console.log('====================');
+
+console.log(getCinemaIncomeObj('Discount', 12, 30));

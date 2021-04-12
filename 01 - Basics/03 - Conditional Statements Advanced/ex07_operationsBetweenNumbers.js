@@ -1,39 +1,92 @@
-function operationsBetweenNumbers(num1, num2, operation) {
-    num1 = Number(num1);
-    num2 = Number(num2);
+function calculateNumbers([first, second, operator]) {
+    first = Number(first);
+    second = Number(second);
     let result = 0;
-    let evenOrOdd = '';
+    let additionalInfo = '';
 
-    switch (operation) {
-        case '+': result = num1 + num2; break;
-        case '-': result = num1 - num2; break;
-        case '*': result = num1 * num2; break;
-        case '/': result = (num1 / num2).toFixed(2); break;
-        case '%': result = num1 % num2; break;
-    }
-
-    switch (operation) {
+    switch (operator) {
         case '+':
-        case '-':
-        case '*':
-            if (result % 2 == 0) {
-                evenOrOdd = 'even';
+            result = `${first} + ${second} = ${first + second}`;
+
+            if ((first + second) % 2 == 0) {
+                additionalInfo = ' - even';
             } else {
-                evenOrOdd = 'odd';
+                additionalInfo = ' - odd'
             }
-            
-            console.log(`${num1} ${operation} ${num2} = ${result} - ${evenOrOdd}`);
             break;
-            
-        case '/':
-        case '%':
-            if (num2 == 0) {
-                console.log(`Cannot divide ${num1} by zero`);
+
+        case '-':
+            result = `${first} - ${second} = ${first - second}`;
+
+            if ((first - second) % 2 == 0) {
+                additionalInfo = ' - even';
             } else {
-                console.log(`${num1} ${operation} ${num2} = ${result}`);
+                additionalInfo = ' - odd'
             }
-        break;
+            break;
+
+        case '*':
+            result = `${first} * ${second} = ${first - second}`;
+
+            if ((first * second) % 2 == 0) {
+                additionalInfo = ' - even';
+            } else {
+                additionalInfo = ' - odd'
+            }
+            break;
+
+        case '/':
+            if (second == 0) {
+                result = `Cannot divide ${first} by zero`;
+            } else {
+                result = `${first} / ${second} = ${(first / second).toFixed(2)}`;
+            }
+            break;
+
+        case '%':
+            if (second == 0) {
+                result = `Cannot divide ${first} by zero`;
+            } else {
+                result = `${first} % ${second} = ${first % second}`;
+            }
+            break;
     }
+
+    return result + additionalInfo;
 }
 
-operationsBetweenNumbers(123, 12, '/');
+function calculateNumbersObj([first, second, operator]) {
+    first = Number(first);
+    second = Number(second);
+
+    const operations = {
+        '+': {
+            result: `${first} + ${second} = ${first + second}`,
+            additionalInfo: ` - ${(first + second) % 2 == 0 ? 'even' : 'odd'}`
+        },
+        '-': {
+            result: `${first} - ${second} = ${first - second}`,
+            additionalInfo: ` - ${(first - second) % 2 == 0 ? 'even' : 'odd'}`
+        },
+        '*': {
+            result: `${first} * ${second} = ${first * second}`,
+            additionalInfo: ` - ${(first * second) % 2 == 0 ? 'even' : 'odd'}`
+        },
+        '/': {
+            result: second != 0 ? `${first} / ${second} = ${(first / second).toFixed(2)}` : `Cannot divide ${first} by zero`,
+            additionalInfo: ''
+        },
+        '%': {
+            result: second != 0 ? `${first} % ${second} = ${first % second}` : `Cannot divide ${first} by zero`,
+            additionalInfo: ''
+        }
+    };
+
+    return operations[operator].result + operations[operator].additionalInfo;
+}
+
+console.log(calculateNumbers([10, 12, '+']));
+
+console.log('====================');
+
+console.log(calculateNumbersObj([10, 12, '+']));

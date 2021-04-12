@@ -1,15 +1,11 @@
 function getAnimalType(animal) {
-    let type = '';
-
     switch (animal) {
-        case 'dog': type = 'mammal'; break;
+        case 'dog': return 'mammal';
         case 'crocodile':
         case 'tortoise':
-        case 'snake': type = 'reptile'; break;
-        default: type = 'unknown'; break;
+        case 'snake': return 'reptile';
+        default: return 'unknown';
     }
-
-    return type;
 }
 
 function getAnimalTypeObj(animal) {
