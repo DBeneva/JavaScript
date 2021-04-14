@@ -17,14 +17,14 @@ function getArea([figure, sideA, sideB]) {
 function getAreaObj([figure, ...sides]) {
     let [sideA, sideB] = sides.map(Number);
 
-    const calculations = {
+    const figures = {
         square: sideA ** 2,
         rectangle: sideA * sideB,
         circle: Math.PI * (sideA ** 2),
         triangle: sideA * sideB / 2
     };
 
-    return calculations[figure].toFixed(3);
+    return figures[figure].toFixed(3);
 }
 
 console.log(getArea(['rectangle', '3', '4']));

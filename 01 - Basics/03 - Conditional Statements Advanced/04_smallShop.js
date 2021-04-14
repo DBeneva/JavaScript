@@ -37,32 +37,21 @@ function getPrice([product, city, qty]) {
 }
 
 function getPriceObj([product, city, qty]) {
-    const products = {
-        coffee: {
-            Sofia: 50,
-            Plovdiv: 40,
-            Varna: 45
-        },
-        water: {
-            Sofia: 80,
-            Plovdiv: 70,
-            Varna: 70
-        },
-        beer: {
-            Sofia: 120,
-            Plovdiv: 115,
-            Varna: 110
-        },
-        sweets: {
-            Sofia: 145,
-            Plovdiv: 130,
-            Varna: 135
-        },
-        peanuts: {
-            Sofia: 160,
-            Plovdiv: 150,
-            Varna: 155
+    class Product {
+        constructor(name, priceSofia, pricePlovdiv, priceVarna) {
+            this.name = name;
+            this.Sofia = priceSofia;
+            this.Plovdiv = pricePlovdiv;
+            this.Varna = priceVarna;
         }
+    }
+        
+    const products = {
+        coffee: new Product('coffee', 50, 40, 45),
+        water: new Product('water', 80, 70, 70),
+        beer: new Product('beer', 120, 115, 110),
+        sweets: new Product('sweets', 145, 130, 135),
+        peanuts: new Product('peanuts', 160, 150, 155)
     };
 
     return products[product][city] * Number(qty) / 100;

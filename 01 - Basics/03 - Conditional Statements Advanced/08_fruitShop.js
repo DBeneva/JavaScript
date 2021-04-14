@@ -7,7 +7,7 @@ function getPrice([fruit, dayOfTheWeek, qty]) {
         case 'Tuesday':
         case 'Wednesday':
         case 'Thursday':
-        case 'Friday':            
+        case 'Friday':
             switch (fruit) {
                 case 'banana': price = 2.5; break;
                 case 'apple': price = 1.2; break;
@@ -16,9 +16,9 @@ function getPrice([fruit, dayOfTheWeek, qty]) {
                 case 'kiwi': price = 2.7; break;
                 case 'pineapple': price = 5.5; break;
                 case 'grapes': price = 3.85; break;
-            }            
+            }
             break;
-            
+
         case 'Saturday':
         case 'Sunday':
             switch (fruit) {
@@ -32,52 +32,33 @@ function getPrice([fruit, dayOfTheWeek, qty]) {
             }
             break;
     }
-    
+
     return price.toFixed(2) * qty || 'error';
 }
 
-function getPriceObj([fruit, dayOfTheWeek, qty]) {
-    qty = Number(qty);
-
-    const days = {
-        weekday: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        weekend: ['Saturday', 'Sunday']
-    };
+function getPriceObj([fruit, day, qty]) {
+    class Fruit {
+        constructor(name, weekdayPrice, weekendPrice) {
+            this.name = name;
+            this.price = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) ?
+                weekdayPrice :
+                ['Saturday', 'Sunday'].includes(day) ? weekendPrice :
+                    0;
+        }
+    }
 
     const fruits = {
-        banana: {
-            weekday: 2.5,
-            weekend: 2.7
-        },
-        apple: {
-            weekday: 1.2,
-            weekend: 1.25
-        },
-        orange: {
-            weekday: 0.85,
-            weekend: 0.9
-        },
-        grapefruit: {
-            weekday: 1.45,
-            weekend: 1.6
-        },
-        kiwi: {
-            weekday: 2.7,
-            weekend: 3
-        },
-        pineapple: {
-            weekday: 5.5,
-            weekend: 5.6
-        },
-        grapes: {
-            weekday: 3.85,
-            weekend: 4.2
-        }
+        banana: new Fruit('banana', 2.5, 2.7),
+        apple: new Fruit('apple', 1.2, 1.25),
+        orange: new Fruit('orange', 0.85, 0.9),
+        grapefruit: new Fruit('grapefruit', 1.45, 1.6),
+        kiwi: new Fruit('kiwi', 2.7, 3),
+        pineapple: new Fruit('pineapple', 5.5, 5.6),
+        grapes: new Fruit('grapes', 3.85, 4.2)
     };
 
-    const day = Object.keys(days).find(d => days[d].includes(dayOfTheWeek));
-    const result = fruits[fruit] && fruits[fruit][day] ?
-        (fruits[fruit][day] * qty).toFixed(2) : 'error';
+    const result = fruits[fruit] && fruits[fruit].price ?
+        (fruits[fruit].price * qty).toFixed(2) : 'error';
 
     return result;
 }

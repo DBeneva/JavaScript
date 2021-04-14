@@ -46,37 +46,23 @@ function getCommission([city, sales]) {
 function getCommissionObj([city, sales]) {
     sales = Number(sales);
 
-    const salesCategories = {
-        first: 500,
-        second: 1000,
-        third: 10000,
-        fourth: Number.MAX_SAFE_INTEGER
-    };
+    class City {
+        constructor(name, first, second, third, fourth) {
+            this.name = name;
+            this.commission = sales <= 500 ? first :
+                sales <= 1000 ? second :
+                    sales <= 10000 ? third :
+                        fourth;
+        }
+    }
 
     const cities = {
-        'Sofia': {
-            first: 0.05,
-            second: 0.07,
-            third: 0.08,
-            fourth: 0.12
-        },
-        'Varna': {
-            first: 0.045,
-            second: 0.075,
-            third: 0.1,
-            fourth: 0.13
-        },
-        'Plovdiv': {
-            first: 0.055,
-            second: 0.08,
-            third: 0.12,
-            fourth: 0.145
-        }
-    };
+        Sofia: new City('Sofia', 0.05, 0.07, 0.08, 0.12),
+        Varna: new City('Varna', 0.045, 0.075, 0.1, 0.13),
+        Plovdiv: new City('Plovdiv', 0.055, 0.08, 0.12, 0.145)
+    }
 
-    const salesCategory = Object.entries(salesCategories).find(([k, v]) => sales <= v)[0];
-    
-    return (cities[city][salesCategory] * sales).toFixed(2) || 'error';
+    return (cities[city].commission * sales).toFixed(2) || 'error';
 }
 
 console.log(getCommission(['Sofia', 1500]));

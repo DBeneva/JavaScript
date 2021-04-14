@@ -38,28 +38,25 @@ function getTripPrice(days, accommodation, grade) {
 
 function getTripPriceObj(days, type, grade) {
     const nights = Number(days) - 1;
-    const gradeMultiplier = grade == 'positive' ? 1.25 : 0.9;
+
+    class Accommodation {
+        constructor(name, price, first = 1, second = 1, third = 1) {
+            this.name = name;
+            this.price = price;
+            this.multiplier = (nights < 10 ? first :
+                nights <= 15 ? second :
+                    third) * (grade == 'positive' ? 1.25 : 0.9);
+        }
+    }
 
     const accommodation = {
-        'room for one person': {
-            price: 18,
-            multiplier: 1
-        },
-        apartment: {
-            price: 25,
-            multiplier: nights < 10 ? 0.7 :
-                nights <= 15 ? 0.65 :
-                    0.5
-        },
-        'president apartment': {
-            price: 35,
-            multiplier: nights < 10 ? 0.9 :
-                nights <= 15 ? 0.85 :
-                    0.8
-        }
+        'room for one person': new Accommodation('room for one person', 18),
+        apartment: new Accommodation('apartment', 25, 0.7, 0.65, 0.5),
+        'president apartment': new Accommodation('president apartment', 35, 0.9, 0.85, 0.8)
     };
 
-    const total = nights * accommodation[type].price * accommodation[type].multiplier * gradeMultiplier;
+    const total = nights * accommodation[type].price * accommodation[type].multiplier;
+
     return total.toFixed(2);
 }
 
