@@ -1,16 +1,17 @@
 function getCinemaIncome(projection, rows, coloumns) {
     rows = Number(rows);
     coloumns = Number(coloumns);
+
     const seats = rows * coloumns;
-    let income = 0;
+    let price = 0;
 
     switch (projection) {
-        case 'Premiere': income = seats * 12; break;
-        case 'Normal': income = seats * 7.5; break;
-        case 'Discount': income = seats * 5; break;
+        case 'Premiere': price = 12; break;
+        case 'Normal': price = 7.5; break;
+        case 'Discount': price = 5; break;
     }
     
-    return income.toFixed(2) + ' leva';
+    return (price * seats).toFixed(2) + ' leva';
 }
 
 function getCinemaIncomeObj(projection, ...rowsCols) {
