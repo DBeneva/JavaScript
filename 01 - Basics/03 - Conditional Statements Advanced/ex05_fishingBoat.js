@@ -35,14 +35,14 @@ function getPriceFishingObj([budget, season, fishermen]) {
     budget = Number(budget);
     fishermen = Number(fishermen);
 
-    const seasons = {
+    const prices = {
         Spring: 3000,
         Summer: 4200,
         Autumn: 4200,
         Winter: 2600
     };
 
-    const price = seasons[season] * getDiscountMultiplier();
+    const price = prices[season] * getDiscountMultiplier();
     const difference = Math.abs(budget - price);
 
     return budget >= price ? `Yes! You have ${difference.toFixed(2)} leva left.` :

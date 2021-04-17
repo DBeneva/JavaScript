@@ -56,37 +56,41 @@ function calculateNumbers([first, second, operator]) {
 }
 
 function calculateNumbersObj([first, second, operator]) {
-    first = Number(first);
-    second = Number(second);
-
     const operations = {
-        '+': {
-            result: `${first} + ${second} = ${first + second}`,
-            additionalInfo: ` - ${(first + second) % 2 == 0 ? 'even' : 'odd'}`
-        },
-        '-': {
-            result: `${first} - ${second} = ${first - second}`,
-            additionalInfo: ` - ${(first - second) % 2 == 0 ? 'even' : 'odd'}`
-        },
-        '*': {
-            result: `${first} * ${second} = ${first * second}`,
-            additionalInfo: ` - ${(first * second) % 2 == 0 ? 'even' : 'odd'}`
-        },
-        '/': {
-            result: second != 0 ? `${first} / ${second} = ${(first / second).toFixed(2)}` : `Cannot divide ${first} by zero`,
-            additionalInfo: ''
-        },
-        '%': {
-            result: second != 0 ? `${first} % ${second} = ${first % second}` : `Cannot divide ${first} by zero`,
-            additionalInfo: ''
-        }
+        '+': getResult('+'),
+        '-': getResult('-'),
+        '*': getResult('*'),
+        '/': second != 0 ? getResult('/') : `Cannot divide ${first} by zero`,
+        '%': second != 0 ? getResult('%') : `Cannot divide ${first} by zero`,
     };
-
+    
     return operations[operator].result + operations[operator].additionalInfo;
+    
+    function getResult(operator) {
+        first = Number(first);
+        second = Number(second);
+        
+        return {
+            result: `${first} ${operator} ${second} = ${calculate(operator)}`,
+            additionalInfo: ['+', '-', '*'].includes(operator) ? ` - ${calculate(operator) % 2 == 0 ? 'even' : 'odd'}` : ''
+        };
+        
+        function calculate(operator) {
+            const operations = {
+                '+': first + second,
+                '-': first - second,
+                '*': first * second,
+                '/': first / second,
+                '%': first % second                
+            };
+
+            return operations[operator].toFixed(2);
+        }
+    }
 }
 
-console.log(calculateNumbers([10, 12, '+']));
+console.log(calculateNumbers([10, 12, '/']));
 
 console.log('====================');
 
-console.log(calculateNumbersObj([10, 12, '+']));
+console.log(calculateNumbersObj([10, 12, '/']));

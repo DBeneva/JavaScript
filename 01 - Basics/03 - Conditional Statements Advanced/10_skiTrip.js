@@ -38,26 +38,26 @@ function getTripPrice(days, accommodation, grade) {
 
 function getTripPriceObj(days, type, grade) {
     const nights = Number(days) - 1;
-
-    class Accommodation {
-        constructor(name, price, first = 1, second = 1, third = 1) {
-            this.name = name;
-            this.price = price;
-            this.multiplier = (nights < 10 ? first :
+    
+    const accommodation = {
+        'room for one person': createAccommodation('room for one person', 18),
+        apartment: createAccommodation('apartment', 25, 0.7, 0.65, 0.5),
+        'president apartment': createAccommodation('president apartment', 35, 0.9, 0.85, 0.8)
+    };
+    
+    const total = nights * accommodation[type].price * accommodation[type].multiplier;
+    
+    return total.toFixed(2);
+    
+    function createAccommodation(name, price, first = 1, second = 1, third = 1) {
+        return {
+            name,
+            price,
+            multiplier: (nights < 10 ? first :
                 nights <= 15 ? second :
-                    third) * (grade == 'positive' ? 1.25 : 0.9);
+                    third) * (grade == 'positive' ? 1.25 : 0.9)
         }
     }
-
-    const accommodation = {
-        'room for one person': new Accommodation('room for one person', 18),
-        apartment: new Accommodation('apartment', 25, 0.7, 0.65, 0.5),
-        'president apartment': new Accommodation('president apartment', 35, 0.9, 0.85, 0.8)
-    };
-
-    const total = nights * accommodation[type].price * accommodation[type].multiplier;
-
-    return total.toFixed(2);
 }
 
 console.log(getTripPrice(14, 'apartment', 'positive'));

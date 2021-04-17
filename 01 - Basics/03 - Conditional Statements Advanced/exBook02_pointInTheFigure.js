@@ -3,21 +3,48 @@ function pointInTheFigure(h, x, y) {
     x = Number(x);
     y = Number(y);
 
-    let insideLowerPart = x > 0 && x < 3 * h && y > 0 && y < h;
-    let insideUpperPart = x > h && x < 2 * h && y > 0 && y < 4 * h;
+    const insideBottomPart = x > 0 && x < 3 * h && y > 0 && y < h;
+    const insideTopPart = x > h && x < 2 * h && y > 0 && y < 4 * h;
+    const commonBorder = y == h && x > h && x < 2 * h;
+    const outsideBottomPart = x < 0 || x > 3 * h || y < 0 || y > h;
+    const outsideTopPart = x < h || x > 2 * h || y < h || y > 4 * h;
 
-    let commonBorder = y == h && x > h && x < 2 * h;
-
-    let outsideLowerPart = x < 0 || x > 3 * h || y < 0 || y > h;
-    let outsideUpperPart = x < h || x > 2 * h || y < h || y > 4 * h;
-
-    if (insideLowerPart || insideUpperPart || commonBorder) {
-        console.log('inside');
-    } else if (outsideLowerPart && outsideUpperPart) {
-        console.log('outside');
+    if (insideBottomPart || insideTopPart || commonBorder) {
+        return 'inside';
+    } else if (outsideBottomPart && outsideTopPart) {
+        return 'outside';
     } else {
-        console.log('border');
+        return 'border';
     }
 }
 
-pointInTheFigure(15, 30, 0);
+function pointInTheFigureObj(...input) {
+    const [h, x, y] = input.map(Number);
+
+    return isInside() || isOutside() || 'border';
+    
+    function isInside() {
+        const location = {
+            insideBottomPart: x > 0 && x < 3 * h && y > 0 && y < h,
+            insideTopPart: x > h && x < 2 * h && y > 0 && y < 4 * h,
+            commonBorder: y == h && x > h && x < 2 * h
+        };
+
+        return Object.values(location).some(v => v == true);
+    }
+
+    function isOutside() {
+        const location = {
+            outsideBottomPart: x < 0 || x > 3 * h || y < 0 || y > h,
+            outsideTopPart: x < h || x > 2 * h || y < h || y > 4 * h,
+        };
+
+        return Object.values(location).every(v => v == true);
+    }
+}
+
+console.log(pointInTheFigure(15, 30, 0));
+
+console.log('====================');
+
+console.log(pointInTheFigureObj(15, 30, 0));

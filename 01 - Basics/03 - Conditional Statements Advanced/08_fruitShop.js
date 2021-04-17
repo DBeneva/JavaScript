@@ -37,30 +37,30 @@ function getPrice([fruit, dayOfTheWeek, qty]) {
 }
 
 function getPriceObj([fruit, day, qty]) {
-    class Fruit {
-        constructor(name, weekdayPrice, weekendPrice) {
-            this.name = name;
-            this.price = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) ?
+    const fruits = {
+        banana: createFruit('banana', 2.5, 2.7),
+        apple: createFruit('apple', 1.2, 1.25),
+        orange: createFruit('orange', 0.85, 0.9),
+        grapefruit: createFruit('grapefruit', 1.45, 1.6),
+        kiwi: createFruit('kiwi', 2.7, 3),
+        pineapple: createFruit('pineapple', 5.5, 5.6),
+        grapes: createFruit('grapes', 3.85, 4.2)
+    };
+    
+    const result = fruits[fruit] && fruits[fruit].price ?
+    (fruits[fruit].price * qty).toFixed(2) : 'error';
+    
+    return result;
+    
+    function createFruit(name, weekdayPrice, weekendPrice) {
+        return {
+            name,
+            price: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) ?
                 weekdayPrice :
                 ['Saturday', 'Sunday'].includes(day) ? weekendPrice :
-                    0;
+                    0
         }
     }
-
-    const fruits = {
-        banana: new Fruit('banana', 2.5, 2.7),
-        apple: new Fruit('apple', 1.2, 1.25),
-        orange: new Fruit('orange', 0.85, 0.9),
-        grapefruit: new Fruit('grapefruit', 1.45, 1.6),
-        kiwi: new Fruit('kiwi', 2.7, 3),
-        pineapple: new Fruit('pineapple', 5.5, 5.6),
-        grapes: new Fruit('grapes', 3.85, 4.2)
-    };
-
-    const result = fruits[fruit] && fruits[fruit].price ?
-        (fruits[fruit].price * qty).toFixed(2) : 'error';
-
-    return result;
 }
 
 console.log(getPrice(['grapes', 'Tuesday', 1.200]));
