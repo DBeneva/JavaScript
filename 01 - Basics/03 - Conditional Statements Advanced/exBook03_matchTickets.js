@@ -29,17 +29,12 @@ function getMatchTickets(budget, category, people) {
     }
 }
 
-function getMatchTickets(budget, category, people) {
-    budget = Number(budget);
+function getMatchTicketsObj(budget, category, people) {
+    budget = Number(budget) * getMultiplier();
     people = Number(people);
 
-    const prices = {
-        VIP: 499.99,
-        Normal: 249.99
-    };
-
-    const tickets = prices[category] * people;
-    const difference = Math.abs(budget * getMultiplier() - tickets);
+    const tickets = getTicketPrice() * people;
+    const difference = Math.abs(budget - tickets);
 
     return budget >= tickets ?
         `Yes! You have ${difference.toFixed(2)} leva left.` :
@@ -63,6 +58,19 @@ function getMatchTickets(budget, category, people) {
             multiplier
         };
     }
+
+    function getTicketPrice() {
+        const prices = {
+            VIP: 499.99,
+            Normal: 249.99
+        };
+
+        return prices[category];
+    }
 }
 
 console.log(getMatchTickets(30000, 'VIP', 49));
+
+console.log('====================');
+
+console.log(getMatchTicketsObj(30000, 'VIP', 49));
