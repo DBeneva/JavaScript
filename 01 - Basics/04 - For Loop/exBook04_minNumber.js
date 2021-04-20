@@ -10,7 +10,18 @@ function minNumber(...input) {
         }
     }
 
-    console.log(min);
+    return min;
 }
 
-minNumber(3, -10, 20, -30);
+function minNumberArr(...input) {
+    return input
+        .map(Number)
+        .slice(1)
+        .sort((a, b) => a - b)[0];
+}
+
+console.log(minNumber(3, -10, 20, -30));
+
+console.log('====================');
+
+console.log(minNumberArr(3, -10, 20, -30));

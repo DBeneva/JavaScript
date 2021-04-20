@@ -1,5 +1,5 @@
 function leftAndRightSum(...input) {
-    let num = Number(input[0]);
+    const num = Number(input[0]);
     let leftSum = 0;
     let rightSum = 0;
     
@@ -11,13 +11,26 @@ function leftAndRightSum(...input) {
         rightSum += Number(input[i]);
     }
 
-    let difference = Math.abs(leftSum - rightSum);
+    const difference = Math.abs(leftSum - rightSum);
 
     if (difference == 0) {
-        console.log(`Yes, sum = ${leftSum}`);
+        return `Yes, sum = ${leftSum}`;
     } else {
-        console.log(`No, diff = ${difference}`);
+        return `No, diff = ${difference}`;
     }
 }
 
-leftAndRightSum(2, 90, 9, 50, 50);
+function leftAndRightSumArr(...input) {
+    const num = Number(input.shift());
+    const leftSum = input.slice(0, num).reduce((acc, curr) => acc + curr, 0);
+    const rightSum = input.slice(num, num * 2).reduce((acc, curr) => acc + curr, 0);
+    const difference = Math.abs(leftSum - rightSum);
+    
+    return difference == 0 ? `Yes, sum = ${leftSum}` : `No, diff = ${difference}`;
+}
+
+console.log(leftAndRightSum(2, 90, 9, 50, 50));
+
+console.log('====================');
+
+console.log(leftAndRightSumArr(2, 90, 9, 50, 50));
