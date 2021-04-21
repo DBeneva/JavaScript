@@ -8,7 +8,7 @@ function equalPairs(...input) {
         sumPair = Number(input[i]) + Number(input[i + 1]);
         let sumPreviousPair = Number(input[i - 2]) + Number(input[i - 1]);
         let difference = Math.abs(sumPair - sumPreviousPair);
-        
+
         if (difference == 0) {
             equalPairs += 1;
         } else if (difference > maxDifference) {
@@ -17,10 +17,27 @@ function equalPairs(...input) {
     }
 
     if (equalPairs == n - 1) {
-        console.log(`Yes, value=${sumPair}`);
+        return `Yes, value=${sumPair}`;
     } else {
-        console.log(`No, maxdiff=${maxDifference}`);
+        return `No, maxdiff=${maxDifference}`;
     }
 }
 
-equalPairs(2, -1, 2, 0, -1)
+function equalPairsArr(...input) {
+    input.map(Number);
+    const sums = [];
+
+    for (let i = 1; i < input.length; i += 2) {
+        sums.push(input[i] + input[i + 1]);
+        sums.sort((a, b) => a - b);
+    }
+
+    return sums.every(x => x == sums[0]) ? `Yes, value=${sums[0]}` :
+        `No, maxdiff=${Math.abs(sums[0] - sums[sums.length - 1])}`;
+}
+
+console.log(equalPairs(2, -1, 2, 0, -1));
+
+console.log('====================');
+
+console.log(equalPairsArr(2, -1, 2, 0, -1));

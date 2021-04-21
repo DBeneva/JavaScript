@@ -13,19 +13,17 @@ function fibonacci(endPosition) {
 }
 
 function fibonacciArr(endPosition) {
-    endPosition = Number(endPosition);
-    const sequence = Array.from(Array(endPosition), (_, i) => )
-    
-    let oldNum1 = 0;
-    let oldNum2 = 1;
+    const sequence = [1, 1];
 
-    for (let position = 0; position <= endPosition; position++) {
-        const num = oldNum1 + oldNum2;
-        oldNum2 = oldNum1;
-        oldNum1 = num;
+    for (let i = 2; i <= endPosition; i++) {
+        sequence.push(sequence[i - 2] + sequence[i - 1]);
     }
 
-    return oldNum1;
+    return sequence[endPosition];
 }
 
-console.log(fibonacci(20));
+console.log(fibonacci(5));
+
+console.log('====================');
+
+console.log(fibonacciArr(5));
