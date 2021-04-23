@@ -9,10 +9,22 @@ function checkPrime(n) {
     }
 
     if (notPrimeNumber || n < 2) {
-        console.log('Not prime');
+        return 'Not prime';
     } else {
-        console.log('Prime');
+        return 'Prime';
     }
 }
 
-checkPrime(0);
+function checkPrimeArr(n) {
+    n = Number(n);
+
+    return Array.from(Array(n - 1), (_, i) => i + 1)
+        .filter(x => n % x == 0).length > 1 || n < 2 ?
+        'Not prime' : 'Prime';
+}
+
+console.log(checkPrime(11));
+
+console.log('===================');
+
+console.log(checkPrimeArr(11));

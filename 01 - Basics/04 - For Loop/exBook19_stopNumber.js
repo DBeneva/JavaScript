@@ -1,7 +1,7 @@
 function stopNumber(input) {
-    let n = Number(input[0]);
-    let m = Number(input[1]);
-    let stop = Number(input[2]);
+    const n = Number(input[0]);
+    const m = Number(input[1]);
+    const stop = Number(input[2]);
     let result = '';
 
     for (let num = m; num >= n; num--) {
@@ -14,7 +14,21 @@ function stopNumber(input) {
         }
     }
 
-    console.log(result);
+    return result.trim();
 }
 
-stopNumber(['1', '36', '12']);
+function stopNumberArr(input) {
+    const [n, m, stop] = input.map(Number);
+    
+    return Array
+        .from(Array(m - Math.max(n, stop)), (_, i) => i + 1 + Math.max(n, stop))
+        .reverse()
+        .filter(x => x % 2 == 0 && x % 3 == 0)
+        .join(' ');
+}
+
+console.log(stopNumber(['1', '36', '12']));
+
+console.log('====================');
+
+console.log(stopNumberArr(['1', '36', '12']));
