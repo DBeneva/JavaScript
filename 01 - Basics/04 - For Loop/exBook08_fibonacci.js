@@ -13,12 +13,8 @@ function fibonacci(endPosition) {
 }
 
 function fibonacciArr(endPosition) {
-    const sequence = [1, 1];
-
-    for (let i = 2; i <= endPosition; i++) {
-        sequence.push(sequence[i - 2] + sequence[i - 1]);
-    }
-
+    const sequence = Array.from(Array(endPosition + 1));
+    sequence.forEach((_, i) => i > 1 ? sequence[i] = (sequence[i - 1] + sequence[i - 2]) : sequence[i] = 1);
     return sequence[endPosition];
 }
 

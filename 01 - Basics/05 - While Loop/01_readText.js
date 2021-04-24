@@ -7,7 +7,15 @@ function readText(input) {
         text = input[i];
     }
 
-    console.log(i);
+    return i;
 }
 
-readText(['Nakov', 'SoftUni', 'Sofia', 'Bulgaria', 'SomeText', 'Stop']);
+function readTextArr(input) {
+    return input.indexOf('Stop');
+}
+
+console.log(readText(['Nakov', 'SoftUni', 'Sofia', 'Bulgaria', 'SomeText', 'Stop']));
+
+console.log('===================');
+
+console.log(readText(['Nakov', 'SoftUni', 'Sofia', 'Bulgaria', 'SomeText', 'Stop']));

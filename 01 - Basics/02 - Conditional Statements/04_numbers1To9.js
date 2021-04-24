@@ -1,4 +1,4 @@
-function numToWord(num) {    
+function numToWord(num) {
     if (num == 1) {
         return 'one';
     } else if (num == 2) {
@@ -22,24 +22,24 @@ function numToWord(num) {
     }
 }
 
-function numToWordObj(num) {
-    const numWord = {
-        1: 'one',
-        2: 'two',
-        3: 'three',
-        4: 'four',
-        5: 'five',
-        6: 'six',
-        7: 'seven',
-        8: 'eight',
-        9: 'nine',
-    };
-    
-    return numWord[num] ? numWord[num] : 'number too big';
+function numToWordArr(num) {
+    const numWord = [
+        'one',
+        'two',
+        'three',
+        'four',
+        'five',
+        'six',
+        'seven',
+        'eight',
+        'nine',
+    ];
+
+    return numWord[num - 1] ? numWord[num - 1] : 'number too big';
 }
 
 console.log(numToWord('1'));
 
 console.log('====================');
 
-console.log(numToWordObj('3'));
+console.log(numToWordArr('3'));

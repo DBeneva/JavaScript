@@ -1,13 +1,27 @@
 function password(input) {
-    let userName = input[0];
-    let password = input[1];
+    const userName = input[0];
+    const password = input[1];
     let index = 2;
+    let output = '';
 
     while (input[index] != password) {
+        output += `Wrong password!\n`;
         index++;
     }
 
-    console.log(`Welcome ${userName}!`);
+    return output + `Welcome ${userName}!`;
 }
 
-password(['Nakov', '1234', 'pass', '1324', '1234']);
+function passwordArr(input) {
+    const [userName, password] = input.splice(0, 2);
+
+    return input
+        .map(x => x == password ? `Welcome ${userName}!` : `Wrong password!`)
+        .join('\n');
+}
+
+console.log(password(['Nakov', '1234', 'pass', '1324', '1234']));
+
+console.log('====================');
+
+console.log(passwordArr(['Nakov', '1234', 'pass', '1324', '1234']));

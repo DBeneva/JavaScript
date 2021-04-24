@@ -7,7 +7,18 @@ function sumNumbers(input) {
         inputLine = input.shift();
     }
 
-    console.log(sum);
+    return sum;
 }
 
-sumNumbers(['10', '20', '30', '45', 'Stop']);
+function sumNumbersArr(input) {
+    return input
+        .map(Number)
+        .slice(0, input.indexOf('Stop'))
+        .reduce((acc, curr) => acc + curr, 0);
+}
+
+console.log(sumNumbers(['10', '20', '30', '45', 'Stop']));
+
+console.log('====================');
+
+console.log(sumNumbersArr(['10', '20', '30', '45', 'Stop']));
