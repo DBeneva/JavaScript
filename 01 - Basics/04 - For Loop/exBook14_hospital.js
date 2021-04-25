@@ -25,15 +25,20 @@ Untreated patients: ${patients - treatedPatients}.`;
 
 function hospitalArr(...input) {
     input.map(Number);
-    const patients = input.slice(1).reduce((acc, curr) => acc + curr, 0);
-
+    input.shift();
+    
     let doctors = 7;
+    let patients = 0;
     let treatedPatients = 0;
 
-    for (i = 1; i < input.length; i++) {
-        doctors += i % 3 == 0 && treatedPatients < input[i] / 2 ? 1 : 0;
-        treatedPatients += input[i] < doctors ? input[i] : doctors;
-    }
+    input.forEach((d, i) => {
+        if (i + 1 % 3 == 0 && treatedPatients < patients / 2) {
+            doctors++;
+        }
+        
+        patients += d;
+        treatedPatients += Math.min(d, doctors);
+    });
 
     return `Treated patients: ${treatedPatients}.
 Untreated patients: ${patients - treatedPatients}.`;
