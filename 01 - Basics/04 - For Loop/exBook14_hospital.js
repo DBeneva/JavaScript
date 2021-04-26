@@ -24,18 +24,15 @@ Untreated patients: ${patients - treatedPatients}.`;
 }
 
 function hospitalArr(...input) {
-    input.map(Number);
     input.shift();
     
     let doctors = 7;
     let patients = 0;
     let treatedPatients = 0;
-
-    input.forEach((d, i) => {
-        if (i + 1 % 3 == 0 && treatedPatients < patients / 2) {
-            doctors++;
-        }
-        
+    
+    input.map(Number)
+        .forEach((d, i) => {
+        doctors += (i + 1) % 3 == 0 && treatedPatients < patients / 2 ? 1 : 0;        
         patients += d;
         treatedPatients += Math.min(d, doctors);
     });
