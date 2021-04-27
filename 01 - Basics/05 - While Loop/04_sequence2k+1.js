@@ -13,7 +13,8 @@ function sequence(n) {
 
 function sequenceArr(n) {
     const numbers = Array.from(Array(n).fill(1));    
-    numbers.forEach((x, i) => (i > 0 && numbers[i - 1] * 2 + 1 <= n) ? numbers[i] = numbers[i - 1] * 2 + 1 : numbers[i] = 1);
+    numbers.forEach((_, i) => (i > 0 && numbers[i - 1] * 2 + 1 <= n) ? numbers[i] = numbers[i - 1] * 2 + 1 : numbers[i] = 1);
+    
     return numbers.slice(0, numbers.indexOf(1, 1)).join('\n');
 }
 
