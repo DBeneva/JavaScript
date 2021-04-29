@@ -20,3 +20,5 @@ function accountBalance(input) {
 }
 
 console.log(accountBalance([5, 120, 45.55, -150]));
+
+console.log('====================');
