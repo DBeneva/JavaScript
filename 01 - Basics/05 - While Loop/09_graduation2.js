@@ -9,18 +9,18 @@ function graduation2(input) {
     while (years <= 12) {
         let grade = Number(input[i]);
         i++;
-        
+
         if (grade < 4) {
             expelled++;
-        
+
             if (expelled >= 2) {
                 yearExpelled += years;
                 break;
             } else {
-            continue;
+                continue;
             }
         }
-        
+
         gradeTotal += grade;
         years++;
     }

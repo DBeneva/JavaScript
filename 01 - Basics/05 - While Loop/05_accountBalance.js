@@ -20,13 +20,13 @@ function accountBalance(input) {
 }
 
 function accountBalanceArr(input) {
-    const transactions = input
-        .slice(1)
-        .map(x => x < 0 ? 'Invalid operation!' : `Increase: ${x}`);
-
-    const total = transactions.reduce((acc, curr) => acc + Number(curr.slice(curr.indexOf(':') + 2)) || 0, 0);
-        return total;
-
+    const transactions = input.slice(1).map(Number);
+    const total = transactions.reduce((acc, curr) => acc + (curr < 0 ? 0 : curr));
+    
+    return transactions
+        .map(x => x < 0 ? 'Invalid operation!' : `Increase: ${x.toFixed(2)}`)
+        .concat(`Total: ${total.toFixed(2)}`)
+        .join('\n');
 }
 
 console.log(accountBalance([5, 120, 45.55, -150]));

@@ -1,5 +1,5 @@
 function maxNumber(input) {
-    let n = Number(input[0]);
+    const n = Number(input[0]);
     let max = Number.NEGATIVE_INFINITY;
     let i = 1;
 
@@ -13,7 +13,15 @@ function maxNumber(input) {
         i++;
     }
 
-    console.log(max);
+    return max;
 }
 
-maxNumber([2, 100, 99]);
+function maxNumberArr(input) {
+    return input.slice(1).sort((a, b) => b - a)[0];
+}
+
+console.log(maxNumber([2, 100, 99]));
+
+console.log('====================');
+
+console.log(maxNumberArr([2, 100, 99]));

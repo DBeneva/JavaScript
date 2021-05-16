@@ -1,10 +1,10 @@
 function minNumber(input) {
-    let n = Number(input[0]);
+    const n = Number(input[0]);
     let min = Number.POSITIVE_INFINITY;
     let i = 1;
 
     while (i <= n) {
-        let currentNumber = Number(input[i]);
+        const currentNumber = Number(input[i]);
         
         if (currentNumber < min) {
             min = currentNumber;
@@ -13,7 +13,15 @@ function minNumber(input) {
         i++;
     }
 
-    console.log(min);
+    return min;
 }
 
-minNumber([2, 100, 99]);
+function minNumberArr(input) {
+    return input.slice(1).sort((a, b) => a - b)[0];
+}
+
+console.log(minNumber([2, 100, 99]));
+
+console.log('====================');
+
+console.log(minNumberArr([2, 100, 99]));
