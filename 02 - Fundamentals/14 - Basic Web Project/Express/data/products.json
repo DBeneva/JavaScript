@@ -1,0 +1,20 @@
+[
+    {
+        "sn": "123",
+        "description": "Oil Filter",
+        "price": 49.90,
+        "qty": 30
+    },
+    {
+        "sn": "456",
+        "description": "Oil Filter",
+        "price": 49.90,
+        "qty": 30
+    },
+    {
+        "sn": "789",
+        "description": "Oil Filter",
+        "price": 49.90,
+        "qty": 30
+    }
+]
