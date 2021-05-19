@@ -1,4 +1,3 @@
-const database = require('../util/database');
 const layout = require('../views/layout');
 const database = require('../util/database');
 
@@ -11,11 +10,11 @@ const html = (items) => `
         <input type="submit" value="Create Item">
     </form>
     <ul>
-        ${items.map(([id, i]) => `<li data-id="${id}">${i.name} - ${i.serial}<a href="/delete">Delete</a></li>`).join('')}
+        ${items.map(([id, i]) => `<li data-id="${id}">${i.name} - ${i.serial}<a href="/delete?id=${id}"> [Delete]</a></li>`).join('')}
     </ul>
 </div>`;
 
 module.exports = (req, res) => {
-    res.write(layout(html(Object.entries(database.database))));
+    res.write(layout(html(Object.entries(database.database)), 'Catalog'));
     res.end();
 };

@@ -1,18 +1,13 @@
 const handlers = {};
 
 function match(method, url) {
-    const method = handlers[url] || {};
+    const methods = handlers[url] || {};
+    const handler = methods[method];
     
-    if (method == undefined) {
-        return defaultHandler;
-    }
-
-    const handler = handlers[url];
-
     if (handler == undefined) {
         return defaultHandler;
     } else {
-        handler;
+        return handler;
     }
 }
 
@@ -21,7 +16,7 @@ function registerHandler(method, url, handler) {
 
     if (methods == undefined) {
         methods = {};
-        handlers[url] = method;
+        handlers[url] = methods;
     }
 
     handlers[url][method] = handler;

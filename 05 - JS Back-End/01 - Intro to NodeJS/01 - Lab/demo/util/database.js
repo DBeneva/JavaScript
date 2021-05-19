@@ -11,7 +11,15 @@ function nextId() {
 }
 
 function addItem(item) {
-    database[id] = item;
+    database[nextId()] = item;
 }
 
-module.exports = {};
+function deleteItem(id) {
+    delete database[id];
+}
+
+module.exports = {
+    addItem,
+    deleteItem,
+    database
+};

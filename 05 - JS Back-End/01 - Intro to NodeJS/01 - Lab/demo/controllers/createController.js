@@ -5,9 +5,6 @@ module.exports = (req, res) => {
     const form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, files) => {
-        console.log('created item');
-        console.log(fields);
-
         database.addItem(fields);
 
         res.writeHead(301, {
@@ -15,5 +12,4 @@ module.exports = (req, res) => {
         });
         res.end();
     });
-
-}
+};
