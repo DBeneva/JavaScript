@@ -1,0 +1,14 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "A simple catalogue of cats in need of shelter.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DB",
+  "license": "MIT",
+  "dependencies": {
+    "formidable": "^1.2.2"
+  }
+}
