@@ -10,7 +10,7 @@ const html = (items) => `
         <input type="submit" value="Create Item">
     </form>
     <ul>
-        ${items.map(([id, i]) => `<li data-id="${id}">${i.name} - ${i.serial}<a href="/delete?id=${id}"> [Delete]</a></li>`).join('')}
+        ${items.map(([id, i]) => `<li data-id="${id}">${i.name} - ${i.serial} <a href="/delete?id=${id}">[Delete]</a></li>`).join('')}
     </ul>
 </div>`;
 
