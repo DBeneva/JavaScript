@@ -11,11 +11,16 @@ module.exports = (req, res) => {
     
     if (pathname == '/cats/add-cat' && req.method == 'GET') {
         const filePath = path.normalize(path.join(__dirname, '../views/addCat.html'));
-
+        
         const index = fs.createReadStream(filePath);
-        index.on('data', (data) => res.write(data));
+        index.on('data', (data) => {
+            const catBreedPlaceholder = breeds.map(b => `<option value="${b}">${b}</option>`);
+            const modifiedData = data.toString().replace('{{catBreeds}}', catBreedPlaceholder);
+            res.write(modifiedData)
+        });
         index.on('end', () => res.end());
-        index.on('error', (err) => res.write(err));       
+        index.on('error', (err) => res.write(err));
+
     } else if (pathname == '/cats/add-breed' && req.method == 'GET') {
         const filePath = path.normalize(path.join(__dirname, '../views/addBreed.html'));
 
@@ -34,23 +39,107 @@ module.exports = (req, res) => {
             let body = qs.parse(formData);
             console.log(body);
 
-            fs.readFile('../data/breeds.json', (err, data) => {
+            fs.readFile('./data/breeds.json', (err, data) => {
                 if (err) throw err;
 
-                let breeds = JSON.parse(data);
+                const breeds = JSON.parse(data);
                 breeds.push(body.breed);
-                let json = JSON.stringify(breeds);
+                const json = JSON.stringify(breeds);
 
-                fs.writeFile('../data/breeds.json', json, 'utf-8', () => console.log('The breed has been added successfully!'));
+                fs.writeFile('./data/breeds.json', json, 'utf-8', () => console.log('The breed has been added successfully!'));
             });
 
-            res.writeHead(300, { 'Location': '/' });
+            res.writeHead(301, { 'Location': '/' });
             res.end();
         });
     } else if (pathname == '/cats/add-cat' && req.method == 'POST') {
-        
+        let form = new formidable.IncomingForm();
 
+        form.parse(req, (err, fields, files) => {
+            if (err) throw err;
 
+            const oldPath = files.upload.path;
+            const newPath = path.normalize(path.join(__dirname, '../content/images/' + files.upload.name));
+       
+            fs.rename(oldPath, newPath, (err) => {
+                if (err) throw err;
+
+                console.log('File was uploaded successfully!');
+            });
+
+            fs.readFile('./data/cats.json', 'utf-8', (err, data) => {
+                if (err) throw err;
+
+                const cats = JSON.parse(data);
+                cats.push({ id: cats.length + 1, ...fields, image: files.upload.name });
+                const json = JSON.stringify(cats);
+
+                fs.writeFile('./data/cats.json', json, 'utf-8', () => {
+                    res.writeHead(301, { 'Location': '/' });
+                    res.end();
+                });
+            });
+        });
+    } else if (pathname.includes('/cats-edit') && req.method == 'GET') {
+        const filePath = path.normalize(path.join(__dirname, '../views/editCat.html'));
+        const catId = pathname.split('/cats-edit/')[1];
+        let currentCat = '';
+
+        fs.readFile('./data/cats.json', (err, data) => {
+            if (err) throw err;
+
+            currentCat = JSON.parse(data).find(c => c.id == catId);
+            
+            const index = fs.createReadStream(filePath);
+            index.on('data', (data) => {
+                
+                let modifiedData = data.toString().replace('{{id}}', catId);
+                modifiedData = modifiedData.replace('{{name}}', currentCat.name);
+                modifiedData = modifiedData.replace('{{description}}', currentCat.description);
+
+                const breedsAsOptions = breeds.map(b => {
+                    if (b == currentCat.breed) {
+                        return `<option value="${b}" selected>${b}</option>`;
+                    } else {
+                        return `<option value="${b}">${b}</option>`;
+                    }
+                });
+
+                modifiedData = modifiedData.replace('{{catBreeds}}', breedsAsOptions.join('/'));
+                modifiedData = modifiedData.replace('{{breed}}', currentCat.breed);
+
+                res.write(modifiedData);
+            });
+            index.on('end', () => res.end());
+            index.on('error', (err) => res.write(err));
+        });
+    } else if (pathname.includes('/cats-find-new-home') && req.method == 'GET') {
+        const filePath = path.normalize(path.join(__dirname, '../views/catShelter.html'));
+        const catId = pathname.split('/cats-find-new-home/')[1];
+        let currentCat = '';
+
+        fs.readFile('./data/cats.json', (err, data) => {
+            if (err) throw err;
+
+            currentCat = JSON.parse(data).find(c => c.id == catId);
+            
+            const index = fs.createReadStream(filePath);
+            index.on('data', (data) => {                
+                console.log(currentCat.name, currentCat.breed);
+                let modifiedData = data.toString().replace('{{id}}', catId);
+                modifiedData = modifiedData.replace('{{name}}', currentCat.name);
+                modifiedData = modifiedData.replace('{{image}}', currentCat.image);
+                modifiedData = modifiedData.replace('{{description}}', currentCat.description);
+                modifiedData = modifiedData.replace('{{breed}}', currentCat.breed);
+
+                res.write(modifiedData);
+            });
+            index.on('end', () => res.end());
+            index.on('error', (err) => res.write(err));
+        });
+    } else if (pathname == '/cats-edit' && req.method == 'POST') {
+
+    } else if (pathname == '/cats-find-new-home' && req.method == 'POST') {
 
     } else {
         return true;

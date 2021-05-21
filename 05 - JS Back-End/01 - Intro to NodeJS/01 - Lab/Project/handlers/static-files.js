@@ -5,7 +5,7 @@ function getContentType(url) {
         return 'text/css';
     } else if (url.endsWith('html')) {
         return 'text/html';
-    } else if (url.endsWith('jpg')) {
+    } else if (url.endsWith('jpg') || url.endsWith('jpeg') || url.endsWith('png')) {
         return 'image/jpeg';
     } else if (url.endsWith('ico')) {
         return 'image/vnd.microsoft.icon';
@@ -19,7 +19,12 @@ module.exports = (req, res) => {
     const pathname = url.pathname;
 
     if (pathname.startsWith('/content') && req.method == 'GET') {
-        fs.readFile(`./${pathname}`, 'utf-8', (err, data) => {
+        const isImage = getContentType(pathname) == 'image/jpeg';
+        const params = isImage ? [handler] : ['utf-8', handler];
+
+        fs.readFile(`./${pathname}`, ...params);
+
+        function handler(err, data) {
             if (err) {
                 console.log(err);
 
@@ -33,7 +38,7 @@ module.exports = (req, res) => {
             res.writeHead(200, { 'Content-Type': getContentType(pathname) });
             res.write(data);
             res.end();
-        });
+        }
     } else {
         return true;
     }
