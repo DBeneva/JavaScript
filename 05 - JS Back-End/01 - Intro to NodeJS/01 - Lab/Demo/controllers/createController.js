@@ -1,24 +1,11 @@
-const formidable = require('formidable');
+const parseForm = require('../util/formParser');
 const database = require('../util/database');
-const qs = require('querystring');
 
-module.exports = (req, res) => {
-    // const form = new formidable.IncomingForm();
+module.exports = async (req, res) => {
+    const body = await parseForm(req);
+    database.addItem(body);
 
-    // form.parse(req, (err, fields, files) => {
-    //     database.addItem(fields);
-
-    //     res.writeHead(301, {
-    //         'Location': '/catalog'
-    //     });
-    //     res.end();
-    // });
-
-    let body = '';
-    req.on('data', data => {
-        body += data.toString(); // 'name=item&serial=1234'
-    });
-    req.on('end', () => console.log(body));
+    console.log('>>> Created item');
 
     res.writeHead(301, {
         'Location': '/catalog'

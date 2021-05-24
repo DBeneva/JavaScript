@@ -10,10 +10,10 @@ async function parse(req) {
 
             try {
                 result = body
-                .split('&')
-                .map(p => p.split('='))
-                .reduce((acc, curr) => Object.assign(acc, { [curr[0]]: curr[1] }), {});
-            
+                    .split('&')
+                    .map(p => p.split('='))
+                    .reduce((acc, curr) => Object.assign(acc, { [curr[0]]: curr[1] }), {});
+
                 resolve(result);
             } catch (err) {
                 reject(err);
@@ -22,11 +22,4 @@ async function parse(req) {
     });
 }
 
-async function demo() {
-    const src = fs.createReadStream('./data.txt');
-    const result = await parse(src);
-
-    console.log(result);
-}
-
-demo();
+module.exports = parse;
