@@ -127,18 +127,38 @@ module.exports = (req, res) => {
             index.on('data', (data) => {                
                 console.log(currentCat.name, currentCat.breed);
                 let modifiedData = data.toString().replace('{{id}}', catId);
-                modifiedData = modifiedData.replace('{{name}}', currentCat.name);
+                modifiedData = modifiedData.replace(new RegExp('{{name}}', 'g'), currentCat.name);
                 modifiedData = modifiedData.replace('{{image}}', currentCat.image);
                 modifiedData = modifiedData.replace('{{description}}', currentCat.description);
-                modifiedData = modifiedData.replace('{{breed}}', currentCat.breed);
+                modifiedData = modifiedData.replace(new RegExp('{{breed}}', 'g'), currentCat.breed);
 
                 res.write(modifiedData);
             });
             index.on('end', () => res.end());
             index.on('error', (err) => res.write(err));
         });
-    } else if (pathname == '/cats-edit' && req.method == 'POST') {
+    } else if (pathname.includes('/cats-edit/') && req.method == 'POST') {
+        const catId = pathname.split('/cats-edit/')[1];
+        const form = new formidable.IncomingForm();
 
+        form.parse(req, (err, fields, files) => {
+            if (err) throw err;
+
+            fs.readFile('./data/cats.json', 'utf-8', (err, data) => {
+                if (err) throw err;
+
+                let cats = JSON.parse(data);
+                console.log(cats);
+                Object.assign(cats.find(c => c.id == catId), { id: catId, ...fields, image: files.upload.name });
+                console.log(cats);
+                const json = JSON.stringify(cats);
+
+                fs.writeFile('./data/cats.json', json, 'utf-8', () => {
+                    res.writeHead(301, { 'Location': '/' });
+                    res.end();
+                });
+            });
+        });
     } else if (pathname == '/cats-find-new-home' && req.method == 'POST') {
 
     } else {

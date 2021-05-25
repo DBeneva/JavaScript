@@ -6,14 +6,14 @@ const homeController = require('./controllers/homeController'); // (req, res) =>
 const catalogController = require('./controllers/catalogController'); // (req, res) => res.write(layout(html(Object.entries(database.database)), 'Catalog'))
 const createController = require('./controllers/createController'); // (req, res) => { form.parse(req, (err, fields, files) => { ... res.writeHead(301, { ... }; res.end(); }); }
 const deleteController = require('./controllers/deleteController'); // (req, res) => { ... res.writeHead(301, { 'Location': '/catalog' }); res.end(); }
+const uploadController = require('./controllers/uploadController');
 
 router.get('/', homeController); // handlers['/'].GET = (req, res) => res.write(layout(homePage))
 router.get('/catalog', catalogController); // handlers['/catalog'].GET = (req, res) => res.write(layout(html(Object.entries(database.database)), 'Catalog'))
 router.get('/about', aboutController); // handlers['/about'].GET = (req, res) => res.write(layout(html, 'About'))
-
 router.post('/create', createController); // handlers['/create'].POST = (req, res) => { form.parse(req, (err, fields, files) => { ... res.writeHead(301, { ... }; res.end(); }); }
-
 router.get('/delete', deleteController); // handlers['/delete'].GET = (req, res) => { ... res.writeHead(301, { 'Location': '/catalog' }); res.end(); }
+router.post('/upload', uploadController); // handlers['/upload'].POST = (req, res) => { form.parse(req, async (err, fields, files) => { ... res.writeHead(301, { ... }); res.end(); }); }
 
 // start server
 const port = 3000;
