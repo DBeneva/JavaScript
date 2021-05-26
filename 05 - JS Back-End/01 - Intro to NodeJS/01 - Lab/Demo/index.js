@@ -15,7 +15,6 @@ router.post('/create', createController); // handlers['/create'].POST = (req, re
 router.get('/delete', deleteController); // handlers['/delete'].GET = (req, res) => { ... res.writeHead(301, { 'Location': '/catalog' }); res.end(); }
 router.post('/upload', uploadController); // handlers['/upload'].POST = (req, res) => { form.parse(req, async (err, fields, files) => { ... res.writeHead(301, { ... }); res.end(); }); }
 
-// start server
 const port = 3000;
 const server = http.createServer(requestHandler);
 
