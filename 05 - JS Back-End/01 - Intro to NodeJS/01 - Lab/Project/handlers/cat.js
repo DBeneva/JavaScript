@@ -144,13 +144,14 @@ module.exports = (req, res) => {
         form.parse(req, (err, fields, files) => {
             if (err) throw err;
 
+            console.log(fields);
             fs.readFile('./data/cats.json', 'utf-8', (err, data) => {
                 if (err) throw err;
 
-                let cats = JSON.parse(data);
-                console.log(cats);
-                Object.assign(cats.find(c => c.id == catId), { id: catId, ...fields, image: files.upload.name });
-                console.log(cats);
+                const cats = JSON.parse(data);
+                const image = cats.find(c => c.id == catId).image;
+                const index = cats.indexOf(cats.find(c => c.id == catId));
+                cats.splice(index, 1, { id: catId, ...fields, image: image || files.upload.name });
                 const json = JSON.stringify(cats);
 
                 fs.writeFile('./data/cats.json', json, 'utf-8', () => {
@@ -159,8 +160,23 @@ module.exports = (req, res) => {
                 });
             });
         });
-    } else if (pathname == '/cats-find-new-home' && req.method == 'POST') {
+    } else if (pathname.includes('/cats-find-new-home') && req.method == 'POST') {
+        const catId = pathname.split('/cats-find-new-home/')[1];
+        console.log(catId);
 
+        fs.readFile('./data/cats.json', 'utf-8', (err, data) => {
+            if (err) throw err;
+
+            let cats = JSON.parse(data);
+            cats = cats.filter(c => c.id != catId);
+            console.log(cats);
+            const json = JSON.stringify(cats);
+
+            fs.writeFile('./data/cats.json', json, 'utf-8', () => {
+                res.writeHead(301, { 'Location': '/' });
+                res.end();
+            });
+        });
     } else {
         return true;
     }
