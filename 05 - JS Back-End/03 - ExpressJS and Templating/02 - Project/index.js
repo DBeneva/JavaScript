@@ -11,9 +11,10 @@ const { init: storage } = require('./models/storage');
 
 const { about } = require('./controllers/about');
 const { catalog } = require('./controllers/catalog');
-const { create, post } = require('./controllers/create');
+const { create, post: createPost } = require('./controllers/create');
 const { details } = require('./controllers/details');
 const { notFound } = require('./controllers/notFound');
+const { edit, post: editPost } = require('./controllers/edit');
 
 start();
 
@@ -24,14 +25,18 @@ async function start() {
     app.engine('.hbs', hbs({ extname: '.hbs' }));
     app.set('view engine', '.hbs');
     app.use('/static', express.static('static'));
+    app.use('/js', express.static('js'));
+    app.use(express.urlencoded({ extended: false }));
     app.use(await storage());
 
     // routing table:
     app.get('/', catalog);
     app.get('/about', about);
-    app.get('/details/:id', details);
+    app.get('/details/:id', await details);
     app.get('/create', create);
-    app.post('/create', post);
+    app.post('/create', createPost);
+    app.get('/edit/:id', await edit);
+    app.post('/edit/:id', await editPost);
     app.all('*', notFound);
 
     app.listen(port, () => console.log(`Server listening on port ${port}...`));
