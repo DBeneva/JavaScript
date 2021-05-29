@@ -1,9 +1,38 @@
-const env = process.env.NODE_ENV || 'development';
+// initialize express app
+// setup handlebars
+// setup static files
+// setup storage middleware
+// set router handlers
 
-const config = require('./config/config')[env];
-const app = require('express')();
+const express = require('express');
+const hbs = require('express-handlebars');
 
-require('./config/express')(app);
-require('./config/routes')(app);
+const { init: storage } = require('./models/storage');
 
-app.listen(config.port, console.log(`Listening on port ${config.port}! Now its up to you...`));
+const { about } = require('./controllers/about');
+const { catalog } = require('./controllers/catalog');
+const { create, post } = require('./controllers/create');
+const { details } = require('./controllers/details');
+const { notFound } = require('./controllers/notFound');
+
+start();
+
+async function start() {
+    const port = 3000;
+    const app = express();
+
+    app.engine('.hbs', hbs({ extname: '.hbs' }));
+    app.set('view engine', '.hbs');
+    app.use('/static', express.static('static'));
+    app.use(await storage());
+
+    // routing table:
+    app.get('/', catalog);
+    app.get('/about', about);
+    app.get('/details/:id', details);
+    app.get('/create', create);
+    app.post('/create', post);
+    app.all('*', notFound);
+
+    app.listen(port, () => console.log(`Server listening on port ${port}...`));
+}
