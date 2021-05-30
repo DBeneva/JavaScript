@@ -35,8 +35,14 @@ function graduation2(input) {
 
 function graduation2Arr(input) {
     const name = input.shift();
+    const expelled = input.filter(g => g < 4).length > 1;
+    const yearExpelled =  expelled ? input.map((g, i) => g < 4 ? [g, i] : [g]).filter(g => g.length > 1).pop()[1] : '';
+    const gradesPass = input.filter(g => g >= 4);
+    const averageGrade = gradesPass.reduce((acc, curr) => acc + curr / gradesPass.length, 0);
 
-    
+    return expelled ?
+        `${name} has been excluded at ${yearExpelled} grade` :
+        `${name} graduated. Average grade: ${averageGrade.toFixed(2)}`;
 }
 
 
@@ -56,14 +62,17 @@ console.log(graduation2([
 console.log('====================');
 
 console.log(graduation2Arr([
-    'Mimi',
+    'Gosho',
+    5,
+    5.5,
+    6,
+    5.43,
+    5.5,
+    6,
+    5.55,
     5,
     6,
-    5,
     6,
-    5,
-    6,
-    6,
-    2,
-    3
+    5.43,
+    5
 ]));
