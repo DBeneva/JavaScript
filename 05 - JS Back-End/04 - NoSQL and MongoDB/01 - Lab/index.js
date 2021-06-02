@@ -16,14 +16,11 @@ async function start() {
 
     console.log('Database connected');
 
-    const post = await (await Post.findOne({})
-        .populate('author')
-        .populate({
-            path: 'comments',
-            populate: 'author'
-        }));
+    const post = await new Post({
+        title: 'My Title'
+    });
+    await post.save();
     console.log(post);
-    
 
     // await Person.findByIdAndUpdate('60b51858cb4e3530a0442383', { $set: { firstName: 'Matthew' } });
     // console.log(await Person.find({}));
