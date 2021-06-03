@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Cube = require('./Cube');
-const Accessory = require('./Accessory');
+const Cube = require('../models/Cube');
+const Accessory = require('../models/Accessory');
 
 mongoose.set('useFindAndModify', false);
 
