@@ -1,4 +1,8 @@
+const mongoose = require('mongoose');
 const Cube = require('./Cube');
+const Accessory = require('./Accessory');
+
+mongoose.set('useFindAndModify', false);
 
 async function init() {
     return (req, res, next) => {
@@ -6,6 +10,7 @@ async function init() {
             getAll,
             getById,
             create,
+            createAccessory,
             edit
         };
 
@@ -50,6 +55,14 @@ async function create(cube) {
     }).save();
 }
 
+async function createAccessory(accessory) {
+    await new Accessory({
+        name: accessory.name,
+        description: accessory.description,
+        imageUrl: accessory.imageUrl,
+    }).save();
+}
+
 async function edit(id, cube) {
     await Cube.findByIdAndUpdate(id, {
         $set: {
@@ -59,7 +72,7 @@ async function edit(id, cube) {
             difficulty: cube.difficulty,
             accessories: cube.accessories
         }
-    }).lean();
+    });
 }
 
 module.exports = {

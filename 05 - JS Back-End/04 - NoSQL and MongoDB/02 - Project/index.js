@@ -5,13 +5,13 @@ require('dotenv/config');
 
 const { init: storage } = require('./models/storage');
 
-const { catalog } = require('./conrtollers/catalog');
-const { about } = require('./conrtollers/about');
-const { create, post: createPost } = require('./conrtollers/create');
-const { details } = require('./conrtollers/details');
-const { edit } = require('./conrtollers/edit');
-const { notFound } = require('./conrtollers/notFound');
-const { createAccessory } = require('./conrtollers/createAccessory');
+const { catalog } = require('./controllers/catalog');
+const { about } = require('./controllers/about');
+const { create, post: createPost } = require('./controllers/create');
+const { details } = require('./controllers/details');
+const { edit, post: editPost } = require('./controllers/edit');
+const { notFound } = require('./controllers/notFound');
+const { createAccessory, post: createAccessoryPost } = require('./controllers/createAccessory');
 
 start();
 
@@ -35,8 +35,10 @@ async function start() {
     app.get('/create', create);
     app.post('/create', await createPost);
     app.get('/create/accessory', createAccessory);
+    app.post('/create/accessory', await createAccessoryPost);
     app.get('/details/:id', await details);
     app.get('/edit/:id', await edit);
+    app.post('/edit/:id', await editPost);
 
     app.get('*', notFound);
 
