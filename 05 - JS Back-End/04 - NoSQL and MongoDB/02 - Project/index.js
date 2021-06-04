@@ -13,6 +13,8 @@ async function start() {
     const port = process.env.PORT || 5000;
     const app = express();
 
+    app.use(await storage());
+
     expressConfig(app);
     await databaseConfig(app); // must be before routesConfig!
     routesConfig(app);

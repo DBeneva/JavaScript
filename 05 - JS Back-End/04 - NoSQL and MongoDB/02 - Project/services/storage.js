@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
 
-mongoose.set('useFindAndModify', false);
+// mongoose.set('useFindAndModify', false);
 
 async function init() {
     return (req, res, next) => {
@@ -19,40 +19,39 @@ async function init() {
 }
 
 async function getAll(query) {
-    try {
-        let cubes = await Cube
-            .find({})
-            .populate('accessories')
-            .lean();
+    const options = {};
 
-        if (query.search) {
-            cubes = cubes.filter(c => c.name.toLowerCase().includes(query.search.toLowerCase()));
-        }
-        if (query.from) {
-            cubes = cubes.filter(c => c.difficulty >= Number(query.from));
-        }
-        if (query.to) {
-            cubes = cubes.filter(c => c.difficulty <= Number(query.to));
-        }
-    
-        return cubes;
-    } catch (err) {
-        console.error(err.message)
+    if (query.search) {
+        options.name = { $regex: query.search, $options: 'i' };
     }
+    if (query.from) {
+        options.difficulty = { $gte: Number(query.from) };
+    }
+    if (query.to) {
+        options.difficulty = options.difficulty || {};
+        options.difficulty.$lte = Number(query.to);
+    }
+
+    let cubes = await Cube
+        .find(options)
+        .populate('accessories')
+        .lean();
+    return cubes;
 }
 
 async function getById(id) {
-    return await Cube.findById(id).lean();
+    const cube = await Cube.findById(id).lean();
+
+    if (cube) {
+        return cube;
+    } else {
+        return undefined;
+    }
 }
 
 async function create(cube) {
-    await new Cube({
-        name: cube.name,
-        description: cube.description,
-        imageUrl: cube.imageUrl,
-        difficulty: cube.difficulty,
-        accessories: cube.accessories
-    }).save();
+    const record = new Cube(cube)
+    return record.save();
 }
 
 async function createAccessory(accessory) {
@@ -64,15 +63,14 @@ async function createAccessory(accessory) {
 }
 
 async function edit(id, cube) {
-    await Cube.findByIdAndUpdate(id, {
-        $set: {
-            name: cube.name,
-            description: cube.description,
-            imageUrl: cube.imageUrl,
-            difficulty: cube.difficulty,
-            accessories: cube.accessories
-        }
-    });
+    const existing = await Cube.findById(id);
+
+    if (!existing) {
+        throw new ReferenceError('No such ID in database');
+    }
+
+    Object.assign(existing, cube); // goes through the setters (validation)
+    return existing.save();
 }
 
 module.exports = {
