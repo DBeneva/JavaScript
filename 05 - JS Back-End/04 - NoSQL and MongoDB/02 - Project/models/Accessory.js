@@ -2,16 +2,8 @@ const { Schema, model } = require('mongoose');
 
 const schema = new Schema({
     name: { type: String, required: true },
-    imageUrl: {
-        type: String,
-        required: true,
-        validate: {
-            validator: (v) => v.startsWith('http'),
-            message: props => `${props} is not a valid http address`
-        }
-    },
-    description: { type: String, required: true, maxlength: 100 },
-    cubes: [{ type: Schema.Types.ObjectId, ref: 'Cube' }]
+    imageUrl: { type: String, required: true, match: /^https?:\/\// },
+    description: { type: String, required: true, maxLength: 500 }
 });
 
 module.exports = model('Accessory', schema);

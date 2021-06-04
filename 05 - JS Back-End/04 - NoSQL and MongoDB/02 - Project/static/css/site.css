@@ -229,7 +229,7 @@ h2{
     text-align: center;
 }
 
-.accessories, .accessory {
+.accessories .accessory{
     display: inline-block;
     background-color: #f3f3f2;
     width: 20%;
@@ -237,7 +237,7 @@ h2{
     margin: 1%;
 }
 
-.accessories, .italic {
+.accessories, .italic{
     text-align: center;
     font-style: italic;
 }

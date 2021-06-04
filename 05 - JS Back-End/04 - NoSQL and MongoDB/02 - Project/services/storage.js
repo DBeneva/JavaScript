@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Cube = require('../models/Cube');
+const Comment = require('../models/Comment')
 const Accessory = require('../models/Accessory');
 
 // mongoose.set('useFindAndModify', false);
@@ -11,7 +12,9 @@ async function init() {
             getById,
             create,
             createAccessory,
-            edit
+            edit,
+            createComment,
+            getAllAccessories
         };
 
         next();
@@ -19,28 +22,20 @@ async function init() {
 }
 
 async function getAll(query) {
-    const options = {};
+    const searchParams = {
+        name: { $regex: query.search || '', $options: 'i' },
+        difficulty: { $gte: Number(query.from) || 0, $lte: Number(query.to) || 6 }
+    };
 
-    if (query.search) {
-        options.name = { $regex: query.search, $options: 'i' };
-    }
-    if (query.from) {
-        options.difficulty = { $gte: Number(query.from) };
-    }
-    if (query.to) {
-        options.difficulty = options.difficulty || {};
-        options.difficulty.$lte = Number(query.to);
-    }
-
-    let cubes = await Cube
-        .find(options)
+    const cubes = await Cube
+        .find(searchParams)
         .populate('accessories')
         .lean();
     return cubes;
 }
 
 async function getById(id) {
-    const cube = await Cube.findById(id).lean();
+    const cube = await Cube.findById(id).populate('comments').lean();
 
     if (cube) {
         return cube;
@@ -50,12 +45,16 @@ async function getById(id) {
 }
 
 async function create(cube) {
-    const record = new Cube(cube)
+    const record = new Cube(cube);
     return record.save();
 }
 
+async function getAllAccessories() {
+    return await Accessory.find({}).lean();
+}
+
 async function createAccessory(accessory) {
-    await new Accessory({
+    return await new Accessory({
         name: accessory.name,
         description: accessory.description,
         imageUrl: accessory.imageUrl,
@@ -73,10 +72,26 @@ async function edit(id, cube) {
     return existing.save();
 }
 
+async function createComment(cubeId, comment) {
+    const cube = await Cube.findById(cubeId);
+
+    if (!cube) {
+        throw new ReferenceError('No such ID in database');
+    }
+
+    const newComment = new Comment(comment);
+    await newComment.save();
+    cube.comments.push(newComment);
+    await cube.save();
+}
+
 module.exports = {
     init,
     getAll,
     getById,
     create,
-    edit
+    edit,
+    createComment,
+    createAccessory,
+    getAllAccessories
 };

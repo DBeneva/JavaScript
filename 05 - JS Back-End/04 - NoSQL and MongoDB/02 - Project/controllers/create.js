@@ -3,20 +3,21 @@ module.exports = {
         res.render('create', { title: 'Create Cube' });
     },
     async post(req, res) {
+        const cube = {
+            name: req.body.name,
+            description: req.body.description,
+            imageUrl: req.body.imageUrl,
+            difficulty: Number(req.body.difficulty)
+        };
+
         try {
-            const cube = {
-                name: req.body.name,
-                description: req.body.description,
-                imageUrl: req.body.imageUrl,
-                difficulty: Number(req.body.difficulty)
-            };
-    
             await req.storage.create(cube);
-    
             console.log(req.body);
             res.redirect('/');
         } catch (err) {
-            console.error(err.message);
+            if (err.name == 'ValidationError') {
+                return res.render('create', { title: 'Create Cube', error: 'All fields are required. Image URL must be a valid URL' });
+            }
         }
     }
 };
