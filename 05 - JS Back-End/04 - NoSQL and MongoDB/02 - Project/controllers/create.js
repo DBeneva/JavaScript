@@ -12,7 +12,7 @@ module.exports = {
 
         try {
             await req.storage.create(cube);
-            console.log(req.body);
+            
             res.redirect('/');
         } catch (err) {
             if (err.name == 'ValidationError') {

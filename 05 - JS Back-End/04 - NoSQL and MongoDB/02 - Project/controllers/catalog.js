@@ -10,7 +10,7 @@ module.exports = {
                 to: req.query.to || '',
                 cubes
             };
-            console.log(cubes);
+            
             res.render('catalog', ctx);
         } catch (err) {
             console.error(err.message);

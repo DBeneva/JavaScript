@@ -34,7 +34,7 @@ module.exports = {
             await req.storage.attachSticker(cubeId, stickerId);
             res.redirect(`/details/${cubeId}`);
         } catch (err) {
-            console.log(err.message);
+            console.error(err.message);
         }
     }
 };
