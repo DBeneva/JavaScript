@@ -3,14 +3,10 @@ const { Schema, model } = require('mongoose');
 const schema = new Schema({
     name: { type: String, required: true },
     description: { type: String, required: true, maxLength: 500 },
-    imageUrl: {
-        type: String,
-        required: true,
-        match: /^https?:\/\//
-    },
-    difficulty: { type: Number, gte: 1, lte: 6 },
-    accessories: [{ type: Schema.Types.ObjectId, ref: 'Accessory' }],
-    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+    imageUrl: { type: String, required: true, match: /^https?:\/\// },
+    difficulty: { type: Number, min: 1, max: 6 },
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+    stickers: [{ type: Schema.Types.ObjectId, ref: 'Sticker' }]
 });
 
 module.exports = model('Cube', schema);

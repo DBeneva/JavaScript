@@ -8,12 +8,12 @@
     <a class="btn" href="/details/{{_id}}/attach">Attach Stickers</a>
     <a class="btn" href="/edit/{{_id}}">Edit</a>
 </div>
-<h2>Accessories</h2>
-<div class="accessories">
-    {{#each accessories}}
-    {{> accessory}}
+<h2>Stickers</h2>
+<div class="stickers">
+    {{#each stickers}}
+    {{> sticker}}
     {{else}}
-    <h3 class="italic">This cube has no accessories yet...</h3>
+    <h3 class="italic">This cube has no stickers yet...</h3>
     {{/each}}
 </div>
 <div class="details">
