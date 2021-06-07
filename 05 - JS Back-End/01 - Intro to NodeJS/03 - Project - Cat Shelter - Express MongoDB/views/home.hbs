@@ -1,0 +1,17 @@
+<form action="/" method="GET">
+    <input name="search" type="text">
+    <button type="submit">Search</button>
+</form>
+</header>
+
+<main>
+    <section class="cats">
+        <ul>
+            {{#each cats}}
+            {{> cat}}
+            {{else}}
+            <p style="font-style: italic;">There are currently no cats in the database</p>
+            {{/each}}
+        </ul>
+    </section>
+</main>
