@@ -4,7 +4,9 @@ module.exports = (app) => {
     return new Promise((resolve, reject) => {
         mongoose.connect('mongodb://localhost:27017/cat-shelter', {
             useUnifiedTopology: true,
-            useNewUrlParser: true
+            useNewUrlParser: true,
+            useFindAndModify: false,
+            autoIndex: false
         });
 
         const db = mongoose.connection;

@@ -7,6 +7,6 @@ const schema = new Schema({
     breed: { type: String, required: true }
 });
 
-//schema.createIndex({ name: 'text', description: 'text' });
+schema.index({ '$**': 'text' });
 
 module.exports = model('Cat', schema);

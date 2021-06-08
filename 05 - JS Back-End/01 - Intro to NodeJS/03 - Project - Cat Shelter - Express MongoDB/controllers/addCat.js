@@ -1,7 +1,7 @@
 module.exports = {
     async addCat(req, res) {
         const breeds = await req.storage.getAllBreeds();
-        res.render('addCat', breeds);
+        res.render('addCat', { breeds });
     },
     async catPost(req, res) {
         const cat = {
@@ -11,7 +11,13 @@ module.exports = {
             breed: req.body.breed
         };
     
-        console.log(req.body);
-
+        try {
+            await req.storage.addCat(cat);
+            res.redirect('/');
+        } catch (err) {
+            if (err.name == 'ValidationError') {
+                return res.render('addCat', { error: 'All fields are required. Image must be a valid URL' });
+            }
+        }
     }
 };
