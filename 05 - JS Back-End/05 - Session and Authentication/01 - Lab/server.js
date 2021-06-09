@@ -2,9 +2,10 @@ const express = require('express');
 const bodyParser = require('express').urlencoded;
 const expressSession = require('express-session');
 
-const routes = require('./controllers');
-
 const app = express();
+const routes = require('./controllers');
+const auth = require('./auth');
+
 app.use(bodyParser({ extended: false }));
 app.use(expressSession({
     secret: 'my random secret',
@@ -12,34 +13,25 @@ app.use(expressSession({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+app.use(auth);
 
 routes(app);
 
-app.post('/register', (req, res) => {
-    const username = req.body.username;
-
-    users[username] = {
-        id: ('0000' + Math.random() * 9999 | 0).toString(16).slice(-4),
-        password: req.body.password
-    };
-
+app.post('/register', async (req, res) => {
+    await req.register(req.body.username, req.body.password);
     res.redirect('/login');
 });
 
-app.post('/login', (req, res) => {
-    const user = users[req.body.username];
+app.post('/login', async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const passwordsMatch = await req.login(username, password);
 
-    if (user && user.password == req.body.password) {
-        req.session.user = user;
+    if (passwordsMatch) {
+        res.redirect('/');
     } else {
-        res.send('Wrong password');
+        res.status(403).send('Wrong password');
     }
-
-    res.redirect('/');
-});
-
-app.all('*', (req, res, next) => {
-    console.log();
 });
 
 app.listen(3000, () => console.log('Server listening on port 3000...'));

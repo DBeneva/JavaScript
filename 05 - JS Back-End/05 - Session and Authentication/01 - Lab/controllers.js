@@ -1,29 +1,53 @@
-module.exports = {};
+module.exports = (app) => {
+    app.all('*', (req, res, next) => {
+        console.log('>>>', req.method, req.url, req.body);
+        console.log('>>> Session data:', req.session);
 
+        next();
+    });
 
+    app.get('/', (req, res) => {
+        let title = 'Welcome';
 
-const users = {};
-app.get('/', (req, res) => {
-    res.send('<h1>Welcome</h1><a href="/register">Register</a><a href="/login">Login</a>');
-});
+        if (req.session.user) {
+            title = `Welcome, ${req.session.user.username}`;
+        }
 
-app.get('/register', (req, res) => {
-    res.send(`
-    <form action="/register" method="POST">
+        res.send(layout('<p>Home Page</p>', title));
+    });
+    
+    app.get('/register', (req, res) => {
+        let title = 'Welcome';
+
+        if (req.session.user) {
+            title = `Welcome, ${req.session.user.username}`;
+        }
+
+        res.send(layout(`<form action="/register" method="POST">
     <label>Username: <input type="text" name="username"></label>
-    <label>Password: <input type="text" name="password"></label>
-    <label>Repeat: <input type="text" name="repeat"></label>
+    <label>Password: <input type="password" name="password"></label>
+    <label>Repeat: <input type="password" name="repass"></label>
     <input type="submit" value="Register">
-    </form>
-    `);
-});
+    </form>`, title));
+    });
+    
+    app.get('/login', (req, res) => {
+        let title = 'Welcome';
 
-app.get('/login', (req, res) => {
-    res.send(`
-    <form action="/login" method="POST">
-    <label>Username: <input type="text" name="username"></label>
-    <label>Password: <input type="text" name="password"></label>
-    <input type="submit" value="Login">
-    </form>
-    `);
-});
+        if (req.session.user) {
+            title = `Welcome, ${req.session.user.username}`;
+        }
+        
+        res.send(layout(`<form action="/login" method="POST">
+        <label>Username: <input type="text" name="username"></label>
+        <label>Password: <input type="password" name="password"></label>
+        <input type="submit" value="Login">
+        </form>`, title));
+    });
+};
+
+function layout(html, title) {
+    return `<h1>${title}<h1>
+    <a href="/">Home</a><a href="/register">Register</a><a href="/login">Login</a>
+    ${html}`;
+}
