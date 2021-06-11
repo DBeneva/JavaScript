@@ -1,31 +1,17 @@
-const { catalog } = require('../controllers/catalog');
-const { about } = require('../controllers/about');
-const { create, post: createPost } = require('../controllers/create');
-const { details, attach, attachPost } = require('../controllers/details');
-const { edit, post: editPost } = require('../controllers/edit');
-const { createSticker, post: stickerPost } = require('../controllers/sticker');
 const { post: commentPost } = require('../controllers/comments');
-const { notFound } = require('../controllers/notFound');
-const { login, loginPost } = require('../controllers/login');
-const { register, registerPost } = require('../controllers/register');
+
+const productController = require('../controllers/productController');
+const stickerController = require('../controllers/stickerController');
+const homeController = require('../controllers/homeController');
+const authController = require('../controllers/authController');
+const { isAuth } = require('../middlewares/guards');
 
 module.exports = (app) => {
-    app.get('/', catalog);
-    app.get('/about', about);
-    app.get('/create', create);
-    app.post('/create', createPost);
-    app.get('/sticker/create', createSticker);
-    app.post('/sticker/create', stickerPost);
-    app.get('/details/:id', details);
-    app.get('/details/:id/attach', attach);
-    app.post('/details/:cubeId/attach', attachPost);
-    app.get('/edit/:id', edit);
-    app.post('/edit/:id', editPost);
-    app.post('/comments/:cubeId/create', commentPost);
-    app.get('/login', login);
-    app.post('/login', loginPost);
-    app.get('/register', register);
-    app.post('/register', registerPost);
+    app.use('/products', productController);
+    app.use('/sticker', stickerController);
+    app.use('/auth', authController);
 
-    app.get('*', notFound);
+    app.post('/comments/:cubeId/create', isAuth(), commentPost);
+    
+    app.use('/', homeController);
 };

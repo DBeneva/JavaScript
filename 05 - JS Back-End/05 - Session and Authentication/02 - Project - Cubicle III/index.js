@@ -1,22 +1,24 @@
 const express = require('express');
-require('dotenv/config');
 
 const expressConfig = require('./config/express');
 const databaseConfig = require('./config/database');
 const routesConfig = require('./config/routes');
-const { init: storage } = require('./services/storage');
+const { PORT } = require('./config');
+
+const storage = require('./middlewares/storage');
+const logger = require('./middlewares/logger');
 
 start();
 
 async function start() {
-    const port = process.env.PORT || 5000;
     const app = express();
 
+    app.use(logger());
     app.use(await storage());
 
-    expressConfig(app);
     await databaseConfig(app); // must be before routesConfig!
+    expressConfig(app);
     routesConfig(app);
 
-    app.listen(port, () => console.log(`Server listening on port ${port}...`));
+    app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`));
 }
