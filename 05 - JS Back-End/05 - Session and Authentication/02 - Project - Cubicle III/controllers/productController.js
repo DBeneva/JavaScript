@@ -3,21 +3,18 @@ const { isAuth, isOwner } = require('../middlewares/guards');
 const preloadCube = require('../middlewares/preload');
 
 router.get('/', async (req, res) => {
-    try {
-        const cubes = await req.storage.getAll(req.query);
+    const cubes = await req.storage.getAll(req.query);
+    console.log(req.query);
+    const ctx = {
+        title: 'Cubicle',
+        cubes,
+        user: req.user,
+        search: req.query.search || '',
+        from: req.query.from || '',
+        to: req.query.to || ''
+    };
 
-        const ctx = {
-            title: 'Cubicle',
-            cubes,
-            search: req.query.search || '',
-            from: req.query.from || '',
-            to: req.query.to || ''
-        };
-
-        res.render('catalog', ctx);
-    } catch (err) {
-        console.error(err.message);
-    }
+    res.render('catalog', ctx);
 });
 
 router.get('/create', isAuth(), (req, res) => {
@@ -46,6 +43,7 @@ router.post('/create', isAuth(), async (req, res) => {
 
 router.get('/details/:id', preloadCube(), async (req, res) => {
     const cube = req.data.cube;
+    console.log(req.data);
 
     if (cube == undefined) {
         res.redirect('/404');
@@ -62,7 +60,7 @@ router.get('/details/:id', preloadCube(), async (req, res) => {
 
 router.get('/edit/:id', preloadCube(), isOwner(), async (req, res) => {
     const cube = req.data.cube;
-    
+
     if (!cube) {
         res.redirect('/404');
     } else {
@@ -95,7 +93,7 @@ router.post('/edit/:id', preloadCube(), isOwner(), async (req, res) => {
 router.get('/attach/:cubeId', async (req, res) => {
     const cube = await req.storage.getById(req.params.cubeId);
     const stickers = await req.storage.getAllStickers((cube.stickers || []).map(s => s._id));
-    
+
     res.render('attach', {
         title: 'Attach Stickers',
         cube,

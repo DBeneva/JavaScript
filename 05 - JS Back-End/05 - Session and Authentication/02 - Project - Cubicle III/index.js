@@ -14,10 +14,9 @@ async function start() {
     const app = express();
 
     app.use(logger());
-    app.use(await storage());
-
     await databaseConfig(app); // must be before routesConfig!
     expressConfig(app);
+    app.use(await storage());
     routesConfig(app);
 
     app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`));

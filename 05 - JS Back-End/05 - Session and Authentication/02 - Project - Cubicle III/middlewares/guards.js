@@ -1,6 +1,6 @@
 function isAuth() {
     return (req, res, next) => {
-        if (res.user != undefined) {
+        if (req.user != undefined) {
             next();
         } else {
             res.redirect('/auth/login');
