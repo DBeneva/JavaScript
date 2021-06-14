@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
     const ctx = {
         title: 'Cubicle',
         cubes,
-        user: req.user,
         search: req.query.search || '',
         from: req.query.from || '',
         to: req.query.to || ''
@@ -49,9 +48,12 @@ router.get('/details/:id', preloadCube(), async (req, res) => {
         res.redirect('/404');
     } else {
         cube.isOwner = req.user && (cube.authorId == req.user._id);
+        const loggedUser = req.user ? req.user.username : '';
+
         const ctx = {
             title: 'Cubicle',
-            cube
+            cube,
+            loggedUser
         };
 
         res.render('details', ctx);
@@ -84,13 +86,13 @@ router.post('/edit/:id', preloadCube(), isOwner(), async (req, res) => {
 
     try {
         await req.storage.edit(req.params.id, cube);
-        res.redirect('/');
+        res.redirect(`/products/details/${req.params.id}`);
     } catch (err) {
         res.redirect('/404');
     }
 });
 
-router.get('/attach/:cubeId', async (req, res) => {
+router.get('/details/:cubeId/attach', async (req, res) => {
     const cube = await req.storage.getById(req.params.cubeId);
     const stickers = await req.storage.getAllStickers((cube.stickers || []).map(s => s._id));
 
@@ -101,12 +103,33 @@ router.get('/attach/:cubeId', async (req, res) => {
     });
 });
 
-router.post('/attach/:cubeId', async (req, res) => {
+router.post('/details/:cubeId/attach', async (req, res) => {
     const cubeId = req.params.cubeId;
     const stickerId = req.body.sticker;
 
     await req.storage.attachSticker(cubeId, stickerId);
-    res.redirect(`/details/${cubeId}`);
+    res.redirect(`/products/details/${cubeId}`);
+});
+
+router.get('/delete/:id', preloadCube(), isOwner(), async (req, res) => {
+    const cube = await req.storage.getById(req.params.id);
+
+    if (!cube) {
+        res.redirect('/404');
+    } else {
+        cube[`select${cube.difficulty}`] = true;
+        const ctx = {
+            title: 'Delete Cube',
+            cube
+        };
+
+        res.render('delete', ctx);
+    }
+});
+
+router.post('/delete/:id', preloadCube(), isOwner(), async (req, res) => {
+    await req.storage.deleteCube(req.params.id);
+    res.redirect('/');
 });
 
 module.exports = router;

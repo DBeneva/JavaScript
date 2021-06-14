@@ -1,15 +1,15 @@
 const Sticker = require('../models/Sticker');
 
-async function getAllAccessories(existing) {
-    return Sticker.find({ _id: { $nin: existing } }).lean();
+async function getAllStickers(existing) {
+    return await Sticker.find({ _id: { $nin: existing } }).lean();
 }
 
-async function createAccessory(sticker) {
-    const record = new Accessory(sticker);
-    return record.save();
+async function createSticker(sticker) {
+    const record = new Sticker(sticker);
+    return await record.save();
 }
 
 module.exports = {
-    createAccessory,
-    getAllAccessories,
+    createSticker,
+    getAllStickers,
 };

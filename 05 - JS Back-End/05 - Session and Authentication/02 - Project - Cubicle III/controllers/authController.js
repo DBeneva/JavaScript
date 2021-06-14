@@ -7,6 +7,7 @@ router.get('/register', isGuest(), (req, res) => {
 
 router.post('/register', isGuest(), async (req, res) => {
     try {
+        console.log(req.body);
         await req.auth.register(req.body);
         res.redirect('/products');
     } catch (err) {
@@ -40,7 +41,7 @@ router.post('/login', isGuest(), async (req, res) => {
 });
 
 router.get('/logout', isAuth(), (req, res) => {
-    res.auth.logout();
+    req.auth.logout();
     res.redirect('/products');
 });
 

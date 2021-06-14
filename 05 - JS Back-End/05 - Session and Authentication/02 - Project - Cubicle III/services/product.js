@@ -8,7 +8,7 @@ async function getAll(query) {
         difficulty: { $gte: Number(query.from) || 0, $lte: Number(query.to) || 6 }
     };
 
-    const cubes = Cube.find(searchParams).lean();
+    const cubes = await Cube.find(searchParams).lean();
 
     return cubes;
 }
@@ -36,6 +36,7 @@ async function getById(id) {
             author: cube.author && cube.author.username,
             authorId: cube.author && cube.author._id
         };
+
         return viewModel;
     } else {
         return undefined;
@@ -57,7 +58,7 @@ async function edit(id, cube) {
 
     Object.assign(existing, cube);
 
-    return existing.save();
+    return await existing.save();
 }
 
 async function createComment(cubeId, comment) {
@@ -82,7 +83,17 @@ async function attachSticker(cubeId, stickerId) {
     }
 
     cube.stickers.push(sticker);
-    return cube.save();
+    return await cube.save();
+}
+
+async function deleteCube(id) {
+    const cube = await Cube.findById(id);
+
+    if (!cube) {
+        throw new ReferenceError('No such ID in database');
+    }
+
+    return await Cube.findByIdAndRemove(id);
 }
 
 module.exports = {
@@ -91,5 +102,6 @@ module.exports = {
     create,
     edit,
     createComment,
-    attachSticker
+    attachSticker,
+    deleteCube
 };
