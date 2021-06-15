@@ -1,5 +1,4 @@
 const router = require('express').Router();
-//const { isAuth } = require('../middlewares/guards');
 
 router.post('/:cubeId/create',
     (req, res, next) => req.isAuth(req, res, next),

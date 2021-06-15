@@ -26,8 +26,12 @@
             </ul>
         </header>
         <main>
-            {{#if error}}
-            <span class="error">{{error}}</span>
+            {{#if errors}}
+            <span class="error">
+                {{#each errors}}
+                <p>{{this}}</p>
+                {{/each}}
+            </span>
             {{/if}}
             
             {{{body}}}
