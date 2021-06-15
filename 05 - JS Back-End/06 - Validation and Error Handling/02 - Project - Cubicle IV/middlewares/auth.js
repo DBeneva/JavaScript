@@ -6,12 +6,12 @@ const userService = require('../services/user');
 
 module.exports = () => (req, res, next) => {
     req.auth = {
-        register, // create user in DB, req.user = createToken(user); res.cookie(COOKIE_NAME, token, { httpOnly: true });
-        login, // req.user = createToken(user);
-        logout // res.clearCookie(COOKIE_NAME);
+        register,
+        login,
+        logout
     };
 
-    if (readToken(req)) { // req.user = userData (req.cookies[COOKIE_NAME]); res.locals.user = userData;
+    if (readToken(req)) {
         next();
     }
 
@@ -63,6 +63,7 @@ module.exports = () => (req, res, next) => {
                 const userData = jwt.verify(token, TOKEN_SECRET);
                 req.user = userData;
                 res.locals.user = userData;
+
                 console.log('Known user', userData.username);
             } catch (err) {
                 res.clearCookie(COOKIE_NAME);

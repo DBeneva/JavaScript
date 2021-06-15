@@ -4,7 +4,6 @@ const preloadCube = require('../middlewares/preload');
 
 router.get('/', async (req, res) => {
     const cubes = await req.storage.getAll(req.query);
-    console.log(req.query);
     const ctx = {
         title: 'Cubicle',
         cubes,
@@ -21,28 +20,27 @@ router.get('/create', isAuth(), (req, res) => {
 });
 
 router.post('/create', isAuth(), async (req, res) => {
-    const cube = {
-        name: req.body.name,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl,
-        difficulty: Number(req.body.difficulty),
-        author: req.user._id
-    };
+        const cube = {
+            name: req.body.name,
+            description: req.body.description,
+            imageUrl: req.body.imageUrl,
+            difficulty: Number(req.body.difficulty),
+            author: req.user._id
+        };
 
-    try {
-        await req.storage.create(cube);
-    } catch (err) {
-        if (err.name == 'ValidationError') {
-            return res.render('create', { title: 'Create Cube', error: 'All fields are required. Image URL must be a valid URL.' });
+        try {
+            await req.storage.create(cube);
+        } catch (err) {
+            if (err.name == 'ValidationError') {
+                return res.render('create', { title: 'Create Cube', error: 'All fields are required. Image URL must be a valid URL.' });
+            }
         }
-    }
 
-    res.redirect('/');
-});
+        res.redirect('/');
+    });
 
 router.get('/details/:id', preloadCube(), async (req, res) => {
     const cube = req.data.cube;
-    console.log(req.data);
 
     if (cube == undefined) {
         res.redirect('/404');
