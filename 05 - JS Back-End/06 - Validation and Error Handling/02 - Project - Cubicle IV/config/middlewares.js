@@ -9,5 +9,5 @@ module.exports = async (app) => {
     app.use(auth());
     app.use(guards());
     app.use(await preloadCube());
-    app.use(logger()); // console.log('>>>', req.method, req.url);
+    app.use(logger()); // console.log('>>>', req.method, req.url)
 }

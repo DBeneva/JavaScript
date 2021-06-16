@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { body, validationResult } = require('express-validator');
 
-router.get('/register',
+router.get(
+    '/register',
     (req, res, next) => req.isGuest(req, res, next),
     (req, res) => {
         res.render('register', { title: 'Register' });
@@ -10,16 +11,30 @@ router.get('/register',
 router.post(
     '/register',
     (req, res, next) => req.isGuest(req, res, next),
-    body('username', 'Username must be at least 3 characters long').isLength({ min: 3 }),
-    body('email', 'Please enter a valid email').isEmail(),
+    body('username', 'Username must be at least 5 characters long and may contain only alphanumeric characters')
+        .trim()
+        .isLength({ min: 5 })
+        .isAlphanumeric(),
+    body('password', 'Password must be at least 8 characters long and may contain only alphanumeric characters')
+        .trim()
+        .isLength({ min: 8 })
+        .isAlphanumeric(),
+    body('repass').trim().notEmpty().custom((value, { req }) => {
+        if (value != req.body.password) {
+            throw new Error('Passwords don\'t match');
+        }
+
+        return true;
+    }),
     async (req, res) => {
         try {
-            const { errors } = validationResult(req);
+            const errors = Object.values(validationResult(req).mapped());
 
             if (errors.length > 0) {
                 throw new Error(errors.map(e => e.msg).join('\n'));
             }
-            // await req.auth.register(req.body);
+            
+            await req.auth.register(req.body);
             res.redirect('/products');
         } catch (err) {
             const ctx = {
@@ -32,13 +47,15 @@ router.post(
         }
     });
 
-router.get('/login',
+router.get(
+    '/login',
     (req, res, next) => req.isGuest(req, res, next),
     (req, res) => {
         res.render('login', { title: 'Login' });
     });
 
-router.post('/login',
+router.post(
+    '/login',
     (req, res, next) => req.isGuest(req, res, next),
     async (req, res) => {
         try {
@@ -55,7 +72,8 @@ router.post('/login',
         }
     });
 
-router.get('/logout',
+router.get(
+    '/logout',
     (req, res, next) => req.isAuth(req, res, next),
     (req, res) => {
         req.auth.logout();

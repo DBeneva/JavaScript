@@ -8,18 +8,20 @@ module.exports = () => (req, res, next) => {
     req.auth = {
         register,
         login,
-        logout
+        logout,
+        getUserByUsername: userService.getUserByUsername,
+        createUser: userService.createUser
     };
 
     if (readToken(req)) {
         next();
     }
 
-    async function register({ username, password, repass }) {
-        if (username == '' || password == '' || repass == '') {
-            throw new Error('All fields are required!');
-        } else if (password != repass) {
-            throw new Error('Passwords don\'t match!');
+    async function register({ username, password }) {
+        const existing = await userService.getUserByUsername(username);
+
+        if (existing) {
+            throw new Error('Username is taken');
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);

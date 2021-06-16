@@ -6,6 +6,7 @@ module.exports = (app) => {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useFindAndModify: false,
+            useCreateIndex: true,
             autoIndex: false
         });
 

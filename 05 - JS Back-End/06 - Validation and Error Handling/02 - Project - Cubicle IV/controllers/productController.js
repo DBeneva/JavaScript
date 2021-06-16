@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const { body, validationResult } = require('express-validator');
+const { parseMongooseError } = require('../util/parse');
 
 router.get('/', async (req, res) => {
     const cubes = await req.storage.getAll(req.query);
@@ -13,32 +15,51 @@ router.get('/', async (req, res) => {
     res.render('catalog', ctx);
 });
 
-router.get('/create',
+router.get(
+    '/create',
     (req, res, next) => req.isAuth(req, res, next),
     (req, res) => {
-        res.render('create', { title: 'Create Cube' });
+        res.render('create', { title: 'Create Cube', cube: {} });
     });
 
-router.post('/create',
+router.post(
+    '/create',
+    //body('imageURL', 'Image must be a valid URL').isURL(),
+    body('difficulty').notEmpty().toInt(),
     (req, res, next) => req.isAuth(req, res, next),
     async (req, res) => {
         const cube = {
             name: req.body.name,
             description: req.body.description,
             imageUrl: req.body.imageUrl,
-            difficulty: Number(req.body.difficulty),
+            difficulty: req.body.difficulty,
             author: req.user._id
         };
+        cube[`selected${req.body.difficulty}`] = true;
+        console.log(cube);
+
+        const { errors } = validationResult(req);
+        console.log(errors);
 
         try {
+            // throw new Error('Gotcha!');
             await req.storage.create(cube);
+            res.redirect('/');
         } catch (err) {
+            const ctx = {
+                title: 'Create Cube',
+                cube
+            };
+
             if (err.name == 'ValidationError') {
-                return res.render('create', { title: 'Create Cube', error: 'All fields are required. Image URL must be a valid URL.' });
+                ctx.errors = parseMongooseError(err);
+            } else {
+                ctx.errors = [err.message];
             }
+            
+            res.render('create', ctx);
         }
 
-        res.redirect('/');
     });
 
 router.get('/details/:id',
