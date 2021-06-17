@@ -5,7 +5,7 @@ const router = require('express').Router();
 router.get('/', (req, res) => res.redirect('/products'));
 
 router.get('/about', asyncWrapper((req, res) => {
-    throw new Error('Simulated error');
+    //throw new Error('Simulated error');
     res.render('about', { title: 'About' });
 }));
 

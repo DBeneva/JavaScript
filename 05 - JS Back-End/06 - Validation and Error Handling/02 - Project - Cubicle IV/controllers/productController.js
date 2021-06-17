@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { ExpressHandlebars } = require('express-handlebars');
 const { body, validationResult } = require('express-validator');
 const { parseMongooseError } = require('../util/parse');
 
@@ -35,7 +36,7 @@ router.post(
             difficulty: req.body.difficulty,
             author: req.user._id
         };
-        cube[`selected${req.body.difficulty}`] = true;
+
         console.log(cube);
 
         const { errors } = validationResult(req);
@@ -92,7 +93,6 @@ router.get('/edit/:id',
         if (!cube) {
             res.redirect('/404');
         } else {
-            cube[`select${cube.difficulty}`] = true;
             const ctx = {
                 title: 'Edit Cube',
                 cube
@@ -102,7 +102,9 @@ router.get('/edit/:id',
         }
     });
 
-router.post('/edit/:id',
+router.post(
+    '/edit/:id',
+    body('difficulty').notEmpty().toInt(),
     async (req, res, next) => await req.preloadCube(req, res, next),
     (req, res, next) => req.isOwner(req, res, next),
     async (req, res) => {
@@ -110,14 +112,25 @@ router.post('/edit/:id',
             name: req.body.name,
             description: req.body.description,
             imageUrl: req.body.imageUrl,
-            difficulty: Number(req.body.difficulty)
+            difficulty: req.body.difficulty
         };
 
         try {
             await req.storage.edit(req.params.id, cube);
             res.redirect(`/products/details/${req.params.id}`);
         } catch (err) {
-            res.redirect('/404');
+            const ctx = {
+                title: 'Edit Cube',
+                cube
+            };
+
+            if (err.name == 'ValidationError') {
+                ctx.errors = parseMongooseError(err);
+            } else {
+                ctx.errors = [err.message];
+            }
+            
+            res.render('edit', ctx);
         }
     });
 
