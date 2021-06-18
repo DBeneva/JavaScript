@@ -22,6 +22,4 @@ module.exports = (app) => {
     app.use('/js', express.static('js'));
     app.use(express.urlencoded({ extended: false }));
     app.use(cookieParser());
-
-    
 };
