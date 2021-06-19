@@ -18,12 +18,12 @@
 
 # Application Requirements (BookingUni)
 
-[X] Include resources (HTML, CSS, etc.)
-[X] Arrange templates (without editing)
-[X] Create main.hbs
-[X] Update config to match project requirements (db name)
-[X] Adapt User model, user service and auth middleware to project requirements
-[X] Implement register and login page actions (register, login and logout actions)
+[ ] Include resources (HTML, CSS, etc.)
+[ ] Arrange templates (without editing)
+[ ] Create main.hbs
+[ ] Update config to match project requirements (db name)
+[ ] Adapt User model, user service and auth middleware to project requirements
+[ ] Implement register and login page actions (register, login and logout actions)
 [ ] Create models for project-specific data
 [ ] Create data services and middleware for project-specific data
 [ ] Implement page actions for project-specific functionality
