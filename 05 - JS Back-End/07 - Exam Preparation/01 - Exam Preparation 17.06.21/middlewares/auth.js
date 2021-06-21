@@ -44,13 +44,13 @@ async function login(username, password) {
     const user = await userService.getUserByUsername(username);
 
     if (!user) {
-        throw new Error('No such user');
+        throw new Error('Incorrect username or password');
     }
 
     const hasMatch = await bcrypt.compare(password, user.hashedPassword);
 
     if (!hasMatch) {
-        throw new Error('Incorrect password');
+        throw new Error('Incorrect username or password');
     }
 
     return generateToken(user);
