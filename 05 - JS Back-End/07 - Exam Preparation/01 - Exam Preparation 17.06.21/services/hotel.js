@@ -1,4 +1,5 @@
 const Hotel = require('../models/Hotel');
+const User = require('../models/User');
 
 module.exports = {
     getAllHotels,
@@ -24,20 +25,30 @@ async function getHotelById(id) {
 async function createHotel(hotelData) {
     const hotel = new Hotel(hotelData)
     await hotel.save();
+
+    const owner = await User.findById(hotel.owner);
+    const offers = owner.offers;
+    offers.push(hotel._id);
+    await owner.save();
+    
     return hotel;
 }
 
 async function editHotel(id, hotel) {
-    await Hotel.findByIdAndUpdate(id, hotel);
-    return hotel;
+    return await Hotel.findByIdAndUpdate(id, hotel).lean();
 }
 
 async function bookHotel(id, bookerId) {
-    const hotel = await Hotel.findById(id);
+    const hotel = await Hotel.findById(id).lean();
     const bookings = hotel.bookedBy;
     bookings.push(bookerId);
-    await Hotel.findByIdAndUpdate(id, { bookedBy: bookings });
-    return hotel;
+    const rooms = hotel.rooms - 1;
+    await Hotel.findByIdAndUpdate(id, { bookedBy: bookings, rooms }).lean();
+
+    const booker = await User.findById(bookerId).lean();
+    const reservations = booker.reservations;
+    reservations.push(hotel.name);
+    await User.findByIdAndUpdate(bookerId, { reservations }).lean();
 }
 
 async function deleteHotel(id) {

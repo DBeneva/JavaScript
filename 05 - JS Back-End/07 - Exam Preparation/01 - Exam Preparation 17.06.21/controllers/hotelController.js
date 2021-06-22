@@ -53,7 +53,7 @@ router.get('/details/:id', async (req, res) => {
         hotel.isOwner = true;
     }
 
-    if (req.user && hotel.bookedBy.includes(req.user.username)) {
+    if (req.user && hotel.bookedBy.toString().includes(req.user._id)) {
         hotel.hasBooked = true;
     }
 
@@ -104,11 +104,10 @@ router.get(
     (req, res, next) => req.guards.isUser(req, res, next),
     async (req, res) => {
         const hotel = await req.storage.getHotelById(req.params.id);
-        
-        if (req.user._id != hotel.owner) {
+
+        if (req.user._id != hotel.owner && !hotel.bookedBy.includes(req.user._id)) {
             try {
                 await req.storage.bookHotel(hotel._id, req.user._id);
-                res.redirect(`/hotels/details/${hotel._id}`);
             } catch (err) {
                 console.log(err.message);
             }
@@ -125,7 +124,6 @@ router.get(
 
         if (req.user._id == hotel.owner) {
             try {
-                confirm('about to delete hotel', hotel.name);
                 await req.storage.deleteHotel(req.params.id);
             } catch (err) {
                 console.log(err.message);
