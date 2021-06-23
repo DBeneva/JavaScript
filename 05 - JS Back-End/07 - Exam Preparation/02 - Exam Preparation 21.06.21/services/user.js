@@ -8,10 +8,9 @@ module.exports = {
 async function createUser(username, hashedPassword) {
     const user = await new User({
         username,
-        hashedPassword,
-        liked: []
+        hashedPassword
     });
-    user.save();
+    await user.save();
 
     return user;
 }

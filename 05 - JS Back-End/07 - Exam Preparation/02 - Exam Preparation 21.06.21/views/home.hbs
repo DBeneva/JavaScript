@@ -22,16 +22,20 @@
         </div>
     </div>
     {{else}}
-    <h1>Best Rated Plays</h1>
+    <div class="aux">
+        <h1>Best Rated Plays</h1>
+        <div class="home-buttons">
+            <a class="btn create-play" href="/plays/by-date">Sort by Date</a>
+            <a class="btn create-play" href="/plays/by-likes">Sort by Likes</a>
+        </div>
+    </div>
     {{/if}}
     <div class="theaters-container">
-        {{#if plays}}
         {{#each plays}}
         {{> play}}
-        {{/each}}
         {{else}}
         <h4>No plays yet...</h4>
-        {{/if}}
+        {{/each}}
 
         {{!-- <div>
             <div class="home-image">
@@ -80,6 +84,6 @@
                     <span class="likes">6 likes</span>
                 </div>
             </div>
-        </div> --}}        
+        </div> --}}
     </div>
 </section>

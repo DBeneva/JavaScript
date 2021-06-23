@@ -1,7 +1,9 @@
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
-    res.render('home', { title: 'Theater' });
+router.get('/', async (req, res) => {
+    const plays = await req.storage.getAllPlays();
+
+    res.render('home', { title: 'Theater', plays });
 });
 
 module.exports = router;

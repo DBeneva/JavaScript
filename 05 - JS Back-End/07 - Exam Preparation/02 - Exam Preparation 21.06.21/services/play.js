@@ -8,6 +8,13 @@ module.exports = {
 };
 
 async function createPlay(playData) {
+    const pattern = new RegExp(`^${playData.title}$`, 'i');
+    const existing = await Play.find({ title: { $regex: pattern } });
+
+    if (existing) {
+        throw new Error('A play with this name already exists!');
+    }
+
     const play = await new Play(playData);
     await play.save();
 
@@ -15,15 +22,11 @@ async function createPlay(playData) {
 }
 
 async function getAllPlays() {
-    const plays = await Play.find({}).lean();
-
-    return plays.sort((a, b) => b.likes.length - a.likes.length).slice(0, 3);
+    return await Play.find({ isPublic: true }).sort({ createdAt: -1 }).lean();
 }
 
 async function getPlayById(id) {
-    const play = await Play.findById(id).lean();
-
-    return play;
+    return await Play.findById(id).lean();
 }
 
 async function editPlay(id, playData) {

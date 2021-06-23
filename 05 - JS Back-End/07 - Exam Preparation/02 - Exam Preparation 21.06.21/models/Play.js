@@ -5,7 +5,7 @@ const schema = new Schema({
     description: {
         type: String,
         required: [true, 'Description is required'],
-        maxLength: [50, 'Description length may not exceed 50 characters']
+        maxLength: [50, 'Description must be less than 50 characters long']
     },
     imageUrl: {
         type: String,
@@ -13,8 +13,9 @@ const schema = new Schema({
         match: [/^https?:\/\//, 'Image URL must be a valid URL']
     },
     isPublic: { type: Boolean, default: false },
-    createdAt: { type: Date || String, required: true },
-    likes: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    createdAt: { type: Date, default: Date.now },
+    usersLiked: [{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],
+    owner: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = model('Play', schema);
