@@ -42,22 +42,18 @@ router.post(
     });
 
 router.get('/details/:id', async (req, res) => {
-    const hotel = await req.storage.getHotelById(req.params.id);
-    const owner = await req.storage.getUserById(hotel.owner);
+    try {
+        const hotel = await req.storage.getHotelById(req.params.id);
+        hotel.isUser = Boolean(req.user);
+        hotel.isOwner = req.user && hotel.owner == req.user._id;
+        hotel.hasBooked = req.user && hotel.bookedBy.find(u => u._id == req.user._id);
 
-    if (req.user) {
-        hotel.isUser = true;
+        res.render('details', { title: hotel.name, hotel });
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/404');
     }
 
-    if (hotel.isUser && (owner.username == req.user.username)) {
-        hotel.isOwner = true;
-    }
-
-    if (req.user && hotel.bookedBy.toString().includes(req.user._id)) {
-        hotel.hasBooked = true;
-    }
-
-    res.render('details', { title: hotel.name, hotel });
 });
 
 
