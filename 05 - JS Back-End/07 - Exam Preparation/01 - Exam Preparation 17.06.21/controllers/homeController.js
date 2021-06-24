@@ -10,6 +10,7 @@ router.get(
     (req, res, next) => req.guards.isUser(req, res, next),
     async (req, res) => {
         const user = await req.storage.getUserById(req.params.id);
+        user.reservations = user.reservations.map(h => h.name);
         res.render('profile', { title: 'Your Profile', user });
     });
 

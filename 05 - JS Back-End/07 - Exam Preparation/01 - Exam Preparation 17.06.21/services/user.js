@@ -25,6 +25,6 @@ async function getUserByEmail(email) {
 }
 
 async function getUserById(id) {
-    const user = await User.findById(id).lean();
+    const user = await User.findById(id).populate('reservations').lean();
     return user;
 }

@@ -38,17 +38,19 @@ async function editHotel(id, hotelData) {
     return await Hotel.findByIdAndUpdate(id, hotelData, { runValidators: true }).lean();
 }
 
-async function bookHotel(id, bookerId) {
-    const hotel = await Hotel.findById(id).lean();
-    const bookings = hotel.bookedBy;
-    bookings.push(bookerId);
-    const rooms = hotel.rooms - 1;
-    await Hotel.findByIdAndUpdate(id, { bookedBy: bookings, rooms }).lean();
+async function bookHotel(hotelId, userId) {
+    const hotel = await Hotel.findById(hotelId);
+    const user = await User.findById(userId);
 
-    const booker = await User.findById(bookerId).lean();
-    const reservations = booker.reservations;
-    reservations.push(hotel.name);
-    await User.findByIdAndUpdate(bookerId, { reservations }).lean();
+    if (user._id == hotel.owner) {
+        throw new Error('You cannot book your own hotel!');
+    }
+
+    user.reservations.push(hotelId);
+    hotel.bookedBy.push(user);
+    hotel.rooms--;
+
+    return Promise.all([user.save(), hotel.save()]);
 }
 
 async function deleteHotel(id) {
