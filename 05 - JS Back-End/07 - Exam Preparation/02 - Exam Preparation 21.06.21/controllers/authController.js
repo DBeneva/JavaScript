@@ -33,7 +33,7 @@ router.post(
                 throw new Error(message);
             }
 
-            await req.auth.register(req.body.username, req.body.password);
+            await req.auth.register(req.body.username.trim(), req.body.password.trim());
             res.redirect('/');
         } catch (err) {
             console.log(err.message);
@@ -60,7 +60,7 @@ router.post(
     (req, res, next) => req.guards.isGuest(req, res, next),
     async (req, res) => {
         try {
-            await req.auth.login(req.body.username, req.body.password);
+            await req.auth.login(req.body.username.trim(), req.body.password.trim());
             res.redirect('/');
         } catch (err) {
             console.log(err.message);

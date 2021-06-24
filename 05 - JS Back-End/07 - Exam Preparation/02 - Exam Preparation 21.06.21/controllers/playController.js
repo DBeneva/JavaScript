@@ -13,9 +13,9 @@ router.post(
     (req, res, next) => req.guards.isUser(req, res, next),
     async (req, res) => {
         const playData = {
-            title: req.body.title,
-            description: req.body.description,
-            imageUrl: req.body.imageUrl,
+            title: req.body.title.trim(),
+            description: req.body.description.trim(),
+            imageUrl: req.body.imageUrl.trim(),
             isPublic: Boolean(req.body.isPublic),
             owner: req.user._id
         };
@@ -76,9 +76,9 @@ router.post(
     async (req, res) => {
         const playData = {
             _id: req.params.id,
-            title: req.body.title,
-            description: req.body.description,
-            imageUrl: req.body.imageUrl,
+            title: req.body.title.trim(),
+            description: req.body.description.trim(),
+            imageUrl: req.body.imageUrl.trim(),
             isPublic: Boolean(req.body.isPublic)
         };
 
