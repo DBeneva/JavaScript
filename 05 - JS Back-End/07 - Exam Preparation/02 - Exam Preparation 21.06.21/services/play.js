@@ -23,8 +23,16 @@ async function createPlay(playData) {
     return play;
 }
 
-async function getAllPlays() {
-    return await Play.find({ isPublic: true }).sort({ createdAt: -1 }).lean();
+async function getAllPlays(orderedBy) {
+    let sort = { createdAt: -1 };
+    
+    if (orderedBy == 'likes') {
+        console.log('Sorting by likes');
+        sort = { usersLiked: -1 };
+    }
+
+    return await Play.find({ isPublic: true }).sort(sort).lean();
+
 }
 
 async function getPlayById(id) {
