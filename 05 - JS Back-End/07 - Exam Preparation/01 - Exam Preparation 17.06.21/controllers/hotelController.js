@@ -56,42 +56,60 @@ router.get('/details/:id', async (req, res) => {
 
 });
 
-
 router.get(
     '/edit/:id',
     (req, res, next) => req.guards.isUser(req, res, next),
     async (req, res) => {
-        const hotel = await req.storage.getHotelById(req.params.id);
-
-        res.render('edit', { title: `Edit ${hotel.name}`, hotel });
+        try {
+            const hotel = await req.storage.getHotelById(req.params.id);
+    
+            if (hotel.owner != req.user._id) {
+                throw new Error('You cannot edit a hotel that you haven\'t created!');
+            }
+    
+            res.render('edit', { title: 'Edit Hotel', hotel});
+        } catch (err) {
+            console.log(err.message);
+            redirect('/');
+        }
     });
 
 router.post(
     '/edit/:id',
     (req, res, next) => req.guards.isUser(req, res, next),
     async (req, res) => {
-        const hotelData = {
-            name: req.body.name,
-            city: req.body.city,
-            rooms: req.body.rooms,
-            imageUrl: req.body.imageUrl
-        };
+        try {
+            const hotel = await req.storage.getHotelById(req.params.id);
 
-        const hotel = await req.storage.getHotelById(req.params.id);
-
-        if (req.user._id == hotel.owner) {
-            try {
-                await req.storage.editHotel(req.params.id, hotelData);
-                res.redirect(`/hotels/details/${req.params.id}`);
-            } catch (err) {
-                const ctx = {
-                    title: `Edit ${hotel.name}`,
-                    hotel,
-                    errors: [err.message]
-                };
-
-                res.render('edit', ctx);
+            if (hotel.owner != req.user._id) {
+                throw new Error('You cannot edit a hotel that you haven\'t created!');
             }
+
+            await req.storage.editHotel(req.params.id, req.body);
+            res.redirect('/');
+        } catch (err) {
+            console.log(err.message);
+
+            let errors;
+
+            if (err.errors) {
+                errors = Object.values(err.errors).map(e => e.properties.message);
+            } else {
+                errors = [err.message];
+            }
+
+            const ctx = {
+                errors,
+                hotel: {
+                    _id: req.params.id,
+                    name: req.body.name,
+                    city: req.body.city,
+                    imageUrl: req.body.imageUrl,
+                    rooms: req.body.rooms
+                }
+            };
+
+            res.render('edit', ctx);
         }
     });
 

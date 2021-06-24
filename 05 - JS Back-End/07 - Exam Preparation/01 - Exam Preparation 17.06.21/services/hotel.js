@@ -34,8 +34,8 @@ async function createHotel(hotelData) {
     return hotel;
 }
 
-async function editHotel(id, hotel) {
-    return await Hotel.findByIdAndUpdate(id, hotel).lean();
+async function editHotel(id, hotelData) {
+    return await Hotel.findByIdAndUpdate(id, hotelData, { runValidators: true }).lean();
 }
 
 async function bookHotel(id, bookerId) {
