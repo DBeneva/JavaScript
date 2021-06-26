@@ -1,16 +1,14 @@
 const router = require('express').Router();
 const { body, validationResult } = require('express-validator');
+const { isGuest } = require('../middlewares/guards');
 
-router.get(
-    '/register',
-    (req, res, next) => req.guards.isGuest(req, res, next),
-    (req, res) => {
-        res.render('register', { title: 'Register' });
-    });
+router.get('/register', isGuest(), (req, res) => {
+    res.render('register', { title: 'Register' });
+});
 
 router.post(
     '/register',
-    (req, res, next) => req.guards.isGuest(req, res, next),
+    isGuest(),
     body('email', 'Invalid email').isEmail(),
     body('username').notEmpty().withMessage('Username is required'),
     body('password')
@@ -51,32 +49,26 @@ router.post(
         }
     });
 
-router.get(
-    '/login',
-    (req, res, next) => req.guards.isGuest(req, res, next),
-    (req, res) => {
-        res.render('login', { title: 'Login' });
-    });
+router.get('/login', isGuest(), (req, res) => {
+    res.render('login', { title: 'Login' });
+});
 
-router.post(
-    '/login',
-    (req, res, next) => req.guards.isGuest(req, res, next),
-    async (req, res) => {
-        try {
-            await req.auth.login(req.body.username.trim(), req.body.password.trim());
-            res.redirect('/');
-        } catch (err) {
-            console.log(err.message);
+router.post('/login', isGuest(), async (req, res) => {
+    try {
+        await req.auth.login(req.body.username.trim(), req.body.password.trim());
+        res.redirect('/');
+    } catch (err) {
+        console.log(err.message);
 
-            const ctx = {
-                title: 'Login',
-                errors: err.type == 'credential' ? ['Incorrect username or password'] : [err.message],
-                username: req.body.username
-            };
+        const ctx = {
+            title: 'Login',
+            errors: err.type == 'credential' ? ['Incorrect username or password'] : [err.message],
+            username: req.body.username
+        };
 
-            res.render('login', ctx);
-        }
-    });
+        res.render('login', ctx);
+    }
+});
 
 router.get('/logout', (req, res) => {
     req.auth.logout();

@@ -12,20 +12,22 @@ module.exports = {
 
 async function createCourse(courseData) {
     const pattern = new RegExp(`^${courseData.title}$`, 'i');
-    const existing = await Course.find({ title: { $regex: pattern } });
+    const existing = await Course.findOne({ title: { $regex: pattern } });
 
     if (existing) {
         throw new Error('A course with this name already exists!');
     }
 
     const course = await new Course(courseData);
-    course.save();
-
-    return course;    
+    return await course.save();    
 }
 
-async function getAllCourses(query) {
-    return await Course.find({}).lean();
+async function getAllCourses(user, query) {
+    const search = query ? { title: { $regex: query, $options: 'i' } } : {};
+    const sort = user ? { createdAt: 1 } : { users: -1 };
+    const limit = user ? '' : 3;
+    
+    return await Course.find(search).sort(sort).limit(limit).lean();
 }
 
 async function getCourseById(id) {
@@ -39,10 +41,6 @@ async function editCourse(id, courseData) {
 async function enrollCourse(courseId, userId) {
     const course = await Course.findById(courseId);
     const user = await User.findById(userId);
-
-    if (userId == course.author) {
-        throw new Error('You cannot enroll your own course!');
-    }
 
     course.users.push(userId);
     user.courses.push(courseId);

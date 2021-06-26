@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const schema = new Schema({
-    title: { type: String, required: [true, 'Course title is required'] },
+    title: { type: String, minLength: [4, 'Title must be at least 4 characters long'] },
     description: {
         type: String,
-        required: [true, 'Password is required'],
+        minLength: [20, 'Description must be at least 20 characters long'],
         maxLength: [50, 'Description must be less than 50 characters long']
     },
     imageUrl: {

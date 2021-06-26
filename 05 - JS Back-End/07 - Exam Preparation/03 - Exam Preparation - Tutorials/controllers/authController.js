@@ -49,9 +49,21 @@ router.get('/login', isGuest(), (req, res) => {
     res.render('login', { title: 'Login' });
 });
 
-router.post('/login', isGuest(), (req, res) => {
+router.post('/login', isGuest(), async (req, res) => {
+    try {
+        await req.auth.login(req.body.username.trim(), req.body.password.trim());
+        res.redirect('/');
+    } catch (err) {
+        console.log(err.message);
 
+        const ctx = {
+            title: 'Login',
+            errors: err.type == 'credential' ? ['Incorrect username or password'] : [err.message],
+            username: req.body.username
+        };
 
+        res.render('login', ctx);
+    }
 });
 
 router.get('/logout', (req, res) => {

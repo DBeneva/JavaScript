@@ -1,24 +1,24 @@
-module.exports = () => (req, res, next) => {
-    req.guards = {
-        isUser,
-        isGuest
-    };
-
-    next();
+module.exports = {
+    isUser,
+    isGuest
 };
 
-function isUser(req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        res.redirect('/auth/login');
+function isUser() {
+    return (req, res, next) => {
+        if (req.user) {
+            next();
+        } else {
+            res.redirect('/auth/login');
+        }
     }
 }
 
-function isGuest(req, res, next) {
-    if (!req.user) {
-        next();
-    } else {
-        res.redirect('/');
+function isGuest() {
+    return (req, res, next) => {
+        if (!req.user) {
+            next();
+        } else {
+            res.redirect('/');
+        }
     }
 }

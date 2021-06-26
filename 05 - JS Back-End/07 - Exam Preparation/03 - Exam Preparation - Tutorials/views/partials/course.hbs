@@ -1,12 +1,17 @@
 <div class="card mb-4">
-    <img class="card-img-top"
-        src="https://1.bp.blogspot.com/-pdqcVeIQp64/XDX7TzdRdcI/AAAAAAAAM8E/ZmGuB6caZqIGmEflGHcj3zgXJJrmqRLdgCLcBGAs/w1200-h630-p-k-no-nu/Free%2BCourses%2Bto%2Blearn%2BJavaScript.jpg"
-        alt="Card image cap" width="400">
+    <img class="card-img-top" src="{{imageUrl}}" alt="Card image cap" width="400">
+    {{#if user}}
     <div class="card-body">
-        <h4 class="card-title">JavaScript</h4>
+        <h4 class="card-title">{{title}}</h4>
     </div>
     <div class="card-footer">
-        <a href=""><button type="button" class="btn btn-primary">Details</button></a>
-        <small class="float-right">Date...</small>
+        <a href="/courses/details/{{_id}}"><button type="button" class="btn btn-primary">Details</button></a>
+        <small class="float-right">{{createdAt}}</small>
     </div>
+    {{else}}
+    <div class="card-body">
+        <h4 class="card-title">{{title}}</h4>
+        <small class="float-right">Enrolled: {{users.length}}</small>
+    </div>
+    {{/if}}
 </div>
