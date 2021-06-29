@@ -3,6 +3,13 @@ const dataController = require('./dataController');
 
 const app = express();
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Controll-Allow-Origin', '*');
+    res.setHeader('Access-Controll-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Controll-Allow-Headers', 'Content-Type');
+
+    next();
+});
 app.use(express.json()); // body parser - json
 app.use('/api', dataController);
 

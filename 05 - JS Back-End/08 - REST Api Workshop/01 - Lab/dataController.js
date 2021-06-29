@@ -16,22 +16,31 @@ router.get('/', (req, res) => {
     res.json(data);
 });
 
-router.post('/', (req, res) => {
-    console.log(req.body);
-    res.end();
-});
-
 router.get('/:id', (req, res) => {
     res.json(data[req.params.id]);
 });
 
+router.post('/', (req, res) => {
+    const id = 'a' + (Math.random() * 1000 | 0);
+    data[id] = req.body;
+    res.status(201).json({ _id: id });
+});
+
 router.put('/:id', (req, res) => {
-    req.json(data[req.params.id]);
+    data[req.params.id] = req.body;
+    res.status(202).json(data[req.params.id]);    
+});
+
+router.patch('/:id', (req, res) => {
+    const item = data[req.params.id];
+    Object.assign(item, req.body);
+    data[req.params.id] = item;
+    res.status(202).json(item); // returns the item
 });
 
 router.delete('/:id', (req, res) => {
-    console.log(req.body);
-    res.end();
+    delete data[req.params.id];
+    res.status(204).end();
 });
 
 module.exports = router;
