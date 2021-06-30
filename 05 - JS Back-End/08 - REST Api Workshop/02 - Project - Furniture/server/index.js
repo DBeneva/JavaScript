@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('./middlewares/cors');
 const furnitureController = require('./controllers/furnitureController');
 const usersController = require('./controllers/usersController');
+const auth = require('./middlewares/auth');
 
 start();
 
@@ -12,9 +13,9 @@ async function start() {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        
+
         const db = mongoose.connection;
-        
+
         db.on('error', (err) => reject(err));
         db.on('open', () => {
             console.log('Database connected');
@@ -22,16 +23,16 @@ async function start() {
         });
     });
 
-
     const app = express();
-    
-    app.use(express.json());
+
     app.use(cors());
+    app.use(auth());
+    app.use(express.json());
     //app.use('/users', authController);
     app.use('/data/catalog', furnitureController);
     app.use('/users', usersController);
-    
+
     app.get('/', (req, res) => res.send('It wor  ks!'));
-    
+
     app.listen(5000, () => console.log('REST Service is listening on port 5000...'));
 }

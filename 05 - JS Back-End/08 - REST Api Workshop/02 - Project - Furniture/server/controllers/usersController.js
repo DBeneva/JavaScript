@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { register } = require('../services/users');
+const { register, login } = require('../services/users');
 
 router.post('/register', async (req, res) => {
     const { email, password } = req.body;
@@ -17,8 +17,23 @@ router.post('/register', async (req, res) => {
         const userData = await register(email.toLocaleLowerCase().trim(), password);
         res.json(userData);
     } catch (err) {
-        res.json({ message: err.message });
+        res.status(err.status || 400).json({ message: err.message });
     }
+});
+
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    
+    try {
+        const userData = await login(email, password);
+        res.json(userData);
+    } catch (err) {
+        res.status(err.status || 400).json({ message: err.message });
+    }
+});
+
+router.get('/logout', (req, res) => {
+    res.status(204).end();
 });
 
 module.exports = router;
