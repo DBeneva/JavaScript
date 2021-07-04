@@ -1,9 +1,3 @@
-const hello = function (name) {
-    console.log('hi,', name);
-}
+sayHi();
 
-hello('john');
-
-console.log('in');
-
-if (3 > 2) console.log('yess');
+function sayHi() { console.log('hi'); }
