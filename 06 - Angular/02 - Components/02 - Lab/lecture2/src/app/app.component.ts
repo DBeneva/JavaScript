@@ -10,6 +10,17 @@ export class AppComponent {
   classes = ['test', 'test-1'];
   showText = true;
 
+  constructor() {
+    debugger;
+  }
+
+  ngAfterViewInit(): void {
+    debugger;
+  }
+  ngOnInit(): void {
+    debugger;
+  }
+
   changeTitleHandler(inputEl: HTMLInputElement): void {
     this.title = inputEl.value;
     inputEl.value = '';
@@ -19,7 +30,7 @@ export class AppComponent {
     event.preventDefault();
     this.showText = !this.showText;
     console.log(args);
-    
+
   }
   // title = 3;
   // users = [
