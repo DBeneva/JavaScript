@@ -1,6 +1,15 @@
-<div>{{title}}</div>
+<div>HEADER</div>
+
+<div id="content">
+  <app-user-list *ngIf="users" [userArray]="users" (addUser)="addNewUserHandler($event)"></app-user-list>
+  <div *ngIf="!users">Loading...</div>
+</div>
+
+<div>FOOTER</div>
+
+<!-- <div>{{title}}</div>
 <input #inputElement type="text">
-<button (click)="changeTitleHandler(inputElement)">Click Me!</button>
+<button (click)="changeTitleHandler(inputElement)">Click Me!</button> -->
 
 <!-- <app-test></app-test>
 
@@ -9,6 +18,6 @@
     {{user.name}}
   </li>
 </ul> -->
-
+<!-- 
 <div *ngIf="showText">VISIBLE</div>
-<button (click)="toggleText($event, 100, 200)">{{showText ? 'HIDE TEXT' : 'SHOW TEXT'}}</button>
+<button (click)="toggleText($event, 100, 200)">{{showText ? 'HIDE TEXT' : 'SHOW TEXT'}}</button> -->
