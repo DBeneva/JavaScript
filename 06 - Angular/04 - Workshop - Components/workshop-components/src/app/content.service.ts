@@ -21,3 +21,5 @@ export class ContentService {
     return this.http.get<IPost[]>(`${API_URL}/posts${query}`);
   }
 }
+
+const list: Array<number> | undefined = [1, 2, 3];
