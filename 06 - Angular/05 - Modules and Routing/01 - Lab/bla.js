@@ -1,2 +1,2 @@
-console.log('a'.codePointAt(1));
-console.log('a'.charCodeAt(1));
+console.log('\u00F1'.normalize() == '\u006E\u0303'.normalize());
+console.log('\u006E\u0303');
