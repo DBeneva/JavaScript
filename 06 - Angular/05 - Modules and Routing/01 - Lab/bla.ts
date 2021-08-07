@@ -1,3 +1,11 @@
-let fruits = ['a', 'b', 'c', 'd', 'e', 'f'];
+enum PrintMedia {
+    Newspaper,
+    Newsletter = 11,
+    Magazine = Newspaper * 5 + 800,
+    Book = getMedia('Not Forbes'),
+    Billboard
+}
 
-console.log(fruits.copyWithin(0));
+function getMedia(mediaName: string): PrintMedia {
+    if (mediaName == 'Forbes') return PrintMedia.Magazine;
+}
