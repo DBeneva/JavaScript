@@ -6,6 +6,6 @@ enum PrintMedia {
     Billboard
 }
 
-function getMedia(mediaName: string): PrintMedia {
+function getMedia(mediaName: (string | number | boolean)): PrintMedia {
     if (mediaName == 'Forbes') return PrintMedia.Magazine;
 }

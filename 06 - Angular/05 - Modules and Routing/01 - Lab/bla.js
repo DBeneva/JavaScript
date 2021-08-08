@@ -1,3 +1,7 @@
-let fruits = ['a', 'b', 'c'];
+function sayHi() {
+    console.log('Hi!');
+}
 
-console.log(['a', new Date()].toLocaleString());
+//const speech = sayHi();
+
+console.log(sayHi());
