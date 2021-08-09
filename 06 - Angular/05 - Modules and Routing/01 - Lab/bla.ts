@@ -1,13 +1,8 @@
-enum PrintMedia {
-    Newspaper,
-    Newsletter = 11,
-    Magazine = Newspaper * 5 + 800,
-    Book = getMedia('Not Forbes'),
-    Billboard = 0
+interface IEmployee {
+    name: string,
+    code: number
 }
 
-function getMedia(mediaName: (string | number | boolean)): PrintMedia {
-    if (mediaName == 'Forbes') return PrintMedia.Magazine;
-}
-
-const a = ['text', 3, '23'];
+const employee = {} as IEmployee;
+employee.name = 'John';
+console.log(employee);

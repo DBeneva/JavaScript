@@ -1,7 +1,3 @@
-function sayHi() {
-    console.log('Hi!');
-}
-
-//const speech = sayHi();
-
-console.log(sayHi());
+var employee = {};
+employee.name = 'John';
+console.log(employee);
