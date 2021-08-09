@@ -1,8 +1,6 @@
-interface IEmployee {
-    name: string,
-    code: number
-}
+function add(a: number, b: number): number;
+function add(a: string): string;
 
-const employee = {} as IEmployee;
-employee.name = 'John';
-console.log(employee);
+function add(a: any, b: any): any {
+    return a + b;
+}
