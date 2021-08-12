@@ -1,12 +1,13 @@
-class Car {
-    constructor(public name: string) { }
-    run(speed: number = 0) { return `${this.name} is fast: ${speed}` }
+class Person {
+    public code!: number;
+    name!: string;
+    private phone!: number;
+    protected address!: string;
 }
 
-class Honda extends Car {
-    constructor(public name: string) { super(name); }
-    run(speed = 150) { return `A Honda started. ${super.run(speed)}` }
-}
-
-const honda = new Honda('Honda City');
-honda.run();
+const emp = new Person();
+emp.code = 123;
+emp.name = 'Ben';
+emp.phone = 123456;
+emp.address = '12 A Str.';
+console.log(emp);
