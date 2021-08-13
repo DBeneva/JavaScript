@@ -1,11 +1,9 @@
-var Person = /** @class */ (function () {
-    function Person() {
+"use strict";
+class Employee {
+    constructor(code) {
+        this.code = code;
     }
-    return Person;
-}());
-var emp = new Person();
-emp.code = 123;
-emp.name = 'Ben';
-emp.phone = 123456;
-emp.address = '12 A Str.';
-console.log(emp);
+}
+const employee = new Employee(10);
+console.log(employee.code); // 10
+employee.code = 20; // Compiler Error

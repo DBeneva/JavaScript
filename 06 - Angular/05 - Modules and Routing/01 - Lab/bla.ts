@@ -1,13 +1,5 @@
-class Person {
-    public code!: number;
-    name!: string;
-    private phone!: number;
-    protected address!: string;
-}
+class Employee { constructor(readonly code: number) {} }
 
-const emp = new Person();
-emp.code = 123;
-emp.name = 'Ben';
-emp.phone = 123456;
-emp.address = '12 A Str.';
-console.log(emp);
+const employee = new Employee(10);
+console.log(employee.code); // 10
+employee.code = 20; // Compiler Error
