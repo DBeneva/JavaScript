@@ -1,5 +1,5 @@
-class Employee { constructor(readonly code: number) {} }
+interface IEmployee { name: string; }
 
-const employee = new Employee(10);
-console.log(employee.code); // 10
-employee.code = 20; // Compiler Error
+const employee: Readonly<IEmployee> = { name: 'John' };
+employee.name // 'John'
+employee.name = 'Ben'; // Compiler Error
