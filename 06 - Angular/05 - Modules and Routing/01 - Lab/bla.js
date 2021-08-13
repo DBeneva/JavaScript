@@ -1,9 +1,12 @@
 "use strict";
 class Employee {
-    constructor(code) {
-        this.code = code;
+    constructor() {
+        this.namef = 'B';
     }
 }
-const employee = new Employee(10);
-console.log(employee.code); // 10
-employee.code = 20; // Compiler Error
+Employee.code = 1;
+const employee = new Employee();
+//employee.code // Compiler Error
+console.log(employee.namef);
+console.log(Employee.namef);
+console.log(Employee.code); // 1
