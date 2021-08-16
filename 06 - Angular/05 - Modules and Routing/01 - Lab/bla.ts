@@ -1,14 +1,3 @@
-/// <reference path="StringUtility.ts" />
+function type<T, U>(id: T, str: U): string { return typeof id + typeof str; }
 
-class Employee { static code: number = 1; name: string = 'B' }
-
-const employee = new Employee();
-//employee.code // Compiler Error
-console.log(employee.name);
-//console.log(Employee.name);
-console.log(Employee.code); // 1
-
-export let greeting: string = 'Hi TS';
-
-employee.name = StringUtility.toCapital(employee.name);
-console.log(employee.name);
+console.log(type<number, string>(2, 'hello')); // 'numberstring'
