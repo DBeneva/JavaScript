@@ -1,3 +1,6 @@
-function type<T, U>(id: T, str: U): string { return typeof id + typeof str; }
+class Person { constructor(public name: string) {} }
+function display<T extends Person>(per: T): void { console.log(per.name); }
 
-console.log(type<number, string>(2, 'hello')); // 'numberstring'
+const person = new Person('Ben');
+display(person); // 'Ben'
+display({ name: 'Ben' }); // Compiler Error

@@ -1,3 +1,10 @@
 "use strict";
-function type(id, str) { return typeof id + typeof str; }
-console.log(type(2, 'hello')); // 'numberstring'
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+}
+function display(per) { console.log(per.name); }
+const person = new Person('Ben');
+display(person); // 'Ben'
+display({ age: 45, name: 'Ben' }); // Compiler Error
