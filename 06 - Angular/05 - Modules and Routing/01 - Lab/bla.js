@@ -1,10 +1,9 @@
 "use strict";
-class Person {
-    constructor(name) {
-        this.name = name;
+class KeyValue {
+    constructor(key, val) {
+        this.key = key;
+        this.val = val;
     }
 }
-function display(per) { console.log(per.name); }
-const person = new Person('Ben');
-display(person); // 'Ben'
-display({ age: 45, name: 'Ben' }); // Compiler Error
+const kvp = new KeyValue(1, 'Ben');
+console.log(kvp.val); // 'Ben'

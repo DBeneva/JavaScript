@@ -1,6 +1,6 @@
-class Person { constructor(public name: string) {} }
-function display<T extends Person>(per: T): void { console.log(per.name); }
+class KeyValue<T, U> {
+    constructor(public key: T, public val: U) { }
+}
 
-const person = new Person('Ben');
-display(person); // 'Ben'
-display({ name: 'Ben' }); // Compiler Error
+const kvp = new KeyValue<number, string>(1, 'Ben');
+console.log(kvp.val); // 'Ben'
