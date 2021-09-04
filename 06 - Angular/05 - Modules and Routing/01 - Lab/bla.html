@@ -10,15 +10,14 @@
 </head>
 
 <body>
-    <div ng-app="myApp" test-directive>
-        <!-- directive: test-directive -->
+    <div ng-app="" ng-init="name='Bryan'">
+        <input ng-model="name">
+        {{name}}
     </div>
-    <script>
+    <!-- <script>
         const app = angular.module('myApp', []);
-        app.directive('testDirective', function () {
-            return { template: '<h1>Hi!</h1>', restrict: 'A', replace: true };
-        });
-    </script>
+        app.controller('myCtrl', ($scope) => { $scope.name = 'Ben'; });
+    </script> -->
 </body>
 
 </html>
