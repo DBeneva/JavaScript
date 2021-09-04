@@ -10,14 +10,11 @@
 </head>
 
 <body>
-    <div ng-app="" ng-init="name='Bryan'">
-        <input ng-model="name">
-        {{name}}
-    </div>
-    <!-- <script>
-        const app = angular.module('myApp', []);
-        app.controller('myCtrl', ($scope) => { $scope.name = 'Ben'; });
-    </script> -->
+    <form ng-app="" name="myForm">
+        <input type="email" name="myEmail" ng-model="text">
+        <p>{{text}}</p>
+        <span ng-show="myForm.myEmail.$error.email">Invalid email</span>
+    </form>
 </body>
 
 </html>
