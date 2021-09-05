@@ -8,20 +8,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <title>Document</title>
     <style>
-        input.ng-not-empty {
+        input.ng-invalid {
             background-color: lightblue;
         }
     </style>
 </head>
 
-<body>
-    <form ng-app="" name="myForm">
-        <input type="email" name="myEmail" ng-model="text" required>
-        <p>{{myForm.myEmail.$valid}}</p>
-        <p>{{myForm.myEmail.$dirty}}</p>
-        <p>{{myForm.myEmail.$touched}}</p>
-        <p>{{myForm.myEmail.$error.required}}</p>
-    </form>
+<body ng-app="myApp">
+    <p>{{age}}</p>
+    <p ng-controller="myCtrl">{{age}}</p>
+    <p>{{age}}</p>
 </body>
+
+<script>
+    const app = angular.module('myApp', []);
+    app.controller('myCtrl', $scope => $scope.age = 3);
+    app.run($rootScope => $rootScope.age = 5);
+</script>
 
 </html>
