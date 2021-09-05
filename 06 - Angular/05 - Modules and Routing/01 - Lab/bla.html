@@ -7,23 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <title>Document</title>
-    <style>
-        input.ng-invalid {
-            background-color: lightblue;
-        }
-    </style>
 </head>
 
-<body ng-app="myApp">
-    <p>{{age}}</p>
-    <p ng-controller="myCtrl">{{age}}</p>
-    <p>{{age}}</p>
-</body>
+<body ng-app="">
+    <p>{{[{name: 'n', age: 3}, {name: 'G', age: 56}, {name: 'a', age: 1}] | orderBy:'name'}}</p>
+    <p>{{[{name: 'n', age: 3}, {name: 'G', age: 56}, {name: 'a', age: 1}] | orderBy:'age'}}</p>
+    <p>{{"age" | uppercase}}</p> <!-- 5 -->  
+    <p ng-bind="'John' | uppercase"></p> 
+    <p ng-bind="'John'"></p>    
 
-<script>
-    const app = angular.module('myApp', []);
-    app.controller('myCtrl', $scope => $scope.age = 3);
-    app.run($rootScope => $rootScope.age = 5);
-</script>
+</body>
 
 </html>
