@@ -9,12 +9,26 @@
     <title>Document</title>
 </head>
 
-<body ng-app="">
-    <p>{{[{name: 'n', age: 3}, {name: 'G', age: 56}, {name: 'a', age: 1}] | orderBy:'name'}}</p>
-    <p>{{[{name: 'n', age: 3}, {name: 'G', age: 56}, {name: 'a', age: 1}] | orderBy:'age'}}</p>
-    <p>{{"age" | uppercase}}</p> <!-- 5 -->  
-    <p ng-bind="'John' | uppercase"></p> 
-    <p ng-bind="'John'"></p>    
+<body>
+    <table ng-app="myApp" ng-controller="myCtrl">
+        <tr>
+          <th ng-click="orderByMe('name')" ng-model="name">Name</th>
+          <th ng-click="orderByMe('age')" ng-model="age">Age</th>
+        </tr>
+        <tr ng-repeat="p in people | orderBy: myOrderBy">
+          <td>{{p.name}}</td>
+          <td>{{p.age}}</td>
+        </tr>
+      </table> 
+      <script>
+        const app = angular.module('myApp', []);
+        app.controller('myCtrl', $scope => {
+          $scope.people = [{ name: 'Jim', age: 4 }, { name: 'Don', age: 21 }];
+          $scope.orderByMe = (x) => $scope.myOrderBy = x;
+        });
+      </script>
+      
+
 
 </body>
 
