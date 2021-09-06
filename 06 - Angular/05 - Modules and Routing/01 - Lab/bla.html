@@ -10,24 +10,18 @@
 </head>
 
 <body>
-    <table ng-app="myApp" ng-controller="myCtrl">
-        <tr>
-          <th ng-click="orderByMe('name')" ng-model="name">Name</th>
-          <th ng-click="orderByMe('age')" ng-model="age">Age</th>
-        </tr>
-        <tr ng-repeat="p in people | orderBy: myOrderBy">
-          <td>{{p.name}}</td>
-          <td>{{p.age}}</td>
-        </tr>
-      </table> 
-      <script>
-        const app = angular.module('myApp', []);
-        app.controller('myCtrl', $scope => {
-          $scope.people = [{ name: 'Jim', age: 4 }, { name: 'Don', age: 21 }];
-          $scope.orderByMe = (x) => $scope.myOrderBy = x;
-        });
-      </script>
-      
+    <ul ng-app="myApp" ng-controller="myCtrl">
+        <li ng-repeat="n in names">{{n | myFormat}}</li> <!-- AlLaN, BeN -->
+        </div>
+        <script>
+            const app = angular.module('myApp', []);
+            app.controller('myCtrl', $scope => $scope.names = ['Allan', 'Ben']);
+            app.filter('myFormat', () => (x) => {
+                return x.split('')
+                    .map((c, i) => i % 2 != 0 ? c : c.toUpperCase())
+                    .join('');
+            });
+        </script>
 
 
 </body>
