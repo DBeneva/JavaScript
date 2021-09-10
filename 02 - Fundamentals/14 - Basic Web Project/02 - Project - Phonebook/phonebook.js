@@ -12,14 +12,19 @@ function addContact(name, number) {
 	fs.writeFileSync('./data/contacts.json', JSON.stringify(contacts, null, 2));
 }
 
+function editContact(name, number) {
+	contacts.splice(contacts.indexOf(contacts.find(x => x.name == name)), 1, new Contact(name, number));
+	fs.writeFileSync('./data/contacts.json', JSON.stringify(contacts, null, 2));
+}
+
 function removeContact(name) {
 	contacts.splice(contacts.indexOf(contacts.find(x => x.name == name)), 1);
-	console.log(`Deleting phonebook contact of ${name}`);
 	fs.writeFileSync('./data/contacts.json', JSON.stringify(contacts, null, 2));
 }
 
 module.exports = {
 	getAll,
 	addContact,
+	editContact,
 	removeContact
 };
