@@ -1,23 +1,35 @@
-[
-  {
-    "name": "Peter",
-    "number": "+359885688748"
-  },
-  {
-    "name": "John",
-    "number": "+359885558758"
-  },
-  {
-    "name": "Mary",
-    "number": "+359866566758"
-  },
-  {
+{
+  "2sdnsbaoktfk51rm": {
     "name": "Adam",
-    "number": "+359898812131",
-    "_locals": {}
+    "surname": "Peterson",
+    "numbers": [
+      "+359898722211"
+    ],
+    "emails": [
+      "jpeterson@gmail.com"
+    ]
   },
-  {
-    "name": "George",
-    "number": "+359888112266"
+  "2sdnssrkktfkar3x": {
+    "name": "Peter",
+    "surname": "Jackson",
+    "numbers": [
+      "+359898723356",
+      "+359899003211"
+    ],
+    "emails": [
+      "p_jackson@yahoo.com",
+      "pjackson@gmail.com"
+    ]
+  },
+  "2sdnsk94ktfkeynu": {
+    "name": "Mathew",
+    "surname": "Smith",
+    "numbers": [
+      "+359898722255",
+      "+359888667766"
+    ],
+    "emails": [
+      "msmith@gmail.com"
+    ]
   }
-]
+}

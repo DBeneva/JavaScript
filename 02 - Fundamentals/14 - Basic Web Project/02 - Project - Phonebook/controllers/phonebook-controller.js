@@ -7,28 +7,32 @@ module.exports = {
   },
   addContact(req, res) {
     const name = req.body.name;
-    const number = req.body.number;
+    const surname = req.body.surname;
+    const numbers = req.body.numbers.split(', ');
+    const emails = req.body.emails.split(', ');
 
-    if (name != '' && number != '') {
-      phonebook.addContact(name, number);
+    if (name != '' && numbers != []) {
+      phonebook.addContact(name, surname, numbers, emails);
     }
     
     res.redirect('/');
   },
   editContact(req, res) {
-    const contact = phonebook.getAll().find(c => c.name == req.params.name);
+    const contact = phonebook.getById(req.params.id);
     res.render('edit', contact);
   },
   editContactPost(req, res) {
     const name = req.body.name;
-    const number = req.body.number;
-    phonebook.editContact(name, number);
+    const surname = req.body.surname;
+    const numbers = req.body.numbers.split(', ');
+    const emails = req.body.emails.split(', ');
+    phonebook.editContact(req.params.id, name, surname, numbers, emails);
     
     res.redirect('/');
   },
   removeContact(req, res) {
-    const name = req.body.name;
-    phonebook.removeContact(name);
+    const id = req.params.id;
+    phonebook.removeContact(id);
 
     res.redirect('/');
   }

@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="/edit/{{name}}" method="POST">
+<form class="form-horizontal" action="/edit/{{id}}" method="POST">
   <fieldset>
     <legend>Edit Contact</legend>
     <div class="form-group">
@@ -8,9 +8,21 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="number" class="col-lg-2 control-label">Number</label>
+      <label for="surname" class="col-lg-2 control-label">Surname</label>
       <div class="col-lg-10">
-        <input type="text" autofocus="autofocus" name="number" title="Number" class="form-control" id="number" value="{{number}}"/>
+        <input type="text" autofocus="autofocus" name="surname" title="Name" class="form-control" id="name" value="{{surname}}"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="numbers" class="col-lg-2 control-label">Numbers</label>
+      <div class="col-lg-10">
+        <input type="text" autofocus="autofocus" name="numbers" title="Numbers" class="form-control" id="numbers" value="{{numbers}}"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="emails" class="col-lg-2 control-label">Emails</label>
+      <div class="col-lg-10">
+        <input type="text" autofocus="autofocus" name="emails" title="Emails" class="form-control" id="emails" value="{{emails}}"/>
       </div>
     </div>
     <div class="form-group">

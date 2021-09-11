@@ -3,15 +3,19 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">Number</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Numbers</th>
+      <th scope="col">Emails</th>
     </tr>
   </thead>
   <tbody>
     {{#each contacts}}
     <tr>
       <td>{{name}}</td>
-      <td>{{number}}</td>
-      <td><a class="btn btn-primary" href="/edit/{{name}}">Edit</a> <a class="btn btn-primary" href="/delete">Delete</a></td>
+      <td>{{surname}}</td>
+      <td>{{#each numbers}}{{this}}<br>{{/each}}</td>
+      <td>{{#each emails}}{{this}}<br>{{/each}}</td>
+      <td><a class="btn btn-primary" href="/edit/{{id}}">Edit</a> <a class="btn btn-primary" href="/delete/{{id}}">Delete</a></td>
       <td></td>
     </tr>
     {{/each}}
@@ -20,16 +24,28 @@
 <form class="form-horizontal" action="/add" method="POST">
   <fieldset>
     <legend>New Contact</legend>
-    <div class="form-group">
+        <div class="form-group">
       <label for="name" class="col-lg-2 control-label">Name</label>
       <div class="col-lg-10">
-        <input type="text" autofocus="autofocus" name="name" title="Name" class="form-control" id="name" />
+        <input type="text" autofocus="autofocus" name="name" title="Name" class="form-control" id="name" value="{{name}}"/>
       </div>
     </div>
     <div class="form-group">
-      <label for="number" class="col-lg-2 control-label">Number</label>
+      <label for="surname" class="col-lg-2 control-label">Surname</label>
       <div class="col-lg-10">
-        <input type="text" autofocus="autofocus" name="number" title="Number" class="form-control" id="number" />
+        <input type="text" autofocus="autofocus" name="surname" title="Name" class="form-control" id="name" value="{{surname}}"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="numbers" class="col-lg-2 control-label">Numbers</label>
+      <div class="col-lg-10">
+        <input type="text" autofocus="autofocus" name="numbers" title="Numbers" class="form-control" id="numbers" value="{{numbers}}"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="emails" class="col-lg-2 control-label">Emails</label>
+      <div class="col-lg-10">
+        <input type="text" autofocus="autofocus" name="emails" title="Emails" class="form-control" id="emails" value="{{emails}}"/>
       </div>
     </div>
     <div class="form-group">

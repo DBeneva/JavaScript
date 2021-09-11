@@ -3,7 +3,7 @@ const phonebookController = require('./controllers/phonebook-controller');
 module.exports = (app) => {
   app.get('/', phonebookController.index);
   app.post('/add', phonebookController.addContact),
-  app.get('/edit/:name', phonebookController.editContact),
-  app.post('/edit/:name', phonebookController.editContactPost),
-  app.get('/delete', phonebookController.removeContact);
+  app.get('/edit/:id', phonebookController.editContact),
+  app.post('/edit/:id', phonebookController.editContactPost),
+  app.get('/delete/:id', phonebookController.removeContact);
 };
