@@ -7,23 +7,28 @@ import { IUser } from './interfaces/user';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  
+
   users = [
     {
-      name: 'Ivan 1',
+      name: 'Ivan 2',
       age: 21
     },
     {
-      name: 'Ivan 2',
-      age: 22
-    },
-    {
       name: 'Ivan 3',
-      age: 23
+      age: 23,
+      courses: [3, 4]
     }
   ];
+  name = 'Ben';
+  username = 'adam';
+  sayHi = (event: string) => alert(`Hi ${event}`);
 
-  addNewUserHandler(newUser: IUser): void {
-    this.users = this.users.concat(newUser);
-  }
+  visible = true;
+  toggleText = () => this.visible = !this.visible;
+  classes = ['red', 'fancy'];
+  isSpecial = true;
+
+  // addNewUserHandler(newUser: IUser): void {
+  //   this.users = this.users.concat(newUser);
+  // }
 }

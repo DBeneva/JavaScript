@@ -1,23 +1,29 @@
 <div>HEADER</div>
 
-<div id="content">
+<!-- <div id="content">
   <app-user-list *ngIf="users" [userArray]="users" (addUser)="addNewUserHandler($event)"></app-user-list>
   <div *ngIf="!users">Loading...</div>
-</div>
+</div> -->
 
 <div>FOOTER</div>
+
+<input type="text" bindon-ngModel="username">
+
+<p>{{username}}</p>
 
 <!-- <div>{{title}}</div>
 <input #inputElement type="text">
 <button (click)="changeTitleHandler(inputElement)">Click Me!</button> -->
 
-<!-- <app-test></app-test>
+<app-test></app-test>
 
 <ul>
   <li *ngFor="let user of users">
-    {{user.name}}
+    user {{user?.name}} {{user && user.courses}}
+    <!-- <span *ngIf="user.courses.length == 0">No courses</span> -->
   </li>
-</ul> -->
-<!-- 
-<div *ngIf="showText">VISIBLE</div>
-<button (click)="toggleText($event, 100, 200)">{{showText ? 'HIDE TEXT' : 'SHOW TEXT'}}</button> -->
+</ul>
+
+<div *ngIf="visible" [class]="classes" [class.special]="isSpecial" [style.color]="isSpecial ? 'red' : 'green'">VISIBLE</div>
+<button (click)="toggleText()">{{visible ? 'HIDE TEXT' : 'SHOW TEXT'}}</button>
+
