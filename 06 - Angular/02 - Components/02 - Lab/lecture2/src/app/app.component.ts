@@ -28,7 +28,7 @@ export class AppComponent {
   classes = ['red', 'fancy'];
   isSpecial = true;
 
-  // addNewUserHandler(newUser: IUser): void {
-  //   this.users = this.users.concat(newUser);
-  // }
+  addNewUserHandler(newUser: IUser): void {
+    this.users = this.users.concat(newUser);
+  }
 }
