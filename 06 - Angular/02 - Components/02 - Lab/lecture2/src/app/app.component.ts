@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IUser } from './interfaces/user';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,28 +7,15 @@ import { IUser } from './interfaces/user';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-
-  users = [
-    {
-      name: 'Ivan 2',
-      age: 21
-    },
-    {
-      name: 'Ivan 3',
-      age: 23,
-      courses: [3, 4]
-    }
-  ];
+  constructor(public userService: UserService) {}
+  
   name = 'Ben';
   username = 'adam';
   sayHi = (event: string) => alert(`Hi ${event}`);
 
   visible = true;
+
   toggleText = () => this.visible = !this.visible;
   classes = ['red', 'fancy'];
   isSpecial = true;
-
-  addNewUserHandler(newUser: IUser): void {
-    this.users = this.users.concat(newUser);
-  }
 }

@@ -1,0 +1,8 @@
+<li>
+    <div id="title">{{article.title}}</div>
+    <button *ngIf="!descIsComplete" (click)="readMore()">{{descBtnTitle}}</button>
+    <button *ngIf="descIsComplete" (click)="hideDesc()">{{descBtnTitle}}</button>
+    <button (click)="toggleImage()">{{imageButtonTitle}}</button>
+    <div class="desc" *ngIf="descToShow.length > 0">{{descToShow}}</div>
+    <img *ngIf="imageIsShown" src="{{article.imageUrl}}" alt="article image" />
+</li>
