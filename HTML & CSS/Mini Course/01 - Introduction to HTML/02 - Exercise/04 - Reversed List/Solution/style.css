@@ -1,0 +1,19 @@
+body {
+    font-family: Helvetica, sans-serif;
+    width: 30%;
+}
+
+h3 {
+    color: darkblue;
+    text-align: center;
+}
+
+ol {
+    padding: 50px;
+    background-color: rgba(169, 169, 169, 0.493);
+}
+
+ol li {
+    text-decoration: underline;
+    padding: 5px;
+}

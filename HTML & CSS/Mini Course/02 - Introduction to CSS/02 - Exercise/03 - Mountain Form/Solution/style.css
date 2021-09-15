@@ -1,0 +1,92 @@
+body {
+    width: 1800px;
+    font-family: Helvetica, sans-serif;
+}
+
+article {
+    display: inline-block;
+    margin-top: 200px;
+}
+
+article:nth-child(1) {
+    margin-left: 200px;
+    width: 250px;
+    height: 380px;
+    background-image: linear-gradient(to bottom, #6382b0, #5e769b, #596a86, #535e72, #4d535e);
+    background-image: url(../Requirements-and-Resources/Images/peak.jpg);
+    background-size: cover;
+    color: white;
+    border-radius: 10px 0 0 10px;
+    float: left;
+    text-align: center;
+}
+
+article:nth-child(1) i {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+article:nth-child(1) p {
+    padding-top: 250px;
+    padding-bottom: 0;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-style: italic;
+}
+
+article:nth-child(2) {
+    width: 210px;
+    height: 304px;
+    border: 3px solid black;
+    border-radius: 0 10px 10px 0;
+    padding-top: 70px;
+    padding-left: 70px;
+}
+
+article:nth-child(2) p {
+    font-size: 12px;
+    padding-bottom: 1px;
+    margin-bottom: 0;
+    color: lightgray;
+}
+
+article:nth-child(2) input {
+    border-bottom: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+button {
+    display: block;
+    float: left;
+    margin-top: 25px;
+    margin-right: 0;
+    background-color: rgb(70, 66, 94);
+    color: white;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+article:nth-child(2) p:last-child {
+    display: inline-block;
+    margin-top: 25px;
+    margin-left: 5px;
+    padding-left: 0;
+    color: rgb(70, 66, 94);
+    font-size: 13px;
+    padding-top: 8px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(70, 66, 94);
+    font-size: 13px;
+    padding-top: 8px;
+}
+
+

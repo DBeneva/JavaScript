@@ -1,0 +1,165 @@
+body {
+    width: 1800px;
+    font-family: "Open Sans", sans-serif;
+}
+
+header p, header h3  {
+    margin: 0;
+}
+
+nav {
+    padding-left: 150px;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0;
+}
+
+nav ul li a {
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(214,116,114);
+    margin: 0;
+}
+
+header section:nth-child(2) {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(../Requirements-and-Resources/Images/header-flower.png);
+    background-position: center;
+    background-size: cover;
+    width: 800px;
+    height: 450px;
+    color: white;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+}
+
+header section:nth-child(2) h2 {
+    font-weight: bold;
+    padding-top: 170px;
+    font-size: 26px;
+}
+
+header section:nth-child(2) hr {
+    width: 70px;
+    border: 1px solid rgb(214,116,114);
+}
+
+header section:nth-child(2) p {
+    width: 350px;
+    padding-left: 230px;
+    font-size: 12px;
+}
+
+header section:nth-child(3) {
+    width: 800px;
+    height: 200px;
+    background-color: rgb(214,116,114);
+    margin-top: 0;
+    color: white;
+    text-align: center;
+}
+
+header section:nth-child(3) h3 {
+    width: 350px;
+    padding-left: 230px;
+    font-size: 16px;
+    padding-top: 30px;
+}
+
+header section:nth-child(3) hr {
+    width: 70px;
+    border: 1px solid white;
+}
+
+header section:nth-child(3) p {
+    width: 350px;
+    padding-left: 230px;
+    font-size: 12px;
+}
+
+button {
+    margin-top: 20px;
+    background-color: white;
+    color: rgb(214,116,114);
+    font-weight: bold;
+    font-size: 12px;
+    border-color: rgb(214,116,114);
+    box-shadow: rgb(214,116,114);
+
+    border-radius: 5px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+main {
+    width: 800px;
+}
+
+main header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+main header h2 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+main header hr {
+    width: 70px;
+    border: 1px solid rgb(214,116,114);
+    margin-bottom: 30px;
+}
+
+main section {
+    display: inline-block;
+    text-align: center;
+    padding-left: 50px;
+    vertical-align: top;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+main section:nth-child(2) {
+    padding-left: 167px;
+}
+
+main section article h3, main section article p {
+    text-align: center;
+    width: 120px;
+}
+
+main section article img {
+    width: 60px;
+}
+
+main section article h3 {
+    font-size: 12px;
+    padding-bottom: 5px;
+}
+
+main section article p {
+    font-size: 10px;
+}
+
+footer {
+    margin-top: 30px;
+    background-color: rgb(214,116,114);
+    color: white;
+    width: 800px;
+    text-align: center;
+    font-size: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
