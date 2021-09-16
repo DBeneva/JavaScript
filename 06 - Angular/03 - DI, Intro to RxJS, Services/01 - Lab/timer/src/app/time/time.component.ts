@@ -8,19 +8,19 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./time.component.scss']
 })
 export class TimeComponent implements OnDestroy {
-  timeStreamSubscription!: Subscription;
+  timeSubsc!: Subscription;
   time$ = interval(1000).pipe(
     startWith(''),
     map(() => new Date())
   );
-  timeValue!: Date;
+  time!: Date;
 
   constructor() {
-    this.timeStreamSubscription = this.time$.subscribe(timeValue => this.timeValue = timeValue);
+    this.timeSubsc = this.time$.subscribe(timeValue => this.time = timeValue);
   }
 
   ngOnDestroy(): void {
-    this.timeStreamSubscription.unsubscribe();
+    this.timeSubsc.unsubscribe();
   }
 
 }
