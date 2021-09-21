@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { IUser } from '../interfaces/user';
+import { IUser } from '../../interfaces/user';
 
 @Component({
   selector: 'app-user-list-item',
