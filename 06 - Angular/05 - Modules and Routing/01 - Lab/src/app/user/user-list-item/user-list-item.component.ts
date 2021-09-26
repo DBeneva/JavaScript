@@ -7,13 +7,10 @@ import { IUser } from '../../interfaces/user';
   styleUrls: ['./user-list-item.component.sass']
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserListItemComponent implements OnInit {
+export class UserListItemComponent {
 
   @Input() user!: IUser;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

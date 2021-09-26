@@ -1,25 +1,20 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/user';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  users = [
-    {
-      name: 'Ivan 2',
-      age: 21
-    },
-    {
-      name: 'Ivan 3',
-      age: 23,
-      courses: [3, 4]
-    }
-  ];
+  
+  constructor(private http: HttpClient) { }
+  userArray: IUser[] | undefined;
+  loadUsers(search: string = '') {
+    const query = search ? `?email_like=${search}` : '';
+    return this.http.get<IUser[]>(`https://jsonplaceholder.typicode.com/users${query}`).subscribe(users => this.userArray = users);
+  }
 
-  constructor() { }
- 
-  addNewUserHandler(newUser: IUser): void {
-    this.users = this.users.concat(newUser);
+  loadUser(id: number) {
+    return this.http.get<IUser>(`https://jsonplaceholder.typicode.com/users/${id}`);
   }
 }

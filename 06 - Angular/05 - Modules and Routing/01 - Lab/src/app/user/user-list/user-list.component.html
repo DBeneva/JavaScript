@@ -1,9 +1,8 @@
 <div id="container">
     <div>
-        <input #userNameInput type="text">
-        <input #userAgeInput type="number">
-        <button (click)="addNewUser(userNameInput, userAgeInput)">Add new user</button>
+        <input #query type="text">
+        <button (click)="userService.userArray">Load users</button>
     </div>
-    <app-user-list-item *ngFor="let user of userArray" [user]="user"></app-user-list-item>
+    <app-user-list-item *ngFor="let user of userService.userArray" [user]="user"></app-user-list-item>
 </div>
-<div *ngIf="!userService.users">Loading...</div>
+<div *ngIf="!userService.userArray">Loading...</div>
