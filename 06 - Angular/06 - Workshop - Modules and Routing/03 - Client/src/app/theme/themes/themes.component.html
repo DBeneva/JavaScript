@@ -5,7 +5,7 @@
             <div class="theme-container" *ngFor="let theme of themes">
                 <div class="theme-name-wrapper">
                     <div class="theme-name">
-                        <a href="#" class="normal">
+                        <a class="normal" [routerLink]="['/themes', theme._id]">
                             <h2>{{theme.themeName}}</h2>
                         </a>
                         <div class="columns">
@@ -16,7 +16,8 @@
                                 </div>
                             </div>
                             <div class="subscribers">
-                                <!-- <button class="subscribe">Subscribe</button> -->
+                                <!-- <button *ngIf="!{{theme.subscribers.includes('5fa64b162183ce1728ff371d')}}" class="subscribe">Subscribe</button>
+                                <button *ngIf="{{theme.subscribers.includes('5fa64b162183ce1728ff371d')}}" class="unsubscribe">Unsubscribe</button> -->
                                 <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                             </div>
                         </div>

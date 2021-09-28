@@ -5,7 +5,7 @@ export interface ITheme {
     themeName: string;
     userId: {
         themes: string[],
-        posts: string[],
+        posts: (string | Object)[],
         _id: string,
         tel: string,
         email: string,
