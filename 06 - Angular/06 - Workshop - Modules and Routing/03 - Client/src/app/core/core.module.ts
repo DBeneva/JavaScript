@@ -1,6 +1,5 @@
 import { NgModule, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
@@ -12,7 +11,6 @@ import { AuthActivate } from './guards/auth.activate';
   declarations: [HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
-    HttpClientModule,
     RouterModule
   ],
   exports: [HeaderComponent, FooterComponent],

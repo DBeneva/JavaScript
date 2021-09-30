@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ContentService } from 'src/app/content.service';
+import { ContentService } from '../content.service';
 import { ITheme } from 'src/app/shared/interfaces';
 
 

@@ -8,8 +8,6 @@ import { IPost } from 'src/app/shared/interfaces';
 })
 export class AsideComponent {
 
-  @Input() title!: string;
   @Input() recentPosts: IPost[] | undefined;
-
   constructor() { }
 }

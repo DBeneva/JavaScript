@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContentService } from 'src/app/content.service';
+import { ContentService } from '../content.service';
 import { IPost, ITheme } from 'src/app/shared/interfaces';
 import { UserService } from 'src/app/user/user.service';
 
@@ -8,6 +8,7 @@ import { UserService } from 'src/app/user/user.service';
   templateUrl: './themes.component.html',
   styleUrls: ['./themes.component.css']
 })
+
 export class ThemesComponent {
   themes: ITheme[] | undefined;
   recentPosts: IPost[] | undefined;

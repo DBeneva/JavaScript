@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IPost, ITheme } from './shared/interfaces';
-import { environment } from '../environments/environment';
+import { IPost, ITheme } from '../shared/interfaces';
+import { environment } from '../../environments/environment';
 
 const API_URL = environment.apiURL;
 console.log(API_URL);
-
 
 @Injectable({
   providedIn: 'root'
