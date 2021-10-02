@@ -72,7 +72,8 @@ form .field {
 
 /* if error */
 
-p.error {
+ul.error li {
+    list-style-type: none;
     text-align: left;
     background-color: #f8d7da;
     padding: 8px;

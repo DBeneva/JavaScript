@@ -11,14 +11,8 @@ export class RegisterComponent {
     form.reset();
   }
 
-  tell = '+359';
-
-  phoneCodes: Object[] = [
-    { code: '+359', default: true },
-    { code: '+44', default: '' },
-    { code: '+41', default: '' }
-  ];
-
+  phoneCodes = ['+359', '+44', '+41'];
+  professions = ['Designer', 'Architect', 'Secretary'];
 
   constructor() {  }
 }

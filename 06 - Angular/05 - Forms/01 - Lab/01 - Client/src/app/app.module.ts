@@ -4,13 +4,17 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
-import { SameValueDirective } from './same-value.directive';
+import { SameValueDirective } from './register/validators/same-value.directive';
+import { FullNameValidatorDirective } from './register/validators/full-name-validator.directive';
+import { PhoneValidatorDirective } from './register/validators/phone-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    SameValueDirective
+    SameValueDirective,
+    FullNameValidatorDirective,
+    PhoneValidatorDirective
   ],
   imports: [
     BrowserModule,

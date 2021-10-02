@@ -7,44 +7,66 @@
 
             <p class="field field-icon">
                 <label for="username"><span><i class="fas fa-user"></i></span></label>
-                <input type="text" name="username" id="username" placeholder="Mark Ulrich" #name="ngModel" required ngModel>
+                <input type="text" name="username" id="username" placeholder="Mark Ulrich" #nameInput="ngModel"
+                    ngModel appFullNameValidator>
             </p>
 
             <!-- if error -->
-            <p *ngIf="name.invalid && name.touched" class="error">
-                Message for Error
-            </p>
+            <ul *ngIf="nameInput.invalid && nameInput.touched" class="error">
+                <li *ngIf="nameInput.errors?.twoNames">Please enter two names (letters only) separated by a space</li>
+                <li *ngIf="nameInput.errors?.capitalLetters">Both your names must start with a capital letter</li>
+            </ul>
             <!-- end if error -->
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input type="text" name="email" id="email" placeholder="marк@gmial.com" ngModel>
+                <input type="text" name="email" id="email" placeholder="marк@gmial.com" ngModel #emailInput="ngModel"
+                    required email>
             </p>
+
+            <ul *ngIf="emailInput.invalid && emailInput.touched" class="error">
+                <li *ngIf="emailInput.errors?.email">Email is invalid</li>
+            </ul>
 
             <p class="field field-icon">
                 <label for="tel"><span><i class="fas fa-phone"></i></span></label>
-                <select name="tel" id="tel" class="tel" ngModel>
-                    <option *ngFor="let code of phoneCodes">{{code.code}}</option>
+                <select name="tel" id="tel" class="tel">
+                    <option *ngFor="let code of phoneCodes">{{code}}</option>
                 </select>
-                <input type="text" name="tel" id="tel" placeholder="888 888" ngModel>
+                <input type="text" name="tel" id="tel" placeholder="888 888 888" ngModel #phoneInput="ngModel" appPhoneValidator>
             </p>
+
+            <ul *ngIf="phoneInput.invalid && phoneInput.touched" class="error">
+                <li *ngIf="phoneInput.errors?.phone">Phone must be a 9-digit number in the following format: 888 888 888</li>
+            </ul>
 
             <p class="field field-icon">
                 <label for="building"><span><i class="fas fa-building"></i></span></label>
-                <select name="building" id="building" class="building" ngModel>
-                    <option value="1">Designer</option>
+                <select name="building" id="building" class="building">
+                    <option *ngFor="let profession of professions">{{profession}}</option>
                 </select>
             </p>
 
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="password" id="password" placeholder="******" ngModel>
+                <input type="password" name="password" id="password" placeholder="******" ngModel
+                    #passwordInput="ngModel" required minlength="6">
             </p>
+
+            <ul *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+                <li *ngIf="passwordInput.errors?.required">Password is required</li>
+                <li *ngIf="passwordInput.errors?.minlength">Password must be at least 6 characters long</li>
+            </ul>
 
             <p class="field field-icon">
                 <label for="re-password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="re-password" name="re-password" id="re-password" placeholder="******" ngModel>
+                <input type="password" name="re-password" id="re-password" placeholder="******" ngModel
+                    appSameValue="password" #repassInput="ngModel">
             </p>
+
+            <ul *ngIf="repassInput.touched && repassInput.invalid" class="error">
+                <li *ngIf="repassInput.errors?.sameValue">Passwords don't match</li>
+            </ul>
 
             <p>
                 <button type="submit" [disabled]="form.invalid">Create Account</button>
