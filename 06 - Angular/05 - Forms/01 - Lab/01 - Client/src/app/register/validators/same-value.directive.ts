@@ -16,13 +16,14 @@ export class SameValueDirective implements OnDestroy, Validator {
 
   @Input() appSameValue = '';
   @Input() name: string;
-  otherControl: AbstractControl;
+  otherControl: Object;
   subscription: Subscription;
 
   constructor(private form: NgForm) { }
 
   validate(control: AbstractControl): ValidationErrors {
-    const otherControl = this.form.controls[this.appSameValue];
+    //const otherControl = this.form.form.controls.passData.controls[this.appSameValue];
+    const otherControl = this.form.form.get(this.appSameValue)['controls'].password;
     if (this.subscription) { this.subscription.unsubscribe(); }
     this.subscription = otherControl.valueChanges.subscribe(() => {
       control.updateValueAndValidity({ onlySelf: true });

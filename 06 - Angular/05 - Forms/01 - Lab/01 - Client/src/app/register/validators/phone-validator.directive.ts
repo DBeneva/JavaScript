@@ -18,7 +18,7 @@ export class PhoneValidatorDirective implements Validator {
   constructor() { }
   
   validate(control: AbstractControl): ValidationErrors {
-    if (!control.value.match(/[0-9]{3} [0-9]{3} [0-9]{3}/)) {
+    if (control.value && !control.value.match(/[0-9]{3} [0-9]{3} [0-9]{3}/)) {
       return { phone: { [this.name]: control.value } };
     }
   }

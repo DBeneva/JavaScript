@@ -25,7 +25,8 @@ select {
 }
 
 button {
-    background-color: #d41872;
+    /* background-color: #d41872; */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 3px;
@@ -93,5 +94,5 @@ input.ng-invalid.ng-touched {
 }
 
 button[disabled] {
-    background-color: lightgray;
+    background-color: #007bff70;
 }

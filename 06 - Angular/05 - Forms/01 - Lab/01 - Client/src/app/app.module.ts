@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SameValueDirective } from './register/validators/same-value.directive';
 import { FullNameValidatorDirective } from './register/validators/full-name-validator.directive';
 import { PhoneValidatorDirective } from './register/validators/phone-validator.directive';
+import { UrlValidatorDirective } from './register/validators/url-validator.directive';
+import { RegisterReactiveComponent } from './register-reactive/register-reactive.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,14 @@ import { PhoneValidatorDirective } from './register/validators/phone-validator.d
     RegisterComponent,
     SameValueDirective,
     FullNameValidatorDirective,
-    PhoneValidatorDirective
+    PhoneValidatorDirective,
+    UrlValidatorDirective,
+    RegisterReactiveComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

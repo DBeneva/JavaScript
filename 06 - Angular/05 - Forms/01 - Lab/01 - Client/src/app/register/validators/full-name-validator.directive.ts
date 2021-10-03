@@ -17,9 +17,9 @@ export class FullNameValidatorDirective implements Validator {
   constructor() { }
 
   validate(control: AbstractControl): ValidationErrors {
-    if (!control.value.match(/[A-Za-z]+ [A-Za-z]+/)) {
+    if (control.value && !control.value.match(/[A-Za-z]+ [A-Za-z]+/)) {
       return { twoNames: { [this.name]: control.value } };
-    } else if (!control.value.match(/[A-Z][a-z]* [A-Z][a-z]*/)) {
+    } else if (control.value && !control.value.match(/[A-Z][a-z]* [A-Z][a-z]*/)) {
       return { capitalLetters: { [this.name]: control.value } };
     }
   }

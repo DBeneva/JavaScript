@@ -29,8 +29,8 @@
             </ul>
 
             <p class="field field-icon">
-                <label for="tel"><span><i class="fas fa-phone"></i></span></label>
-                <select name="tel" id="tel" class="tel">
+                <label for="code"><span><i class="fas fa-phone"></i></span></label>
+                <select name="code" id="code" class="tel">
                     <option *ngFor="let code of phoneCodes">{{code}}</option>
                 </select>
                 <input type="text" name="tel" id="tel" placeholder="888 888 888" ngModel #phoneInput="ngModel" appPhoneValidator>
@@ -48,25 +48,31 @@
             </p>
 
             <p class="field field-icon">
-                <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="password" id="password" placeholder="******" ngModel
-                    #passwordInput="ngModel" required minlength="6">
+                <label for="image"><span><i class="fas fa-image"></i></span></label>
+                <input type="url" name="image" id="image" ngModel #imageInput="ngModel" appUrlValidator>
             </p>
 
-            <ul *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
-                <li *ngIf="passwordInput.errors?.required">Password is required</li>
-                <li *ngIf="passwordInput.errors?.minlength">Password must be at least 6 characters long</li>
+            <ul *ngIf="imageInput.invalid && imageInput.touched" class="error">
+                <li *ngIf="imageInput.errors?.url">Please enter a valid image URL</li>
             </ul>
 
-            <p class="field field-icon">
-                <label for="re-password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="re-password" id="re-password" placeholder="******" ngModel
-                    appSameValue="password" #repassInput="ngModel">
-            </p>
-
-            <ul *ngIf="repassInput.touched && repassInput.invalid" class="error">
-                <li *ngIf="repassInput.errors?.sameValue">Passwords don't match</li>
-            </ul>
+            <div ngModelGroup="passData" #passData="ngModelGroup">
+                <p class="field field-icon">
+                    <label for="password"><span><i class="fas fa-lock"></i></span></label>
+                    <input type="password" name="password" id="password" placeholder="******" ngModel
+                        #passwordInput="ngModel" required minlength="6">
+                </p>
+    
+                <p class="field field-icon">
+                    <label for="re-password"><span><i class="fas fa-lock"></i></span></label>
+                    <input type="password" name="re-password" id="re-password" placeholder="******" ngModel
+                        appSameValue="passData" #repassInput="ngModel">
+                </p>
+                    
+                <ul *ngIf="passData.invalid && passData.touched" class="error">
+                    <li>Both passwords must be valid</li>
+                </ul>
+            </div>
 
             <p>
                 <button type="submit" [disabled]="form.invalid">Create Account</button>
