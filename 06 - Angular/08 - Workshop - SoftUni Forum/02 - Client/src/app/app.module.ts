@@ -21,8 +21,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CoreModule,
     UserModule,
     ThemeModule,
-    AppRoutingModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

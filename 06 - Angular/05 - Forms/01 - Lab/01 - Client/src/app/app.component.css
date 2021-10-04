@@ -1,0 +1,16 @@
+.navigation {
+    background-color: #007bff;
+    border-radius: 12px;
+    color: white;
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    padding: 20px;
+    margin: 0px 20px;
+    display: inline-block;
+}
+
+.navigation:first-child {
+    margin-left: 500px;
+}

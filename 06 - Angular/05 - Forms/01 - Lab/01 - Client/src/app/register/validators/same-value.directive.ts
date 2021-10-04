@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
     }
   ]
 })
+
 export class SameValueDirective implements OnDestroy, Validator {
 
   @Input() appSameValue = '';
@@ -22,7 +23,6 @@ export class SameValueDirective implements OnDestroy, Validator {
   constructor(private form: NgForm) { }
 
   validate(control: AbstractControl): ValidationErrors {
-    //const otherControl = this.form.form.controls.passData.controls[this.appSameValue];
     const otherControl = this.form.form.get(this.appSameValue)['controls'].password;
     if (this.subscription) { this.subscription.unsubscribe(); }
     this.subscription = otherControl.valueChanges.subscribe(() => {

@@ -9,6 +9,7 @@ import { FullNameValidatorDirective } from './register/validators/full-name-vali
 import { PhoneValidatorDirective } from './register/validators/phone-validator.directive';
 import { UrlValidatorDirective } from './register/validators/url-validator.directive';
 import { RegisterReactiveComponent } from './register-reactive/register-reactive.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RegisterReactiveComponent } from './register-reactive/register-reactive
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
