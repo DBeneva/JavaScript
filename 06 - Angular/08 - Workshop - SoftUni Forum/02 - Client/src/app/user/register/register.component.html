@@ -48,7 +48,7 @@
                 </p>
             </ng-container>
             
-            <ng-container formGroupName="passwords" id="passwords">
+            <div formGroupName="passwords" class="passwords">
                 <!-- password -->
                 <p class="field field-icon">
                     <label for="password"><span><i class="fas fa-lock"></i></span></label>
@@ -78,7 +78,7 @@
                         Passwords don't match!
                     </p>
                 </ng-container>  
-            </ng-container>
+            </div>
 
 
             <button [disabled]="form.invalid">Create Account</button>
