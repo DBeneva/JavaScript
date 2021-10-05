@@ -81,7 +81,8 @@ p.error {
     padding-top: 0;
 }
 
-input.ng-touched.ng-invalid {
+input.ng-touched.ng-invalid,
+#passwords>input.ng-invalid input#rePassword {
     border-left-color: red;
 }
 

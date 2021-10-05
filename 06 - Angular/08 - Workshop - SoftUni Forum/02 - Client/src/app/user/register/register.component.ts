@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { emailValidator, passwordValidator, phoneValidator } from 'src/app/shared/validators';
+import { emailValidator, passwordValidator, phoneValidator, sameValueAsFactory } from 'src/app/shared/validators';
 import { UserService } from '../user.service';
 
 @Component({
@@ -24,14 +24,14 @@ export class RegisterComponent {
         email: ['', [Validators.required, emailValidator]],
         code: ['', [Validators.required]],
         phone: ['', [phoneValidator]],
-        passwords: [{
-          password: '',
-          rePassword: ''
-        }, [Validators.required, passwordValidator]]
+        passwords: this.fb.group({
+          password: ['', [Validators.required, passwordValidator]], 
+          rePassword: ['', [Validators.required, sameValueAsFactory(() => this.form ? this.form.get('passwords.password') : null)]]
+        })
       });
     }
 
   register(): void {
-    //this.userService;
+    if (this.form.invalid) { return; }
   }
 }

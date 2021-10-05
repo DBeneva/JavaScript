@@ -1,4 +1,7 @@
-import { AbstractControl, FormArray, ValidationErrors } from "@angular/forms";
+import { AbstractControl, ValidationErrors } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { filter, startWith, switchMap } from "rxjs/operators";
+
 
 export function emailValidator(control: AbstractControl): ValidationErrors | null {
     if (!control.value) { return null; }
@@ -16,10 +19,43 @@ export function phoneValidator(control: AbstractControl): ValidationErrors {
     };
 }
 
-export function passwordValidator(controls: FormArray): ValidationErrors {
-    if (!controls[0]) { return; }
-    debugger;
-    return /^[A-Za-z0-9]{5,}$/.test(controls[0]) ? null : {
-        invalidPassword: true
-    };
+export function passwordValidator(control: AbstractControl): ValidationErrors {
+    if (!control.value) { return; }
+
+    if (/^[A-Za-z0-9]+$/.test(control.value)) {
+        if (control.value.length >= 5) {
+            return null;
+        } else {
+            return { lessThanFiveChars: true };
+        }
+    } else {
+        return { notAllowedChars: true };
+    }
+}
+
+export function sameValueAsFactory(getTargetControl: () => AbstractControl | null) {
+    let subscription: Subscription | null = null;
+
+    return function (control: AbstractControl) {
+        if (subscription) {
+            subscription.unsubscribe();
+            subscription = null;
+        }
+
+        const targetControl = getTargetControl();
+        if (!targetControl) { return null; }
+
+        subscription = control.statusChanges.pipe(
+            filter(() => false),
+            startWith(null),
+            switchMap(() => targetControl.valueChanges)
+        ).subscribe({
+            next: () => { control.updateValueAndValidity(); },
+            complete: () => { subscription = null; }
+        });
+
+        return targetControl.value == control.value ? null : {
+            noMatch: true
+        };
+    }
 }
