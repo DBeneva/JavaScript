@@ -23,7 +23,7 @@ form.login, form.register {
     padding-top: 1.5rem;
 }
 
-.login input, .register input {
+input {
     flex: 0 1 100%;
     border: 1px solid;
     padding: 0.3em;
@@ -81,6 +81,10 @@ p.error {
     padding-top: 0;
 }
 
-.input-error {
+input.ng-touched.ng-invalid {
     border-left-color: red;
+}
+
+button[disabled] {
+    background-color: #4ebded86;
 }
