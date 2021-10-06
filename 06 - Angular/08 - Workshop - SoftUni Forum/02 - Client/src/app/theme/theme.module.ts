@@ -7,6 +7,7 @@ import { ThemeRoutingModule } from './theme-routing.module';
 import { AsideComponent } from './aside/aside.component';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,8 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     HttpClientModule,
-    ThemeRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ThemeRoutingModule
   ]
 })
 export class ThemeModule { }

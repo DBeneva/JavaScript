@@ -3,6 +3,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthActivate } from '../core/guards/auth.activate';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 const routes: Routes = [
     {
@@ -26,6 +27,15 @@ const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [AuthActivate],
+        data: {
+            authRequired: true,
+            authFailureRedirectUrl: '/login'
+        }
+    },
+    {
+        path: 'profile-edit',
+        component: ProfileEditComponent,
         canActivate: [AuthActivate],
         data: {
             authRequired: true,

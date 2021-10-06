@@ -16,8 +16,8 @@ export class AuthActivate implements CanActivate {
 
         let authRedirectUrl = authFailureRedirectUrl;
         if (authRequired) {
-            const loginRedirectUrl = route.url.reduce((acc, s) => `${acc}/${s.path}`, '');
-            authRedirectUrl += `?redirectUrl=${loginRedirectUrl}`;
+            const previousUrl = route.url.reduce((acc, s) => `${acc}/${s.path}`, '');
+            authRedirectUrl += `?redirectUrl=${previousUrl}`;
         }
         return this.router.parseUrl(authRedirectUrl || '/');
     }

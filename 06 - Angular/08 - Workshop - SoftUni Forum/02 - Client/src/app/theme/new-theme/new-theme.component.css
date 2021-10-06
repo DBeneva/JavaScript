@@ -83,3 +83,7 @@ p.error {
 .input-error {
     border-left-color: red;
 }
+
+button[disabled] {
+    background-color: #4ebded86;
+}
