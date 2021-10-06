@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
 import { emailValidator } from 'src/app/shared/validators';
 
 @Component({
@@ -8,9 +7,8 @@ import { emailValidator } from 'src/app/shared/validators';
   styleUrls: ['./profile-edit.component.css']
 })
 export class ProfileEditComponent {
-  @ViewChild('form', { read: NgForm, static: false }) form: NgForm;
-  phoneCodes = ['+359', '+44', '+41', '+1'];
   emailValidator = emailValidator;
-  
+  phoneCodes = ['+359', '+44', '+41', '+1'];
+   
   constructor() { }
 }

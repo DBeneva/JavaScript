@@ -4,6 +4,8 @@ import { filter, startWith, switchMap } from "rxjs/operators";
 
 
 export function emailValidator(control: AbstractControl): ValidationErrors | null {
+    console.log(control.value);
+    
     if (!control.value) { return null; }
 
     return /^.{6,}@gmail\.(bg|com)$/.test(control.value) ? null : {

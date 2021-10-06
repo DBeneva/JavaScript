@@ -20,7 +20,7 @@
             <div class="flex">
                 <p>Email: </p>
                 <input ngModel #emailInput="ngModel" type="email" name="email" id="email" value="john.doe@gmail.com"
-                    required appCustomValidator="emailValidator(emailInput)">
+                    required appCustomValidator="emailValidator">
                 <ng-container *ngIf="emailInput.touched">
                     <p *ngIf="emailInput.errors?.required" class="error">
                         Email is required!
