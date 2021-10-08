@@ -3,6 +3,7 @@
         <app-welcome-message *ngIf="!isLogged"></app-welcome-message>
         <div class="theme-title" *ngIf="themes">
             <div class="theme-container" *ngFor="let theme of themes">
+                <!-- {{theme.subscribers | json}} -->
                 <div class="theme-name-wrapper">
                     <div class="theme-name">
                         <a class="normal" [routerLink]="['/themes', theme._id]">
@@ -16,8 +17,10 @@
                                 </div>
                             </div>
                             <div class="subscribers">
-                                <!-- <button *ngIf="!{{theme.subscribers.includes('5fa64b162183ce1728ff371d')}}" class="subscribe">Subscribe</button>
-                                <button *ngIf="{{theme.subscribers.includes('5fa64b162183ce1728ff371d')}}" class="unsubscribe">Unsubscribe</button> -->
+                                <div *ngIf="isLogged">
+                                    <button *ngIf="!theme.subscribers.includes(user._id)" class="subscribe" (click)="subscribe(theme._id)">Subscribe</button>
+                                    <button *ngIf="theme.subscribers.includes(user._id)" class="unsubscribe" (click)="unsubscribe(theme._id)">Unsubscribe</button>
+                                </div>
                                 <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                             </div>
                         </div>

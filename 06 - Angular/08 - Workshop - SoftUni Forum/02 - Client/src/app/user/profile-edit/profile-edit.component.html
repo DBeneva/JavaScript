@@ -2,11 +2,12 @@
     <div class="profile">
         <img src="../../../assets/profile.png" alt="default user">
         <h3>User Info:</h3>
-        <form #form="ngForm">
+        <form #form="ngForm" (ngSubmit)="updateProfile(form)">
             <div class="flex">
                 <p>Username: </p>
-                <input ngModel #usernameInput="ngModel" type="text" name="username" id="username" value="Johny" required
-                    minlength="5">
+                <input [ngModel]="user.username" #usernameInput="ngModel" type="text"
+                    name="username" id="username"
+                    required minlength="5">
                 <ng-container *ngIf="usernameInput.touched">
                     <p *ngIf="usernameInput.errors?.required" class="error">
                         Username is required!
@@ -19,8 +20,8 @@
 
             <div class="flex">
                 <p>Email: </p>
-                <input ngModel #emailInput="ngModel" type="email" name="email" id="email" value="john.doe@gmail.com"
-                    required appCustomValidator="emailValidator">
+                <input [ngModel]="user.email" #emailInput="ngModel" type="email" name="email" id="email" value="john.doe@gmail.com"
+                    required [appCustomValidator]="emailValidator" value="user.email">
                 <ng-container *ngIf="emailInput.touched">
                     <p *ngIf="emailInput.errors?.required" class="error">
                         Email is required!
@@ -33,14 +34,20 @@
             <div class="flex">
                 <p>Phone: </p>
                 <div>
-                    <select name="select-tel" id="select-tel" class="tel">
+                    <select #code="ngModel" [ngModel]="userCode" name="code" id="select-tel" class="tel">
                         <option *ngFor="let code of phoneCodes">{{code}}</option>
                     </select>
-                    <input ngModel #phone="ngModel" type="text" name="tel" id="tel" value="885 888 888">
+                    <input [ngModel]="userTel" #phoneInput="ngModel" type="text" name="tel" id="tel" value="885 888 888"
+                        [appCustomValidator]="phoneValidator">
+                    <ng-container *ngIf="phoneInput.touched">
+                        <p *ngIf="phoneInput.errors?.invalidPhone" class="error">
+                            Required format: 888 888 888
+                        </p>
+                    </ng-container>
                 </div>
             </div>
             <button routerLink="/profile" class="red-button">Cancel</button>
-            <button [disabled]="form.invalid" class="green-button">Save</button>
+            <button type="submit" [disabled]="form.invalid" class="green-button">Save</button>
         </form>
     </div>
 </div>

@@ -80,6 +80,8 @@ p.error {
     border-radius: 0.3em;
     color: red;
     padding-top: 0;
+    font-size: smaller;
+    min-width: 250px;
 }
 
 button[disabled] {

@@ -1,3 +1,5 @@
+@import url('https://use.fontawesome.com/releases/v5.15.4/css/all.css');
+
 /* theme content  */
 
 .theme-content {
@@ -196,6 +198,33 @@
     cursor: pointer;
 }
 
+.answer button[disabled] {
+    background-color: #4ebded86;
+}
+
 .comment-area {
     min-width: 100%
+}
+
+.edit-delete {
+    width: 80%;
+}
+
+.edit-delete button {
+    padding: 0.2rem 0.5rem;
+    margin-left: 15px;
+    border: none;
+    border-radius: 0.3rem;
+    color: white;
+    cursor: pointer;
+    width: 150px;
+    font-size: 16px;
+}
+
+.edit {
+    background-color: green;
+}
+
+.delete {
+    background-color: red;
 }

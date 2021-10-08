@@ -12,12 +12,14 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorF
   ]
 })
 export class CustomValidatorDirective implements Validator {
-  @Input('appCustomValidator') validatorFn: ValidatorFn | undefined;
+  @Input('appCustomValidator') validatorFn: ValidatorFn;
   constructor() { }
+
+  
+  
   validate(control: AbstractControl): ValidationErrors | null {
-    console.log(this.validatorFn);
+    // console.log(this.validatorFn);
     if (!this.validatorFn) { return null; }
-    // return emailValidator(control);
     return this.validatorFn(control);
   }
 }

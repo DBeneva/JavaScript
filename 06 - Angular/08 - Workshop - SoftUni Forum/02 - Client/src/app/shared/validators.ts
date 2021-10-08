@@ -1,11 +1,9 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { filter, startWith, switchMap } from "rxjs/operators";
+import { Observable, Subscription } from "rxjs";
+import { filter, startWith, switchMap, takeUntil } from "rxjs/operators";
 
 
 export function emailValidator(control: AbstractControl): ValidationErrors | null {
-    console.log(control.value);
-    
     if (!control.value) { return null; }
 
     return /^.{6,}@gmail\.(bg|com)$/.test(control.value) ? null : {
@@ -35,7 +33,7 @@ export function passwordValidator(control: AbstractControl): ValidationErrors {
     }
 }
 
-export function sameValueAsFactory(getTargetControl: () => AbstractControl | null) {
+export function sameValueAsFactory(getTargetControl: () => AbstractControl | null, killSubscriptions: Observable<any>) {
     let subscription: Subscription | null = null;
 
     return function (control: AbstractControl) {
@@ -47,10 +45,8 @@ export function sameValueAsFactory(getTargetControl: () => AbstractControl | nul
         const targetControl = getTargetControl();
         if (!targetControl) { return null; }
 
-        subscription = control.statusChanges.pipe(
-            filter(() => false),
-            startWith(null),
-            switchMap(() => targetControl.valueChanges)
+        subscription = targetControl.valueChanges.pipe(
+            takeUntil(killSubscriptions)
         ).subscribe({
             next: () => { control.updateValueAndValidity(); },
             complete: () => { subscription = null; }

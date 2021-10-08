@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { emailValidator } from 'src/app/shared/validators';
@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent {
   form: FormGroup;
   emailValidator = emailValidator;
 
@@ -19,16 +19,10 @@ export class LoginComponent implements AfterViewInit {
     private userService: UserService,
     private router: Router,
     private fb: FormBuilder
-    ) {
-      this.form = fb.group({
-        email: ['', [Validators.required, emailValidator]],
-        password: ['', [Validators.required, Validators.minLength(5)]]
-      });
-    }
-
-  ngAfterViewInit(): void {
-    requestAnimationFrame(() => {
-      //this.form.control.updateValueAndValidity();
+  ) {
+    this.form = fb.group({
+      email: ['', [Validators.required, emailValidator]],
+      password: ['', [Validators.required, Validators.minLength(5)]]
     });
   }
 
@@ -36,8 +30,12 @@ export class LoginComponent implements AfterViewInit {
     if (form.invalid) { return; }
 
     const { email, password } = form.value;
-    this.userService.login(email, password);
-    const redirectUrl = this.activatedRoute.snapshot.queryParams.redirectUrl || '/';
-    this.router.navigate([redirectUrl]);
+    this.userService.login({ email, password }).subscribe({
+      next: () => {
+        const redirectUrl = this.activatedRoute.snapshot.queryParams.redirectUrl || '/';
+        this.router.navigate([redirectUrl]);
+      },
+      error: (err) => { console.log(err); }
+    });
   }
 }

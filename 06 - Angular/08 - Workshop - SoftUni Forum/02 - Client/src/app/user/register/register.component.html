@@ -21,7 +21,7 @@
             <!-- email -->
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input formControlName="email" appCustomValidator="emailValidator(form.get('email'))" type="email" name="email" id="email" placeholder="john.doe@gmail.com">
+                <input formControlName="email" [appCustomValidator]="emailValidator" type="email" name="email" id="email" placeholder="john.doe@gmail.com">
             </p>
             
             <ng-container *ngIf="form.get('email').touched">
@@ -37,32 +37,34 @@
             <p class="field field-icon">
                 <label for="tel"><span><i class="fas fa-phone"></i></span></label>
                 <select formControlName="code" name="select-tel" id="select-tel" class="tel">
-                    <option *ngFor="let code of phoneCodes">{{code}}</option>
+                    <option *ngFor="let code of phoneCodes" [selected]="code == '+359'">{{code}}</option>
                 </select>
-                <input formControlName="phone" appCustomValidator="phoneValidator(form.get('phone'))" type="text" name="tel" id="tel" placeholder="885 888 888">
+                <input formControlName="tel" [appCustomValidator]="phoneValidator" type="text"
+                    name="tel" id="tel" placeholder="885 888 888">
             </p>
             
-            <ng-container *ngIf="form.get('phone').touched">
-                <p *ngIf="form.get('phone').errors?.invalidPhone" class="error">
+            <ng-container *ngIf="form.get('tel').touched">
+                <p *ngIf="form.get('tel').errors?.invalidPhone" class="error">
                     Phone must be a 9-digit number in the following format: 888 888 888
                 </p>
             </ng-container>
             
-            <div formGroupName="passwords" class="passwords">
+            <!-- <div formGroupName="passwords" class="passwords"> -->
                 <!-- password -->
                 <p class="field field-icon">
                     <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                    <input formControlName="password" appCustomValidator="passwordValidator(form.get('passwords.password'))" type="password" name="password" id="password" placeholder="******">
+                    <input formControlName="password" [appCustomValidator]="passwordValidator" type="password" name="password" id="password" placeholder="******">
                 </p>
     
                 <!-- rePassword -->
                 <p class="field field-icon">
                     <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
-                    <input formControlName="rePassword" type="password" name="rePassword" id="rePassword" placeholder="******">
+                    <input formControlName="rePassword" type="password" name="rePassword"
+                        id="rePassword" placeholder="******">
                 </p>
 
                 <!-- errors -->
-                <ng-container *ngIf="form.get('passwords').touched">
+                <!-- <ng-container *ngIf="form.get('passwords').touched">
                     <p *ngIf="form.get('passwords.password').errors?.required" class="error">
                         Password is required!
                     </p>
@@ -73,12 +75,16 @@
                         Password may only contain latin letters and digits!
                     </p>
                     <p *ngIf="form.get('passwords.password').valid &&
-                        form.get('passwords.rePassword').touched &&
+                        form.get('passwords.rePassword').errors?.required" class="error">
+                        Please confirm password!
+                    </p>
+                    <p *ngIf="form.get('passwords.password').valid &&
+                        !form.get('passwords.rePassword').errors?.required &&
                         form.get('passwords.rePassword').errors?.noMatch" class="error">
                         Passwords don't match!
                     </p>
-                </ng-container>  
-            </div>
+                </ng-container>   -->
+            <!-- </div> -->
 
 
             <button [disabled]="form.invalid">Create Account</button>

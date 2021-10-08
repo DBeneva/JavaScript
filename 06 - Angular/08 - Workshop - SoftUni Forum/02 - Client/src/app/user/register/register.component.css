@@ -85,6 +85,10 @@ input.ng-touched.ng-invalid {
     border-left-color: red;
 }
 
+.passwords.ng-touched.ng-invalid input {
+    border-left-color: red;
+}
+
 button[disabled] {
     background-color: #4ebded86;
 }

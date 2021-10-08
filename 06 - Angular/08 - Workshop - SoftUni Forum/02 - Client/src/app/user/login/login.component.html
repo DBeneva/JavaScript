@@ -6,7 +6,7 @@
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
                 <input formControlName="email" class="input-error" type="email" name="email" id="email"
-                    placeholder="john.doe@gmail.com" required appCustomValidator="emailValidator(form.get('email'))">
+                    placeholder="john.doe@gmail.com" required [appCustomValidator]="emailValidator">
             </p>
             <ng-container *ngIf="form.get('email').touched">
                 <p *ngIf="form.get('email').errors?.required" class="error">

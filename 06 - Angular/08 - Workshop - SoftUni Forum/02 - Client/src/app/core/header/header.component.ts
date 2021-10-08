@@ -13,8 +13,8 @@ export class HeaderComponent {
     return this.userService.isLogged;
   }
 
-  get firstName(): string {
-    return this.userService.user.firstName;
+  get username(): string {
+    return this.userService.user.username;
   }
 
   constructor(
@@ -22,7 +22,8 @@ export class HeaderComponent {
     private router: Router) { }
 
   logout(): void {
-    this.userService.logout();
-    this.router.navigate(['/']);
+    this.userService.logout().subscribe(() => {
+      this.router.navigate(['/']);
+    });
   }
 }

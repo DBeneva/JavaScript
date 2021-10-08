@@ -7,6 +7,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,10 +19,14 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    UserRoutingModule
+    UserRoutingModule,
+    SharedModule
+  ],
+  exports: [
+    ProfileEditComponent
   ]
 })
 export class UserModule { }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ContentService } from '../content.service';
 
 @Component({
   selector: 'app-new-theme',
@@ -10,14 +11,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NewThemeComponent {
 
   constructor(
-    private activatedRoute: ActivatedRoute,
+    private contentService: ContentService,
     private router: Router
   ) { }
 
-  onSubmit(form: NgForm) {
-    console.log(form);
-    const redirectUrl = this.activatedRoute.snapshot.queryParams.redirectUrl || '/';
-    this.router.navigate([redirectUrl]);
-  }
+  createTheme(form: NgForm): void {
+    if (form.invalid) return;
 
+    this.contentService.saveTheme(form.value).subscribe({
+      next: () => { this.router.navigate(['/themes']); },
+      error: (err) => { console.error(err); }
+    });
+  }
 }

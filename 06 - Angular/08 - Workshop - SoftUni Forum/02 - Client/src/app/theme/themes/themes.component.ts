@@ -15,6 +15,7 @@ export class ThemesComponent {
   get isLogged(): boolean {
     return this.userService.isLogged;
   }
+  user = this.userService.user;
 
   constructor(
     private contentService: ContentService,
@@ -32,5 +33,13 @@ export class ThemesComponent {
   fetchRecentPosts(): void {
     this.recentPosts = undefined;
     this.contentService.loadPosts(5).subscribe(posts => this.recentPosts = posts);
+  }
+
+  subscribe(themeId: string): void {
+    this.contentService.subscribeToTheme(themeId).subscribe(() => this.fetchThemes());
+  }
+
+  unsubscribe(themeId: string): void {
+    this.contentService.unsubscribeFromTheme(themeId).subscribe(() => this.fetchThemes());
   }
 }

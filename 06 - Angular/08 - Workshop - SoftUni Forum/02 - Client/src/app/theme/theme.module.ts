@@ -8,6 +8,7 @@ import { AsideComponent } from './aside/aside.component';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     SharedModule,
     FormsModule,
+    RouterModule,
     ThemeRoutingModule
   ]
 })

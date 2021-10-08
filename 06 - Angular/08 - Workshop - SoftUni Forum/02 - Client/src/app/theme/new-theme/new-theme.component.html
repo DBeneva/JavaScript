@@ -3,7 +3,7 @@
         <div class="header-background">
             <span>New Theme</span>
         </div>
-        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <form #form="ngForm" (ngSubmit)="createTheme(form)">
             <div class="new-theme-title">
                 <label for="themeName">Title <span class="red">*</span></label>
                 <input ngModel #themeName="ngModel" type="text" name="themeName"
@@ -32,8 +32,8 @@
                 </ng-container>
             </div>
             <div class="new-theme-buttons">
-                <button class="cancel">Cancel</button>
-                <button [disabled]="form.invalid" class="public">Post</button>
+                <button routerLink="/themes" class="cancel">Cancel</button>
+                <button type="submit" [disabled]="form.invalid" class="public">Post</button>
             </div>
 
         </form>

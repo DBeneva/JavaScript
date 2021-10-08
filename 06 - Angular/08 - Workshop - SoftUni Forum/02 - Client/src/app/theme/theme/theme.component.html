@@ -14,30 +14,44 @@
             </div>
         </div>
         <!-- comment  -->
-        <div *ngFor="let comment of theme.posts" class="comment">
+        <div *ngFor="let post of theme.posts" class="comment">
             <header class="header">
-                <p><span>{{comment.userId.username}}</span> posted on <time>{{comment.created_at}}</time></p>
+                <p><span>{{post.userId.username}}</span> posted on <time>{{post.created_at}}</time></p>
             </header>
             <div class="comment-main">
                 <div class="userdetails">
                     <img src="assets/profile.png" alt="avatar">
                 </div>
                 <div class="post-content">
-                    <p>{{comment.text}}</p>
+                    <p>{{post.text}}</p>
                 </div>
             </div>
             <div class="footer">
-                <!-- <i class="fas fa-thumbs-up"></i>
-                <i class="fas fa-thumbs-down"></i> -->
-                <p><span>{{comment.likes.length}}</span> likes</p>
+                <div *ngIf="isLogged && user._id != post.userId._id">
+                    <i *ngIf="!post.likes.includes(user._id)" class="fas fa-thumbs-up" (click)="likePost(post._id)"></i>
+                    <i *ngIf="post.likes.includes(user._id)" class="fas fa-thumbs-down" (click)="unlikePost(post._id)"></i>
+                </div>
+                <div class="edit-delete" *ngIf="isLogged && user._id == post.userId._id">
+                    <button class="edit" (click)="getEditingMode(post._id, post.text)">Edit</button>
+                    <button class="delete" (click)="deletePost(post._id)">Delete</button>
+                </div>
+                <p><span>{{post.likes.length}}</span> likes</p>
             </div>
         </div>
-        <div class="answer-comment">
-            <p><span>currentUser</span> comment:</p>
-            <div class="answer">
-                <form>
-                    <textarea name="postText" id="comment" cols="30" rows="10"></textarea>
-                    <button>Post</button>
+        <div *ngIf="isLogged" class="answer-comment">
+            <p><span>{{user.username}}</span>'s comment:</p>
+            <div *ngIf="!editingMode" class="answer">
+                <form #form="ngForm" (ngSubmit)="postComment(form)">
+                    <textarea ngModel #comment="ngModel" name="postText" id="comment" cols="30" rows="10" required></textarea>
+                    <button type="submit" [disabled]="form.invalid">Post</button>
+                </form>
+            </div>
+            <div *ngIf="editingMode" class="answer">
+                <form #form="ngForm" (ngSubmit)="editPost(comment.value)">
+                    <textarea [ngModel]="postContent" #comment="ngModel"
+                        name="postText" id="comment" cols="30" rows="10" required autofocus></textarea>
+                    <button type="submit" [disabled]="form.pristine">Edit</button>
+                    <button (click)="editingMode = false;">Cancel</button>
                 </form>
             </div>
         </div>
