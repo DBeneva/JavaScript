@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { LocalStorage } from './injection-tokens';
 import { AuthActivate } from './guards/auth.activate';
+import { appInterceptorProvider } from './app-interceptor';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { AuthActivate } from './guards/auth.activate';
       },
       deps: [PLATFORM_ID]
     },
-    AuthActivate
+    AuthActivate,
+    appInterceptorProvider
   ]
 })
 export class CoreModule { }

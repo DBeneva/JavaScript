@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { IUser } from '../shared/interfaces';
-
-const API_URL = environment.apiURL;
 
 @Injectable({
   providedIn: 'root'
@@ -20,31 +17,31 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(user: { email: string; password: string }) {
-    return this.http.post<IUser>(`${API_URL}/login`, user, { withCredentials: true }).pipe(
+    return this.http.post<IUser>('/api/login', user).pipe(
       tap((user) => this.user = user)
     );
   }
 
   register(user: { username: string; email: string; tel: string; password: string }) {
-    return this.http.post<IUser>(`${API_URL}/register`, user, { withCredentials: true }).pipe(
+    return this.http.post<IUser>('/api/register', user).pipe(
       tap((user) => this.user = user)
     );
   }
 
   getProfileInfo() {
-    return this.http.get<IUser>(`${API_URL}/users/profile`, { withCredentials: true }).pipe(
+    return this.http.get<IUser>('api/users/profile').pipe(
       tap((user) => this.user = user)
     );
   }
 
   logout() {
-    return this.http.post<IUser>(`${API_URL}/logout`, {}, { withCredentials: true }).pipe(
+    return this.http.post<IUser>('/api/logout', {}).pipe(
       tap(() => this.user = null)
     );
   }
 
   updateProfile(user: { username: string; email: string; tel: string }) {
-    return this.http.put<IUser>(`${API_URL}/users/profile`, user, { withCredentials: true }).pipe(
+    return this.http.put<IUser>('/api/users/profile', user).pipe(
       tap((user) => this.user = user)
     );
   }
