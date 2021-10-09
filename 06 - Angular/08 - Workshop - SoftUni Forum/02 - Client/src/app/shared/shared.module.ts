@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { WelcomeMessageComponent } from './welcome-message/welcome-message.component';
 import { RouterModule } from '@angular/router';
 import { CustomValidatorDirective } from './custom-validator.directive';
+import { GetPropPipe } from './get-prop.pipe';
 
 
 @NgModule({
   declarations: [
     WelcomeMessageComponent,
-    CustomValidatorDirective
+    CustomValidatorDirective,
+    GetPropPipe
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { CustomValidatorDirective } from './custom-validator.directive';
   ],
   exports: [
     WelcomeMessageComponent,
-    CustomValidatorDirective
+    CustomValidatorDirective,
+    GetPropPipe
   ]
 })
 export class SharedModule { }
