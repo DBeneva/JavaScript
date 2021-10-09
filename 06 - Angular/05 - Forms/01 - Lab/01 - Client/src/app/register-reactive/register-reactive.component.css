@@ -93,6 +93,10 @@ input.ng-invalid.ng-touched {
     border-left: 5px solid #A94442;
 }
 
+.passData.ng-touched.ng-invalid input {
+    border-left: 5px solid #A94442;
+}
+
 button[disabled] {
     background-color: #007bff70;
 }

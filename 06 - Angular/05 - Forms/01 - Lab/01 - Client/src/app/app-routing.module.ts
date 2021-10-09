@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './register-template-driven/register.component';
 import { RegisterReactiveComponent } from './register-reactive/register-reactive.component';
 
 const routes: Routes = [

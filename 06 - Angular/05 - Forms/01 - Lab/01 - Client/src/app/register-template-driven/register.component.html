@@ -1,18 +1,19 @@
 <div class="container">
 
-    <form action="" method="post" #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 
         <fieldset>
-            <h1>Registration Form</h1>
+            <h1>Registration Template-Driven Form</h1>
 
             <p class="field field-icon">
                 <label for="username"><span><i class="fas fa-user"></i></span></label>
-                <input type="text" name="username" id="username" placeholder="Mark Ulrich" #nameInput="ngModel"
-                    ngModel appFullNameValidator>
+                <input type="text" name="username" id="username" placeholder="Mark Ulrich"
+                    #nameInput="ngModel" ngModel required [appCustomValidator]="fullNameValidator">
             </p>
 
             <!-- if error -->
-            <ul *ngIf="nameInput.invalid && nameInput.touched" class="error">
+            <ul *ngIf="nameInput.touched" class="error">
+                <li *ngIf="nameInput.errors?.required">Please enter your names</li>
                 <li *ngIf="nameInput.errors?.twoNames">Please enter two names (letters only) separated by a space</li>
                 <li *ngIf="nameInput.errors?.capitalLetters">Both your names must start with a capital letter</li>
             </ul>
@@ -24,53 +25,65 @@
                     required email>
             </p>
 
-            <ul *ngIf="emailInput.invalid && emailInput.touched" class="error">
+            <ul *ngIf="emailInput.touched" class="error">
+                <li *ngIf="emailInput.errors?.required">Please enter your email</li>
                 <li *ngIf="emailInput.errors?.email">Email is invalid</li>
             </ul>
 
             <p class="field field-icon">
                 <label for="code"><span><i class="fas fa-phone"></i></span></label>
-                <select name="code" id="code" class="tel">
+                <select [ngModel]="phoneCodes[0]" #code="ngModel" name="code" id="code" class="tel">
                     <option *ngFor="let code of phoneCodes">{{code}}</option>
                 </select>
-                <input type="text" name="tel" id="tel" placeholder="888 888 888" ngModel #phoneInput="ngModel" appPhoneValidator>
+                <input type="text" name="tel" id="tel" placeholder="888 888 888" ngModel
+                    #phoneInput="ngModel" [appCustomValidator]="phoneValidator" required>
             </p>
 
-            <ul *ngIf="phoneInput.invalid && phoneInput.touched" class="error">
+            <ul *ngIf="phoneInput.touched" class="error">
+                <li *ngIf="phoneInput.errors?.required">Please enter your phone</li>
                 <li *ngIf="phoneInput.errors?.phone">Phone must be a 9-digit number in the following format: 888 888 888</li>
             </ul>
 
             <p class="field field-icon">
                 <label for="building"><span><i class="fas fa-building"></i></span></label>
-                <select name="building" id="building" class="building">
+                <select [ngModel]="professions[0]" #profession="ngModel" name="building" id="building" class="building">
                     <option *ngFor="let profession of professions">{{profession}}</option>
                 </select>
             </p>
 
             <p class="field field-icon">
                 <label for="image"><span><i class="fas fa-image"></i></span></label>
-                <input type="url" name="image" id="image" ngModel #imageInput="ngModel" appUrlValidator>
+                <input type="url" name="image" id="image"
+                    ngModel #imageInput="ngModel" [appCustomValidator]="urlValidator" required>
             </p>
 
-            <ul *ngIf="imageInput.invalid && imageInput.touched" class="error">
-                <li *ngIf="imageInput.errors?.url">Please enter a valid image URL</li>
+            <ul *ngIf="imageInput.touched" class="error">
+                <li *ngIf="imageInput.errors?.required">Please enter an image URL</li>
+                <li *ngIf="imageInput.errors?.url">Invalid image URL</li>
             </ul>
 
-            <div ngModelGroup="passData" #passData="ngModelGroup">
+            <div ngModelGroup="passData" #passData="ngModelGroup" class="passData">
                 <p class="field field-icon">
                     <label for="password"><span><i class="fas fa-lock"></i></span></label>
                     <input type="password" name="password" id="password" placeholder="******" ngModel
-                        #passwordInput="ngModel" required minlength="6">
+                        #passwordInput="ngModel" required [appCustomValidator]="passwordValidator" minlength="3" maxlength="16">
                 </p>
     
                 <p class="field field-icon">
                     <label for="re-password"><span><i class="fas fa-lock"></i></span></label>
                     <input type="password" name="re-password" id="re-password" placeholder="******" ngModel
-                        appSameValue="passData" #repassInput="ngModel">
+                        [appCustomValidator]="sameValue(passwordInput)" #repassInput="ngModel"
+                        required>
                 </p>
                     
-                <ul *ngIf="passData.invalid && passData.touched" class="error">
-                    <li>Both passwords must be valid</li>
+                <ul *ngIf="passData.touched" class="error">
+                    <li *ngIf="passwordInput.errors?.required">Please enter password</li>
+                    <li *ngIf="passwordInput.errors?.notAllowedCharacters">Please only use letters and digits</li>
+                    <li *ngIf="passwordInput.errors?.minlength && !passwordInput.errors?.notAllowedCharacters">Password must be at least 3 characters long</li>
+                    <div *ngIf="passwordInput.touched && passwordInput.valid">
+                        <li *ngIf="repassInput.errors?.required">Please confirm password</li>
+                        <li *ngIf="repassInput.errors?.noMatch && !repassInput.errors?.required">Passwords don't match</li>
+                    </div>
                 </ul>
             </div>
 

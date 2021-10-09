@@ -1,11 +1,12 @@
 <div class="container">
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="reset()">
         <fieldset>
             <h1>Registration Reactive Form</h1>
 
             <p class="field field-icon">
                 <label for="username"><span><i class="fas fa-user"></i></span></label>
-                <input type="text" name="username" id="username" placeholder="Mark Ulrich" formControlName="username" required>
+                <input type="text" name="username" id="username" placeholder="Mark Ulrich" formControlName="username"
+                    required>
             </p>
 
             <!-- if error -->
@@ -16,7 +17,8 @@
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input type="text" name="email" id="email" placeholder="marк@gmial.com" formControlName="email" required>
+                <input type="text" name="email" id="email" placeholder="marк@gmial.com" formControlName="email"
+                    required>
             </p>
 
             <ul *ngIf="form.get('email').invalid && form.get('email').touched" class="error">
@@ -51,24 +53,35 @@
                 <li>Please enter a valid image URL</li>
             </ul>
 
-            <p class="field field-icon">
-                <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="password" id="password" placeholder="******" formControlName="password" required>
-            </p>
+            <div formGroupName="passData" class="passData">
+                <p class="field field-icon">
+                    <label for="password"><span><i class="fas fa-lock"></i></span></label>
+                    <input type="password" name="password" id="password" placeholder="******" formControlName="password"
+                        required>
+                </p>
 
-            <ul *ngIf="form.get('password').invalid && form.get('password').touched" class="error">
-                <li>Password must be at least 6 characters long</li>
-            </ul>
-
-            <p class="field field-icon">
-                <label for="repeatPassword"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="repeatPassword" id="repeatPassword" placeholder="******"
-                    formControlName="repeatPassword" required>
-            </p>
-
-            <ul *ngIf="form.get('repeatPassword').invalid && form.get('repeatPassword').touched" class="error">
-                <li>Passwords don't match</li>
-            </ul>
+                <p class="field field-icon">
+                    <label for="repeatPassword"><span><i class="fas fa-lock"></i></span></label>
+                    <input type="password" name="repeatPassword" id="repeatPassword" placeholder="******"
+                        formControlName="repeatPassword" required>
+                </p>
+            </div>
+            <ng-container *ngIf="form.get('passData').touched">
+                <ul *ngIf="form.get('passData.password').touched" class="error">
+                    <li *ngIf="form.get('passData.password').errors?.required">Please enter password</li>
+                    <li *ngIf="form.get('passData.password').errors?.notAllowedCharacters">Please only use letters and
+                        digits</li>
+                    <li
+                        *ngIf="form.get('passData.password').errors?.minlength && !form.get('passData.password').errors?.notAllowedCharacters">
+                        Password must be at least 3 characters long</li>
+                </ul>
+                <ul *ngIf="form.get('passData').touched && form.get('passData.password').valid"
+                    class="error">
+                    <li *ngIf="form.get('passData.repeatPassword').errors?.required">Please confirm password</li>
+                    <li *ngIf="!form.get('passData.repeatPassword').errors?.required &&
+                        form.get('passData.repeatPassword').errors?.noMatch">Passwords don't match</li>
+                </ul>
+            </ng-container>
 
             <p>
                 <button type="submit" [disabled]="form.invalid">Create Account</button>

@@ -1,39 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { fullNameValidator, passwordValidator, phoneValidator, sameValueAsFactory, urlValidator } from '../shared/validators';
 
 @Component({
   selector: 'app-register-reactive',
   templateUrl: './register-reactive.component.html',
   styleUrls: ['./register-reactive.component.css']
 })
-export class RegisterReactiveComponent implements OnInit {
+export class RegisterReactiveComponent {
 
   form: FormGroup;
 
   phoneCodes = ['+359', '+44', '+41'];
   professions = ['Designer', 'Architect', 'Secretary'];
 
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit() {
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern('[A-Z][a-z]* [A-Z][a-z]*')]],
+      username: ['', [Validators.required, fullNameValidator]],
       email: ['', [Validators.required, Validators.email]],
-      code: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]{3} [0-9]{3} [0-9]{3}')]],
-      profession: ['', [Validators.required]],
-      image: ['', [Validators.required, Validators.pattern('https?://.*\.(png|jpg)')]],
-      password: ['', [Validators.minLength(6)]],
-      repeatPassword: ['', Validators.required, this.sameValueValidator]
+      code: [''],
+      phone: ['', [Validators.required, phoneValidator]],
+      profession: [''],
+      image: ['', [Validators.required, urlValidator]],
+      passData: this.fb.group({
+        password: ['', [Validators.minLength(3), Validators.maxLength(16), passwordValidator]],
+        repeatPassword: ['', [Validators.required, sameValueAsFactory(() => this.form ? this.form.get('passData.password') : null)]]
+      })
     });
   }
 
-  sameValueValidator(form = this.form) {
-    const password = form.controls['password'];
-    const repeatPassword = form.get('repeatPassword').value;
-
-    if (password != repeatPassword) {
-      form.get('repeatPassword').setErrors({ noMatch: true });
-    }
+  reset() {
+    this.form.reset();
   }
 }
