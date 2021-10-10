@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthActivate } from '../core/guards/auth.activate';
 import { NewThemeComponent } from '../theme/new-theme/new-theme.component';
@@ -17,12 +18,17 @@ const routes: Routes = [
     {
         path: 'add',
         component: NewThemeComponent,
-        canActivate: [AuthActivate],
-        data: {
-            authRequired: true,
-            authFailureRedirectUrl: '/user/login'
-        }
+        //canActivate: [AuthActivate],
+        // data: {
+        //     authRequired: true,
+        //     authFailureRedirectUrl: '/user/login'
+        // }
     }
 ];
 
-export const ThemeRoutingModule = RouterModule.forChild(routes);
+@NgModule({
+    imports: [RouterModule.forChild(routes)],
+    // providers: [AuthActivate]
+})
+
+export class ThemeRoutingModule { }
