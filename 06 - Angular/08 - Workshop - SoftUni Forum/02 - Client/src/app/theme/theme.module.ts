@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 
-
 @NgModule({
   declarations: [
     ThemeComponent,
@@ -21,7 +20,6 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     SharedModule,
     FormsModule,
     RouterModule,

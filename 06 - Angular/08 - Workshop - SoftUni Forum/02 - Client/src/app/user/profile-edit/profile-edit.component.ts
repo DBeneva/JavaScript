@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { emailValidator, phoneValidator } from 'src/app/shared/validators';
-import { UserService } from '../user.service';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -21,7 +21,7 @@ export class ProfileEditComponent {
   updateProfile(form: NgForm) {
     if (form.invalid) return;
     const { username, email } = form.value;
-    const tel = `${form.value.code}${form.value.tel.split(' ').join('')}`;
+    const tel = `${form.value.code}${form.value.tel.split(' ').join('')}` || '';
 
     this.userService.updateProfile({ username, email, tel}).subscribe({
       next: () => { this.router.navigate(['/profile']); },

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from 'src/app/user/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -17,9 +17,15 @@ export class HeaderComponent {
     return this.userService.user.username;
   }
 
+  errorMessage: string;
+
   constructor(
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    activatedRoute: ActivatedRoute
+  ) {
+    this.errorMessage = activatedRoute.snapshot.queryParams.error;
+  }
 
   logout(): void {
     this.userService.logout().subscribe(() => {

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ContentService } from '../content.service';
+import { ContentService } from '../../core/services/content.service';
 import { ITheme } from 'src/app/shared/interfaces';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { NgForm } from '@angular/forms';
 
 

@@ -1,21 +1,31 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Injectable, Provider } from "@angular/core";
-import { Observable } from "rxjs";
+import { Router } from "@angular/router";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { environment } from '../../environments/environment';
 const { apiURL } = environment;
 
 @Injectable()
 
 export class AppInterceptor implements HttpInterceptor {
+
+    constructor(private router: Router) { }
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        let reqStream$ = next.handle(req);
+
         if (req.url.startsWith('/api')) {
-            return next.handle(req.clone({
+            reqStream$ = next.handle(req.clone({
                 url: req.url.replace('/api', apiURL),
                 withCredentials: true
             }));
         }
         
-        return next.handle(req);
+        return reqStream$.pipe(catchError((err) => {
+            this.router.navigate(['/'], { queryParams: { error: 'Oops! Something went wrong!' } });
+            return throwError(err);
+        }));
     }
 }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ContentService } from '../content.service';
+import { ContentService } from '../../core/services/content.service';
 import { IPost, ITheme } from 'src/app/shared/interfaces';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-theme',

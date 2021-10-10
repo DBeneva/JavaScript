@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ContentService } from '../content.service';
+import { Router } from '@angular/router';
+import { ContentService } from '../../core/services/content.service';
 
 @Component({
   selector: 'app-new-theme',
