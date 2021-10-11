@@ -3,10 +3,10 @@
         <h2 class="title">Recent Posts</h2>
         <div *ngIf="recentPosts">
             <div *ngFor="let post of recentPosts" class="aside-theme">
-                <a routerLink="/theme/{{post.themeId._id}}">
+                <a routerLink="/themes/{{post.themeId._id}}">
                     <h3>{{post.themeId.themeName}}</h3>
                     <p>{{post.userId.username}}</p>
-                    <p><span>{{post.created_at}}</span></p>
+                    <p><span>Posted: {{post.created_at | timeDiff}} ago</span></p>
                 </a>
             </div>
         </div>

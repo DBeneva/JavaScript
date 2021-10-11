@@ -49,7 +49,7 @@
                 </p>
             </ng-container>
             
-            <!-- <div formGroupName="passwords" class="passwords"> -->
+            <div formGroupName="passwords" class="passwords">
                 <!-- password -->
                 <p class="field field-icon">
                     <label for="password"><span><i class="fas fa-lock"></i></span></label>
@@ -64,7 +64,7 @@
                 </p>
 
                 <!-- errors -->
-                <!-- <ng-container *ngIf="form.get('passwords').touched">
+                <ng-container *ngIf="form.get('passwords').touched">
                     <p *ngIf="form.get('passwords.password').errors?.required" class="error">
                         Password is required!
                     </p>
@@ -83,15 +83,15 @@
                         form.get('passwords.rePassword').errors?.noMatch" class="error">
                         Passwords don't match!
                     </p>
-                </ng-container>   -->
-            <!-- </div> -->
+                </ng-container>
+            </div>
 
 
             <button [disabled]="form.invalid">Create Account</button>
 
             <p class="text-center">
                 Have an account?
-                <a routerLink="/user/login">Log In</a>
+                <a routerLink="/login">Log In</a>
             </p>
 
         </fieldset>

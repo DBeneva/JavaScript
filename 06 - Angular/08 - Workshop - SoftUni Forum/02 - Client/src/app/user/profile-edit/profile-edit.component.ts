@@ -24,7 +24,7 @@ export class ProfileEditComponent {
     const tel = `${form.value.code}${form.value.tel.split(' ').join('')}` || '';
 
     this.userService.updateProfile({ username, email, tel}).subscribe({
-      next: () => { this.router.navigate(['/user/profile']); },
+      next: () => { this.router.navigate(['/profile']); },
       error: (err) => { console.error(err); }
     });
   }

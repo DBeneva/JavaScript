@@ -6,12 +6,12 @@
                 <!-- {{theme.subscribers | json}} -->
                 <div class="theme-name-wrapper">
                     <div class="theme-name">
-                        <a class="normal" [routerLink]="['/theme', theme._id]">
-                            <h2>{{theme.themeName}}</h2>
+                        <a class="normal" [routerLink]="['/themes', theme._id]">
+                            <h2>{{theme.themeName | shorten : 25}}</h2>
                         </a>
                         <div class="columns">
                             <div>
-                                <p>Date: <time>{{theme.created_at}}</time></p>
+                                <p>Date: <time>{{theme.created_at | date}}</time></p>
                                 <div class="nick-name">
                                     <p>Username: <span>{{theme.userId.username}}</span></p>
                                 </div>

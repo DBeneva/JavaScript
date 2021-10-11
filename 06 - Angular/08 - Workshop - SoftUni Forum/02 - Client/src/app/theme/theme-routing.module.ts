@@ -7,28 +7,33 @@ import { ThemeComponent } from './theme/theme.component';
 
 const routes: Routes = [
     {
-        path: '',
-        pathMatch: 'full',
-        component: ThemesComponent
+        path: 'themes',
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                component: ThemesComponent
+            },
+            {
+                path: ':themeId',
+                component: ThemeComponent
+            }
+        ]
     },
     {
-        path: ':themeId',
-        component: ThemeComponent
-    },
-    {
-        path: 'add',
+        path: 'add-theme',
         component: NewThemeComponent,
-        //canActivate: [AuthActivate],
-        // data: {
-        //     authRequired: true,
-        //     authFailureRedirectUrl: '/user/login'
-        // }
+        canActivate: [AuthActivate],
+        data: {
+            authRequired: true,
+            authFailureRedirectUrl: '/login'
+        }
     }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    // providers: [AuthActivate]
+    providers: [AuthActivate]
 })
 
 export class ThemeRoutingModule { }

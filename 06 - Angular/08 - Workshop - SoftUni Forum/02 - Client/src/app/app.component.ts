@@ -13,9 +13,8 @@ export class AppComponent {
 
   constructor(private userService: UserService) {
     this.userService.getProfileInfo().subscribe({
-      error: (error) => {
+      error: () => {
         this.userService.user = null;
-        throw error;
       }
     });
   }

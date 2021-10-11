@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { LocalStorage } from './injection-tokens';
 import { AuthActivate } from './guards/auth.activate';
 import { appInterceptorProvider } from './app-interceptor';
-import { globalErrorHandlerProvider } from './error-handler';
+//import { globalErrorHandlerProvider } from './error-handler';
 import { UserService } from './services/user.service';
 import { ContentService } from './services/content.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -64,7 +64,7 @@ import { HttpClientModule } from '@angular/common/http';
     UserService,
     ContentService,
     appInterceptorProvider,
-    globalErrorHandlerProvider
+    // globalErrorHandlerProvider
   ]
 })
 export class CoreModule { }
