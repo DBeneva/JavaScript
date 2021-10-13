@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { IUserState } from ".";
-import { IUserListState } from "./reducer";
 
 const userModuleSelector = createFeatureSelector<IUserState>('user');
 
