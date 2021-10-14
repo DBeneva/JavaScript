@@ -24,7 +24,7 @@ export class GlobalEffects {
                 catchError(error => [loadUsersFailure({ error })])
             )
         )
-    ))
+    ));
 
     constructor(
         private actions$: Actions,

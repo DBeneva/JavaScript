@@ -2,7 +2,7 @@ import { Action, ActionReducer, MetaReducer } from "@ngrx/store";
 import { IState } from ".";
 import { clearAppState } from "./actions";
 
-export function clearAppStateMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+function clearAppStateMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
     return function (state: IState, action: Action) {
         if (action.type == clearAppState.type) {
             return reducer(undefined, action);
