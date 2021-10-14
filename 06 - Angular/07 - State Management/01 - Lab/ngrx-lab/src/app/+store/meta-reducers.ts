@@ -8,7 +8,7 @@ function clearAppStateMetaReducer(reducer: ActionReducer<any>): ActionReducer<an
             return reducer(undefined, action);
         }
         return reducer(state, action);
-    } ;
+    };
 }
 
 export const metaReducers: MetaReducer<any>[] = [clearAppStateMetaReducer];
