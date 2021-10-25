@@ -11,7 +11,7 @@ import { UserService } from '../../core/services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnDestroy {
-  killSubscription = new Subject();
+  // killSubscription = new Subject();
   form: FormGroup;
   emailValidator = emailValidator;
   phoneValidator = phoneValidator;
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.killSubscription.next();
-    this.killSubscription.complete();
+    // this.killSubscription.next();
+    // this.killSubscription.complete();
   }
 }
