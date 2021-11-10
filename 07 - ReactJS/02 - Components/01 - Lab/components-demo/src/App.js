@@ -8,7 +8,6 @@ function App() {
         <h1>ToDo App</h1>
       </header>
       <main>
-        <h2>Tasks</h2>
         <ToDoList />
       </main>
       <footer>
