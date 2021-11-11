@@ -1,5 +1,5 @@
 const ToDoListItem = (props) => {
-    return <li>{props.text}</li>;
+    return <li>{props.children}</li>;
 }
 
 export default ToDoListItem;
