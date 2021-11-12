@@ -17,6 +17,7 @@ function ToDoList() {
     return (
         <>
             { name && <h2>Counter - {name}</h2>}
+            { name || <h2>No name</h2> }
             { name == 'Pesho'
                 ? <h3>He is the best!</h3>
                 : <h3>Nah</h3>
