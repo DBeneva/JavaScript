@@ -17,6 +17,7 @@ function ToDoList() {
     return (
         <>
             <h2>Counter</h2>
+            { name == 'Pesho' ? <h3>He is the best!</h3> : <h3>Nah</h3> }
 
             <ul>
                 <ToDoListItem>{count} - {name}</ToDoListItem>
