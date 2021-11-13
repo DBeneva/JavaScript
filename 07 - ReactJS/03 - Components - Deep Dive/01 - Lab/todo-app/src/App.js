@@ -1,11 +1,9 @@
-import './App.css';
+import ToDoList from './components/ToDoList';
 
 function App() {
-  let numbers = [1, 2, 3, 4, 5, 6];
-
   return (
-    <div className="App">
-      {numbers.map(n => <li>{n}</li>)}
+    <div className="site-wrapper">
+      <ToDoList />
     </div>
   );
 }
