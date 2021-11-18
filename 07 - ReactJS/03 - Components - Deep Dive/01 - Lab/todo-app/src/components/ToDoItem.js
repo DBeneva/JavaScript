@@ -1,4 +1,4 @@
-import styles from './ToDoItem.module.css';
+import './ToDoItem.css';
 import { useEffect } from 'react';
 
 function ToDoItem({
@@ -14,10 +14,13 @@ function ToDoItem({
         };
     }, []);
 
+    let listItemClass = `todo-item ${todo.isDone ? 'todo-item-done' : ''}`;
+
     return (
-        <li onClick={() => onClick(todo.id)} className={styles["todo-item"]}>
-            {todo.text} 
-            <button onClick={() => onDelete(todo.id)}>x</button>
+        <li onClick={() => onClick(todo.id)}
+            className={listItemClass}>
+            {todo.text}&nbsp;
+            <button onClick={(e) => onDelete(e, todo.id)}>x</button>
         </li>
     );
 }

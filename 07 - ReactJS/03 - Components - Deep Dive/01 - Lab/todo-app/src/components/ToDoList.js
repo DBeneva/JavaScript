@@ -1,38 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
 import ToDoItem from "./ToDoItem";
+import { createToDo } from '../services/toDoService';
+
+const API_URL = 'http://localhost:3030/jsonstore';
 
 function ToDoList() {
-    const [todos, setTodos] = useState([
-        { id: 'kw2krau0', text: 'Clean my room', isDone: false },
-        { id: 'kw2krn18', text: 'Wash the dishes', isDone: false },
-        { id: 'kw2kryv1', text: 'Go to the gym!', isDone: false }
-    ]);
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        fetch(`${API_URL}/todos`)
+            .then(res => res.json())
+            .then(todosResult => {
+                setTodos(Object.values(todosResult));
+            });
+    }, []);
 
     const onInputBlur = (e) => {
         if (e.target.value === '') return;
-        
+
         let todo = {
             id: uniqid(),
             text: e.target.value,
             isDone: false
         };
 
-        setTodos(state => [...state, todo]);
+        
+        createToDo(todo).then(createdTodo => {
+            console.log(createdTodo);
+            setTodos(state => [...state, createdTodo]);
+        });
+
         e.target.value = '';
     };
 
-    const deleteTodoItemClickHandler = (id) => {
+    const deleteTodoItemClickHandler = (e, id) => {
+        e.stopPropagation();
         setTodos(state => state.filter(todo => todo.id !== id));
     };
 
     const toggleTodoItemClickHandler = (id) => {
         setTodos(state => {
-            let selectedToDo = state.find(x => x.id === id);
-            let toggledToDo = {...selectedToDo, isDone: !selectedToDo.isDone};
-            let restToDos = state.filter(x => x.id !== id);
-
-            return [...restToDos, toggledToDo];
+            return state.map(todo => todo.id === id ? {...todo, isDone: !todo.isDone} : todo);
         });
     };
 
