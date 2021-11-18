@@ -1,22 +1,23 @@
-import CreateGame from "./components/CreateGame";
-import EditGame from "./components/EditGame";
-import GameCatalog from "./components/GameCatalog";
-import GameDetails from "./components/GameDetails";
 import Header from "./components/Header";
-import Login from "./components/Login";
-import Register from "./components/Register";
 import WelcomeWorld from "./components/WelcomeWorld";
+import GameCatalog from "./components/GameCatalog";
+import CreateGame from "./components/CreateGame";
 
 function App() {
+  const routes = {
+    '/home': WelcomeWorld,
+    '/games': GameCatalog,
+    '/create-game': CreateGame
+  };
+
   return (
     <div id="box">
 
       <Header />
 
       <main id="main-content">
+        <WelcomeWorld />
       </main>
-
-      <WelcomeWorld />
 
     </div>
   );
