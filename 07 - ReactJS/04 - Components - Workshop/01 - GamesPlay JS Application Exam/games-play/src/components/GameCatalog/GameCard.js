@@ -1,6 +1,10 @@
 function GameCard({
     game
 }) {
+    const onDetailsClick = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="allGames">
             <div className="allGames-info">
