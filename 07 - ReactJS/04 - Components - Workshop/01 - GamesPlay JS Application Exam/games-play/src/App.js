@@ -6,6 +6,7 @@ import GameCatalog from "./components/GameCatalog";
 import CreateGame from "./components/CreateGame";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const [page, setPage] = useState('/home');
@@ -30,7 +31,7 @@ function App() {
       />
 
       <main id="main-content">
-        { routes[page] || <h2>No Page Found!</h2> }
+        { routes[page] || <ErrorPage /> }
       </main>
 
     </div>

@@ -23,7 +23,7 @@ function GameCatalog() {
                     <img src="/images/avatar-1.jpg" />
                     <h6>Action</h6>
                     <h2>MineCraft</h2>
-                    <a href="#" className="details-button">Details</a>
+                    <a href="/game-details" className="details-button">Details</a>
                 </div>
             </div>
             <h3 className="no-articles">No articles yet</h3>
