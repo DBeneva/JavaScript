@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -14,7 +13,7 @@ function App() {
               <a className="button" href="#">Register</a>
             </div>
             <div id="user">
-              <span>Welcome, {email}</span>
+              <span>Welcome, email</span>
               <a className="button" href="#">My Pets</a>
               <a className="button" href="#">Add Pet</a>
               <a className="button" href="#">Logout</a>
@@ -38,10 +37,10 @@ function App() {
             <p className="field">
               <label htmlFor="password">Password</label>
               <span className="input">
-                <input type="password" name="password" id="password" placeholder="Password" / />
+                <input type="password" name="password" id="password" placeholder="Password" />
               </span>
             </p>
-            <input className="button submit" type="submit" value="Login" / />
+            <input className="button submit" type="submit" value="Login" />
           </fieldset>
         </form>
       </section>
