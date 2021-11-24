@@ -1,8 +1,8 @@
+import { Routes, Route } from 'react-router-dom';
+
 import './App.css';
 import Create from './components/Create/Create';
 import Dashboard from './components/Dasboard/Dashboard';
-import Details from './components/Details/Details';
-import Edit from './components/Edit/Edit';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import MyPets from './components/MyPets/MyPets';
@@ -15,7 +15,13 @@ function App() {
       <Header />
 
       <main id="site-content">
-        
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/my-pets" element={<MyPets />} />
+          <Route path="/create" element={<Create />} />
+        </Routes>
       </main>
 
       <footer id="site-footer">
