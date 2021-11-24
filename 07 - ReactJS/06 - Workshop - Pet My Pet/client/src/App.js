@@ -16,10 +16,6 @@ function App() {
     setUserInfo({ isAuthenticated: true, user: username });
   };
   
-  useEffect(() => {
-    const username = authService.getUser();
-  }, []);
-
   return (
     <div id="container">
 
