@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 
 const Header = ({
     isAuthenticated,
-    user: username
+    user
 }) => {
     const userNavigation = (
         <div id="user">
-            <span>Welcome, {username}</span>
+            <span>Welcome, {user}</span>
             <Link className="button" to="/my-pets">My Pets</Link>
             <Link className="button" to="/create">Add Pet</Link>
             <Link className="button" to="#">Logout</Link>
