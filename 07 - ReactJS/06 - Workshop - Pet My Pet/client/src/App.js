@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import * as authService from './services/authService';
 
 import './App.css';
 import Create from './components/Create/Create';
@@ -10,11 +9,16 @@ import Login from './components/Login/Login';
 import MyPets from './components/MyPets/MyPets';
 import Register from './components/Register/Register';
 import Details from './components/Details/Details';
+import Logout from './components/Logout/Logout';
 
 function App() {
   const [userInfo, setUserInfo] = useState({ isAuthenticated: false, user: '' });
   const onLogin = (username) => {
     setUserInfo({ isAuthenticated: true, user: username });
+  };
+
+  const onLogout = () => {
+    setUserInfo({ isAuthenticated: false, user: '' });
   };
   
   return (
@@ -30,6 +34,7 @@ function App() {
           <Route path="/my-pets" element={<MyPets />} />
           <Route path="/create" element={<Create />} />
           <Route path="/details/:petId" element={<Details />} />
+          <Route path="/logout" element={<Logout onLogout={onLogout} />} />
         </Routes>
       </main>
 

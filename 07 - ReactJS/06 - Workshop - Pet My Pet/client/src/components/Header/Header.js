@@ -10,7 +10,7 @@ const Header = ({
             <span>Welcome, {user}</span>
             <NavLink className="button" to="/my-pets">My Pets</NavLink>
             <NavLink className="button" to="/create">Add Pet</NavLink>
-            <NavLink className="button" to="#">Logout</NavLink>
+            <NavLink className="button" to="/logout">Logout</NavLink>
         </div>
     );
     const guestNavigation = (

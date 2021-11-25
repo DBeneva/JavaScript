@@ -25,7 +25,7 @@ const Details = () => {
 
                     <div className="likes">
                         <img className="hearts" src="/images/heart.png" />
-                        <span id="total-likes">Likes: 0</span>
+                        <span id="total-likes">Likes: {pet.likes}</span>
                     </div>
                 </div>
             </div>
