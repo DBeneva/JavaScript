@@ -1,8 +1,12 @@
+const baseUrl = 'http://localhost:3030/jsonstore';
+
 export const getAll = async () => {
-    const result = await fetch(`http://localhost:3030/jsonstore/pets`);
-    return await result.json();
+    const result = await fetch(`${baseUrl}/pets`);
+    const pets = await result.json();
+
+    return Object.values(pets);
 };
 
 export const getById = async (id) => {
-    return await fetch(`http://localhost:3030/jsonstore/pets/${id}`);
+    return await fetch(`${baseUrl}/pets/${id}`);
 };
