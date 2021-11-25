@@ -9,7 +9,7 @@ const Header = ({
         <div id="user">
             <span>Welcome, {user}</span>
             <NavLink className="button" to="/my-pets">My Pets</NavLink>
-            <NavLink className={isActive => "button" + (isActive ? " selected" : "")} to="/create">Add Pet</NavLink>
+            <NavLink className="button" to="/create">Add Pet</NavLink>
             <NavLink className="button" to="#">Logout</NavLink>
         </div>
     );
