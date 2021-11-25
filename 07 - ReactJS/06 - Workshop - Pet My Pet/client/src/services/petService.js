@@ -8,7 +8,8 @@ export const getAll = async () => {
 };
 
 export const getById = async (id) => {
-    return await fetch(`${baseUrl}/pets/${id}`);
+    const pet = await fetch(`${baseUrl}/pets/${id}`);
+    return await pet.json();
 };
 
 export const create = async (petData) => {
