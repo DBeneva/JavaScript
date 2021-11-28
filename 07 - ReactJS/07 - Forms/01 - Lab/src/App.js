@@ -1,9 +1,11 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function App() {
+  const [username, setUsername] = useState('Pesho');
   const [services, setServices] = useState([]);
   const [isValid, setIsValid] = useState(true);
+  const passwordRef = useRef();
 
   useEffect(() => {
     fetch('http://localhost:3030/jsonstore/services')
@@ -26,12 +28,22 @@ function App() {
   };
 
   const onChange = (e) => {
+    setUsername(e.target.value);
+    
     const currentUsername = e.target.value;
     if (currentUsername.length < 4) {
       setIsValid(false);
     } else {
       setIsValid(true);
     }
+
+    console.log(username);
+  };
+
+  const onServiceChange = (e) => {
+    setUsername('');
+    console.log(passwordRef.current.value);
+    passwordRef.current.value = '';
   };
 
   return (
@@ -43,18 +55,18 @@ function App() {
             type="text"
             name="username"
             id="username"
-            defaultValue="Pesho"
+            value={username}
             onChange={onChange}
           />
         </div>
         {!isValid && <div style={{ color: 'red' }}>Username is invalid!</div>}
         <div>
           <label htmlFor="password">Password: </label>
-          <input type="password" name="password" id="password" />
+          <input type="password" name="password" id="password" ref={passwordRef} />
         </div>
         <div>
           <label htmlFor="services">Services </label>
-          <select name="services" id="services">
+          <select name="services" id="services" onChange={onServiceChange}>
             {services.map(x => <option key={x._id} value={x._id}>{x.name}</option>)}
           </select>
         </div>
