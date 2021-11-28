@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
+import MyHobbies from './components/MyHobbies';
 
 function App() {
   const [username, setUsername] = useState('Pesho');
@@ -76,6 +77,8 @@ function App() {
         </div>
         <input type="submit" value="Login" />
       </form>
+
+      <MyHobbies title="My Favourite Hobbies" />
     </div>
   );
 }
