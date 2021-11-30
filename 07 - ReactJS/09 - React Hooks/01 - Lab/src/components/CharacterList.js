@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import AuthContext from '../contexts/АuthContext';
 import useFetch from '../hooks/useFetch';
+import Character from './Character';
 
 const CharacterList = () => {
+    const { count } = useContext(AuthContext);
     const [url, setUrl] = useState('https://swapi.dev/api/people');
     const { state: characters, isLoading, error } = useFetch(url);
 
     return (
         <>
+            <h3>Count - {count}</h3>
             <ul>
-                {characters.map(x => <li key={x.name}>{x.name}</li>)}
+                {characters.map(x => <Character key={x.name} name={x.name} />)}
             </ul>
             <button onClick={() => setUrl('https://swapi.dev/api/planets')}>Load planets</button>
         </>

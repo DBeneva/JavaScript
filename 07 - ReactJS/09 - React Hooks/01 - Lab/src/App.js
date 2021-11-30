@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Counter from './components/Counter';
 import CharacterList from './components/CharacterList';
 import useDidMount from './hooks/useDidMount';
+import AuthContext from './contexts/АuthContext';
 
 function App() {
   const [name, setName] = useState('Pesho');
@@ -27,14 +28,26 @@ function App() {
     }));
   };
 
+  const addHobby = (hobby) => {
+    setInfo(oldState => ({
+      ...oldState, hobbies: [...oldState.hobbies, hobby]
+    }));
+  };
+
   return (
-    <div className="App">
-      <h2>{!name ? 'Loading...' : name}</h2>
-      {count < 10 ? <Counter count={count} /> : null}
-      <button onClick={onClick}>+</button>
-      {/* <ClassComponent /> */}
-      <CharacterList />
-    </div>
+    <AuthContext.Provider value={{ count, user: info, addHobby }}>
+      <div className="App">
+        <h2>{!name ? 'Loading...' : name}</h2>
+        {count < 10 ? <Counter count={count} /> : null}
+        <button onClick={onClick}>+</button>
+        {/* <ClassComponent /> */}
+        <ul>
+          {info.hobbies.map(x => <li key={x}>{x}</li>)}
+        </ul>
+
+        <CharacterList />
+      </div>
+    </AuthContext.Provider>
   );
 }
 
