@@ -27,10 +27,10 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider>
+    <AuthContext.Provider value={true}>
       <div id="container">
 
-        <Header />
+        <Header email={user.email} />
 
         <main id="site-content">
           <Routes>

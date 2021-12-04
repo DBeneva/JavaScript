@@ -2,12 +2,11 @@ import { NavLink } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({
-    isAuthenticated,
-    user
+    email
 }) => {
     const userNavigation = (
         <div id="user">
-            <span>Welcome, {user}</span>
+            <span>Welcome, {email}</span>
             <NavLink className="button" to="/my-pets">My Pets</NavLink>
             <NavLink className="button" to="/create">Add Pet</NavLink>
             <NavLink className="button" to="/logout">Logout</NavLink>
@@ -25,7 +24,7 @@ const Header = ({
             <nav className="navbar">
                 <section className="navbar-dashboard">
                     <NavLink to="/dashboard">Dashboard</NavLink>
-                    {isAuthenticated
+                    {email
                         ? userNavigation
                         : guestNavigation
                     }
