@@ -14,15 +14,13 @@ const Login = ({
 
         authService.login(email, password)
             .then((authData) => {
-                console.log('logged');
-                console.log(authData);
+                onLogin(authData);
+                navigate('/dashboard');
             })
             .catch(err => {
                 // TODO: show notification
                 console.log(err);
             });
-        onLogin(email);
-        navigate('/dashboard');
     };
 
     return (
