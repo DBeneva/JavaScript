@@ -8,10 +8,19 @@ const Login = ({
     const onLoginHandler = (e) => {
         e.preventDefault();
 
-        let formData = new FormData(e.currentTarget);
-        let email = formData.get('email');
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get('email');
+        const password = formData.get('password');
 
-        authService.login(email);
+        authService.login(email, password)
+            .then((authData) => {
+                console.log('logged');
+                console.log(authData);
+            })
+            .catch(err => {
+                // TODO: show notification
+                console.log(err);
+            });
         onLogin(email);
         navigate('/dashboard');
     };
