@@ -1,12 +1,15 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.css';
+import { AuthContext } from '../../contexts/AuthContext';
 
-const Header = ({
-    email
-}) => {
+const Header = () => {
+    const { user } = useContext(AuthContext);
+    console.log(user.email);
+    
     const userNavigation = (
         <div id="user">
-            <span>Welcome, {email}</span>
+            <span>Welcome, {user.email}</span>
             <NavLink className="button" to="/my-pets">My Pets</NavLink>
             <NavLink className="button" to="/create">Add Pet</NavLink>
             <NavLink className="button" to="/logout">Logout</NavLink>
@@ -24,7 +27,7 @@ const Header = ({
             <nav className="navbar">
                 <section className="navbar-dashboard">
                     <NavLink to="/dashboard">Dashboard</NavLink>
-                    {email
+                    {user.email
                         ? userNavigation
                         : guestNavigation
                     }

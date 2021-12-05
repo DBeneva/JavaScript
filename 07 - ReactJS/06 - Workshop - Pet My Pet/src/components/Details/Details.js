@@ -1,15 +1,37 @@
 import * as petService from '../../services/petService';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Details = () => {
+    const { user } = useContext(AuthContext);
     const [pet, setPet] = useState({});
     const { petId } = useParams();
+    const navigate = useNavigate();
 
-    useEffect(async () => {
-        const pet = await petService.getById(petId);
-        setPet(pet);
-    }, []);
+    useEffect(() => {
+        petService.getById(petId)
+            .then(pet => {
+                setPet(pet);
+            });
+    }, [petId]);
+
+    const deleteHandler = (e) => {
+        e.preventDefault();
+
+        petService.remove(pet._id, user.accessToken)
+            .then(() => navigate('/dashboard'));
+    };
+
+    const ownerButtons = (
+        <>
+            <Link className="button" to="/edit">Edit</Link>
+            <Link className="button" href="#" onClick={deleteHandler}>Delete</Link>
+        </>
+    );
+
+    const userButtons = <a className="button" href="#">Like</a>;
 
     return (
         <section id="details-page" className="details">
@@ -18,14 +40,14 @@ const Details = () => {
                 <p className="type">Type: {pet.type}</p>
                 <p className="img"><img src={pet.imageUrl} /></p>
                 <div className="actions">
-                    <a className="button" href="#">Edit</a>
-                    <a className="button" href="#">Delete</a>
-
-                    <a className="button" href="#">Like</a>
+                    {user._id && (pet._ownerId === user._id
+                        ? ownerButtons
+                        : userButtons
+                    )}
 
                     <div className="likes">
                         <img className="hearts" src="/images/heart.png" />
-                        <span id="total-likes">Likes: {pet.likes}</span>
+                        <span id="total-likes">Likes: {pet.likes ? pet.likes.length : 0}</span>
                     </div>
                 </div>
             </div>

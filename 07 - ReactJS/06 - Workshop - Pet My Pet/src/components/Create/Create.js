@@ -1,28 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import * as petService from '../../services/petService';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Create = () => {
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+
     const [types, setTypes] = useState([]);
-    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:3030/jsonstore/types')
             .then(res => res.json())
             .then(res => {
-                let typesResult = Object.values(res);
-
-                let categories = typesResult.reduce((a, x) => {
-                    if (!a[x.category]) {
-                        a[x.category] = [];
-                    }
-
-                    a[x.category].push(x);
-
-                    return a;
-                }, {});
-                setCategories(categories);
+                const typesResult = Object.values(res);
                 setTypes(typesResult);
             });
     }, []);
@@ -37,12 +29,8 @@ const Create = () => {
         const type = formData.get('type');
 
         petService
-            .create({ name, description, imageUrl, type })
+            .create({ name, description, imageUrl, type }, user.accessToken)
             .then(() => navigate('/dashboard'));
-    };
-
-    const onCategoryChange = (e) => {
-        setTypes(categories[e.target.value]);
     };
 
     return (
@@ -66,15 +54,6 @@ const Create = () => {
                         <label htmlFor="image">Image</label>
                         <span className="input">
                             <input type="text" name="imageUrl" id="image" placeholder="Image" />
-                        </span>
-                    </p>
-
-                    <p className="field">
-                        <label htmlFor="category">Category</label>
-                        <span className="input">
-                            <select id="category" name="category" onChange={onCategoryChange}>
-                                {Object.keys(categories).map(x => <option key={x} value={x}>{x}</option>)}
-                            </select>
                         </span>
                     </p>
 
