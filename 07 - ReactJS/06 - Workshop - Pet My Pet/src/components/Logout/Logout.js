@@ -5,7 +5,7 @@ import * as authService from '../../services/authService';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const Logout = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { logout, user } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
