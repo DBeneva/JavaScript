@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
 const Login = () => {
+    const navigate = useNavigate();
     const { login } = useContext(AuthContext);
 
     const loginSubmitHandler = (e) => {
@@ -12,6 +13,7 @@ const Login = () => {
         const { email, password } = Object.fromEntries(new FormData(e.currentTarget));
         console.log(email, password);
         login(email, password);
+        navigate('/');
     };
 
     return (
