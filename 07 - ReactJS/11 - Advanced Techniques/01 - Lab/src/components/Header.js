@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import { Nav, Navbar, NavDropdown, Container, Form, FormControl, Button } from 'react-bootstrap';
 
 import { useAuth } from '../contexts/AuthContext';
+import NavbarToggle from 'react-bootstrap/esm/NavbarToggle';
 
 const Header = () => {
     const { user } = useAuth();
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Link to="/" as={Navbar.Brand}>Home</Link>
+                <Navbar.Brand to="/" as={Link}>Home</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -16,7 +17,7 @@ const Header = () => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Link to="/login" as={Nav.Link}>Login</Link>
+                        <Nav.Link to="/login" as={Link}>Login</Nav.Link>
                         <Nav.Link href="#action2">Link</Nav.Link>
                         <NavDropdown title="Link" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -30,7 +31,7 @@ const Header = () => {
                             Link
                         </Nav.Link>
                     </Nav>
-                    <p>Hello, {user.email}</p>
+                    <Nav.Item>Hello, {user.email}</Nav.Item>
                     <Form className="d-flex">
                         <FormControl
                             type="search"
