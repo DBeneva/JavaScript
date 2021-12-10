@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, NavDropdown, Container, Form, FormControl, Button } from 'react-bootstrap';
 
+import { useAuth } from '../contexts/AuthContext';
+
 const Header = () => {
+    const { user } = useAuth();
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
@@ -27,6 +30,7 @@ const Header = () => {
                             Link
                         </Nav.Link>
                     </Nav>
+                    <p>Hello, {user.email}</p>
                     <Form className="d-flex">
                         <FormControl
                             type="search"
