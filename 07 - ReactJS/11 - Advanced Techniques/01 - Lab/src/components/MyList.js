@@ -16,11 +16,11 @@ const MyList = ({
     }, []);
 
     return (
-        <Carousel>
+        <Carousel style={{ width: 600}}>
             {dogs.map(x => (
                 <Carousel.Item>
                     <img
-                        className="d-block w-50"
+                        className="d-block w-100"
                         src={x}
                         alt="Dog"
                     />
