@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
+import { isAuth } from '../hoc/isAuth';
 
 const MyList = ({
-
 }) => {
     const [dogs, setDogs] = useState([]);
 
@@ -35,4 +35,4 @@ const MyList = ({
     );
 };
 
-export default MyList;
+export default isAuth(MyList);

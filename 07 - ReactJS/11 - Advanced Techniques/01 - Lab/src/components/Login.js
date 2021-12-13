@@ -7,11 +7,14 @@ const Login = () => {
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
 
+    // throw new Error('Some error');
+
     const loginSubmitHandler = (e) => {
         e.preventDefault();
 
         const { email, password } = Object.fromEntries(new FormData(e.currentTarget));
         console.log(email, password);
+        
         login(email, password);
         navigate('/');
     };

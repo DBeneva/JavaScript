@@ -6,18 +6,21 @@ import Header from './components/Header';
 import { AuthProvider } from './contexts/AuthContext';
 import Login from './components/Login';
 import MyList from './components/MyList';
+import ErrorBoundary from './ErrorBoundary';
 
 function App() {
   return (
-    <AuthProvider>
-      <div className="site-wrapper">
-        <Header />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/dogs" element={<MyList />} />
-        </Routes>
-      </div>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <div className="site-wrapper">
+          <Header />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/dogs" element={<MyList />} />
+          </Routes>
+        </div>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
