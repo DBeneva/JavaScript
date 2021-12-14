@@ -28,9 +28,9 @@ export const AuthProvider = ({
         });
     };
 
-    const logout = () => {
-        dispatch({ type: 'LOGOUT' });
-    };
+    // const logout = () => {
+    //     dispatch({ type: 'LOGOUT' });
+    // };
 
     return (
         <AuthContext.Provider value={{ user, login, isAuthenticated: Boolean(user.email) }}>
