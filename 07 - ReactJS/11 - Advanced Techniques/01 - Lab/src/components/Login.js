@@ -11,7 +11,7 @@ const Login = () => {
         e.preventDefault();
 
         const { email, password } = Object.fromEntries(new FormData(e.currentTarget));
-        console.log(email, password);
+        // console.log(email, password);
         
         login(email, password);
         navigate('/');
