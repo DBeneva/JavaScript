@@ -7,8 +7,6 @@ const Login = () => {
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
 
-    // throw new Error('Some error');
-
     const loginSubmitHandler = (e) => {
         e.preventDefault();
 
