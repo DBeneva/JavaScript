@@ -61,12 +61,12 @@ const Create = () => {
                         <label htmlFor="type">Type</label>
                         <span className="input">
                             <select id="type" name="type">
-                                {types.map(x => <option key={x._id} value={x.name}>{x.name}</option>)}
-                                {/* <option value="cat">Cat</option>
+                                {/* {types.map(x => <option key={x._id} value={x.name}>{x.name}</option>)} */}
+                                <option value="cat">Cat</option>
                                 <option value="dog">Dog</option>
                                 <option value="parrot">Parrot</option>
                                 <option value="reptile">Reptile</option>
-                                <option value="other">Other</option> */}
+                                <option value="other">Other</option>
                             </select>
                         </span>
                     </p>
