@@ -3,9 +3,7 @@ import { request } from './requester';
 const baseUrl = 'http://localhost:3030/data';
 
 export const getAll = async () => {
-    const result = await request(`${baseUrl}/pets`);
-
-    return Object.values(pets);
+    return await request(`${baseUrl}/pets`);
 };
 
 export const getById = async (id) => {
