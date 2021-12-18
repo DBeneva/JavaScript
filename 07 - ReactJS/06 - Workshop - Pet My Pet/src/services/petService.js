@@ -4,7 +4,6 @@ const baseUrl = 'http://localhost:3030/data';
 
 export const getAll = async () => {
     const result = await request(`${baseUrl}/pets`);
-    const pets = await result.json();
 
     return Object.values(pets);
 };
