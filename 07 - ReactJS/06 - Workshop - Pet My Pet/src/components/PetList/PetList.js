@@ -6,8 +6,14 @@ const PetList = () => {
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
-        petService.getAll().then(pets => setPets(pets));
-        console.log(pets);
+        petService.getAll()
+            .then(pets => {
+                console.log(pets);
+                setPets(pets);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }, []);
 
     return (

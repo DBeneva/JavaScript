@@ -2,9 +2,7 @@ import { request } from './requester';
 
 const baseUrl = 'http://localhost:3030/data';
 
-export const getAll = async () => {
-    return await request(`${baseUrl}/pets`);
-};
+export const getAll = () => request(`${baseUrl}/pets`);
 
 export const getById = async (id) => {
     const pet = await fetch(`${baseUrl}/pets/${id}`);
