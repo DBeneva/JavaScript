@@ -12,7 +12,7 @@ const PetList = () => {
                 setPets(pets);
             })
             .catch(err => {
-                console.log(err);
+                console.log(`Error: ${err}`);
             });
     }, []);
 
