@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.css';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user } = useAuthContext();
     console.log(user.email);
     
     const userNavigation = (

@@ -1,23 +1,23 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as petService from '../../services/petService';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Create = () => {
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);
+    const { user } = useAuthContext();
 
-    const [types, setTypes] = useState([]);
+    // const [types, setTypes] = useState([]);
 
-    useEffect(() => {
-        fetch('http://localhost:3030/jsonstore/types')
-            .then(res => res.json())
-            .then(res => {
-                const typesResult = Object.values(res);
-                setTypes(typesResult);
-            });
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://localhost:3030/jsonstore/types')
+    //         .then(res => res.json())
+    //         .then(res => {
+    //             const typesResult = Object.values(res);
+    //             setTypes(typesResult);
+    //         });
+    // }, []);
 
     const onPetCreate = (e) => {
         e.preventDefault();

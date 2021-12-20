@@ -1,11 +1,10 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 import * as authService from '../../services/authService';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
+    const { login } = useAuthContext();
     const onLoginHandler = (e) => {
         e.preventDefault();
 
@@ -25,7 +24,7 @@ const Login = () => {
     };
 
     return (
-        <section id="login-page" className="login">
+        <section id="login-page">
             <form id="login-form" action="" method="POST" onSubmit={onLoginHandler}>
                 <fieldset>
                     <legend>Login Form</legend>
