@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import { AuthProvider } from './contexts/AuthContext';
 import Create from './components/Create/Create';
+import Edit from './components/Edit/Edit';
 import Dashboard from './components/Dasboard/Dashboard';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/my-pets" element={<MyPets />} />
             <Route path="/create" element={<Create />} />
+            <Route path="/edit/:petId" element={<Edit />} />
             <Route path="/details/:petId" element={<Details />} />
             <Route path="/logout" element={<Logout />} />
           </Routes>
