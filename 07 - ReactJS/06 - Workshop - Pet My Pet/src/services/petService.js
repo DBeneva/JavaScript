@@ -30,3 +30,14 @@ export const remove = (id, token) => {
         }
     }).then(res => res.json());
 };
+
+export const like = (petData, token) => {
+    return fetch(`${baseUrl}/pets/${petData._id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': token
+        },
+        body: JSON.stringify(petData)
+    }).then(res => res.json());
+};
