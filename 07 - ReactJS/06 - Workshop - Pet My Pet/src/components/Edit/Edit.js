@@ -13,12 +13,16 @@ const types = [
 
 const Edit = () => {
     const { petId } = useParams();
-    const [pet, setPet] = usePetState(petId);
+    const [pet] = usePetState(petId);
 
     const petEditSubmitHandler = (e) => {
         e.preventDefault();
 
-        console.log('submit');
+        console.log('submit', pet);
+    };
+
+    const nameChangeHandler = () => {
+
     };
 
     return (
@@ -49,11 +53,14 @@ const Edit = () => {
                         <label htmlFor="type">Type</label>
                         <span className="input">
                             <select id="type" name="type" value={pet.type}>
-                                <option defaultValue="Cat">Cat</option>
-                                <option defaultValue="Dog">Dog</option>
-                                <option defaultValue="Parrot">Parrot</option>
-                                <option defaultValue="Reptile">Reptile</option>
-                                <option defaultValue="Other">Other</option>
+                                {types.map(x => {
+                                    return (<option
+                                        key={x.value}
+                                        value={x.value}
+                                    >
+                                        {x.text}
+                                    </option>);
+                                })}
                             </select>
                         </span>
                     </p>
