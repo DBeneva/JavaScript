@@ -22,6 +22,19 @@ export const create = async (petData, token) => {
     return await response.json();
 };
 
+export const update = async (pet, token) => {
+    const response = await fetch(`${baseUrl}/pets/${pet._id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': token
+        },
+        body: JSON.stringify({ pet })
+    });
+
+    return await response.json();
+};
+
 export const remove = (id, token) => {
     return fetch(`${baseUrl}/pets/${id}`, {
         method: 'DELETE',
