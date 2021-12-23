@@ -1,4 +1,4 @@
-export const request = (url) => {
+export const request = (method, url) => {
     return fetch(url).then(responseHandler);
 };
 
@@ -11,3 +11,5 @@ async function responseHandler(res) {
         throw jsonData;
     }
 }
+
+export const get = request.bind(null, 'GET');

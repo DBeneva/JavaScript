@@ -1,8 +1,8 @@
-import { request } from './requester';
+import * as request from './requester';
 
 const baseUrl = 'http://localhost:3030/data';
 
-export const getAll = () => request(`${baseUrl}/pets`);
+export const getAll = () => request.get(`${baseUrl}/pets`);
 
 export const getById = async (id) => {
     const pet = await fetch(`${baseUrl}/pets/${id}`);
@@ -22,14 +22,14 @@ export const create = async (petData, token) => {
     return await response.json();
 };
 
-export const update = async (pet, token) => {
-    const response = await fetch(`${baseUrl}/pets/${pet._id}`, {
+export const update = async (petId, petData, token) => {
+    const response = await fetch(`${baseUrl}/pets/${petId}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
             'X-Authorization': token
         },
-        body: JSON.stringify({ pet })
+        body: JSON.stringify({ petData })
     });
 
     return await response.json();
