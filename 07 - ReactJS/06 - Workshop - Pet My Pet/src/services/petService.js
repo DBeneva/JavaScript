@@ -22,17 +22,8 @@ export const create = async (petData, token) => {
     return await response.json();
 };
 
-export const update = async (petId, petData, token) => {
-    const response = await fetch(`${baseUrl}/pets/${petId}`, {
-        method: 'PUT',
-        headers: {
-            'content-type': 'application/json',
-            'X-Authorization': token
-        },
-        body: JSON.stringify({ petData })
-    });
-
-    return await response.json();
+export const update = (petId, petData) => {
+    request.put(`${baseUrl}/pets/${petId}`, petData);
 };
 
 export const remove = (id, token) => {
