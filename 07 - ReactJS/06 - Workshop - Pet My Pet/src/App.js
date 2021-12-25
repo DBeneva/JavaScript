@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import { AuthProvider } from './contexts/AuthContext';
+import { NotificationProvider } from './contexts/NotificationContext';
 import Create from './components/Create/Create';
 import Edit from './components/Edit/Edit';
 import Dashboard from './components/Dasboard/Dashboard';
@@ -11,33 +12,37 @@ import MyPets from './components/MyPets/MyPets';
 import Register from './components/Register/Register';
 import Details from './components/Details/Details';
 import Logout from './components/Logout/Logout';
+import Notification from './components/common/Notification';
 
 
 function App() {
   return (
     <AuthProvider>
-      <div id="container">
+      <NotificationProvider>
 
-        <Header />
+        <div id="container">
+          <Header />
+          <Notification />
 
-        <main id="site-content">
-          <Routes>
-            <Route path="/dashboard/*" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/my-pets" element={<MyPets />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/edit/:petId" element={<Edit />} />
-            <Route path="/details/:petId" element={<Details />} />
-            <Route path="/logout" element={<Logout />} />
-          </Routes>
-        </main>
+          <main id="site-content">
+            <Routes>
+              <Route path="/dashboard/*" element={<Dashboard />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/my-pets" element={<MyPets />} />
+              <Route path="/create" element={<Create />} />
+              <Route path="/edit/:petId" element={<Edit />} />
+              <Route path="/details/:petId" element={<Details />} />
+              <Route path="/logout" element={<Logout />} />
+            </Routes>
+          </main>
 
-        <footer id="site-footer">
-          <p>@PetMyPet</p>
-        </footer>
+          <footer id="site-footer">
+            <p>@PetMyPet</p>
+          </footer>
 
-      </div>
+        </div>
+      </NotificationProvider>
     </AuthProvider>
   );
 }

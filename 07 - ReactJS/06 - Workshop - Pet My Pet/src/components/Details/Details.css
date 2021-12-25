@@ -1,0 +1,4 @@
+button:disabled, button:disabled:active, button:disabled:hover, button:disabled:visited, button:disabled:link {
+    background-color: rgba(95, 158, 160, 0.5);
+    color: white;
+}

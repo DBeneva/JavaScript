@@ -1,18 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import * as petService from '../../services/petService';
+import * as likeService from '../../services/likeService';
 import { useAuthContext } from '../../contexts/AuthContext';
-import ConfirmDialog from '../Common/ConfirmDialog/ConfirmDialog';
+import { useNotificationContext, types } from '../../contexts/NotificationContext';
+import ConfirmDialog from '../common/ConfirmDialog/ConfirmDialog';
 import usePetState from '../../hooks/usePetState';
 
-const Details = () => {
-    const { user } = useAuthContext();
-    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-    const navigate = useNavigate();
+import './Details.css';
 
+const Details = () => {
+    const navigate = useNavigate();
+    const { user } = useAuthContext();
+    const { addNotification } = useNotificationContext();
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const { petId } = useParams();
     const [pet, setPet] = usePetState(petId);
+
+    useEffect(() => {
+        likeService.getPetLikes(petId)
+            .then((likes) => {
+                setPet(state => ({ ...state, likes }));
+            });
+    }, []);
 
     const deleteHandler = (e) => {
         e.preventDefault();
@@ -30,22 +41,20 @@ const Details = () => {
     };
 
     const likeBtnClick = () => {
-        if (pet.likes?.includes(user._id)) {
-            // TODO: add notification
-
-            console.log('User already liked this pet!');
+        if (user._id == pet._ownerId) {
             return;
         }
-        
-        const likedPet = { ...pet, likes: pet.likes ? [...pet.likes, user._id] : [user._id] };
 
-        petService.like(likedPet, user.accessToken)
-            .then((resData) => {
-                console.log(resData);
-                setPet(likedPet);
+        if (pet.likes?.includes(user._id)) {
+            addNotification('You have already liked this pet!', types.warn);
+            return;
+        }
+
+        likeService.like(user._id, petId)
+            .then(() => {
+                setPet(state => ({ ...state, likes: [...state.likes, user._id] }));
+                addNotification('Successfully liked this pet!', types.warn);
             });
-
-        console.log(`Liked: ${pet.likes}`);
     };
 
     const ownerButtons = (
@@ -55,7 +64,9 @@ const Details = () => {
         </>
     );
 
-    const userButtons = <button className="button" onClick={likeBtnClick}>Like</button>;
+    const userButtons = (
+        <button className="button" onClick={likeBtnClick} disabled={pet.likes?.includes(user._id)}>Like</button>
+    );
 
     return (
         <>
@@ -78,7 +89,7 @@ const Details = () => {
 
                         <div className="likes">
                             <img className="hearts" src="/images/heart.png" />
-                            <span id="total-likes">Likes: {pet.likes ? pet.likes.length : 0}</span>
+                            <span id="total-likes">Likes: {pet.likes?.length || 0}</span>
                         </div>
                     </div>
                 </div>

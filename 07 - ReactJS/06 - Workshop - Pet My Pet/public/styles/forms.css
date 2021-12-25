@@ -5,6 +5,7 @@ body {
 
 form {
 	max-width: 30rem;
+	margin: 5rem auto;
 }
 
 form, form fieldset, form legend, form label, form input, form textarea, form select {

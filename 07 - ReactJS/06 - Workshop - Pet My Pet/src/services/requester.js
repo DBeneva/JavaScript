@@ -4,17 +4,17 @@ export const request = async (method, url, data) => {
     if (method == 'GET') {
         result = fetch(url);
     } else {
-        let token = '';
         result = fetch(url, {
             method,
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'X-Authorization': getToken()
             },
             body: JSON.stringify(data)
         });
     }
-
-    return fetch(url).then(responseHandler);
+    
+    return result.then(responseHandler);
 };
 
 async function responseHandler(res) {
@@ -25,21 +25,24 @@ async function responseHandler(res) {
     } else {
         throw jsonData;
     }
-}
+};
 
 function getToken() {
     try {
-        let user = localStorage.getItem('user');
+        let userItem = localStorage.getItem('user');
 
-        if (user) {
-            throw { message: 'You must be authenticated!' };
+        if (!userItem) {
+            throw {message: 'You must be authenticated'};
         }
 
+        let user = JSON.parse(userItem);
+
         return user.accessToken;
-    } catch (err) {
-        console.log(error);
+    } catch(err) {
+        console.log(err);
     }
 }
 
 export const get = request.bind(null, 'GET');
 export const put = request.bind(null, 'PUT');
+export const post = request.bind(null, 'POST');

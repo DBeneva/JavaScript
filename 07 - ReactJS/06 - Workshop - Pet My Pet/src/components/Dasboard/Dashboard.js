@@ -1,14 +1,32 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
+import * as petService from '../../services/petService';
+
 import PetList from '../PetList/PetList';
 
+
 const Dashboard = () => {
+    const [pets, setPets] = useState([]);
+
+    useEffect(() => {
+        petService.getAll()
+            .then(pets => {
+                console.log(pets);
+                setPets(pets);
+            })
+            .catch(err => {
+                console.log(`Error: ${err}`);
+            });
+    }, []);
+
     return (
         <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>
 
             <section>
                 <Routes>
-                    <Route path="/" element={<PetList />} />
+                    <Route path="/" element={<PetList pets={pets} />} />
                 </Routes>
             </section>
 

@@ -4,9 +4,14 @@ const baseUrl = 'http://localhost:3030/data';
 
 export const getAll = () => request.get(`${baseUrl}/pets`);
 
-export const getById = async (id) => {
-    const pet = await fetch(`${baseUrl}/pets/${id}`);
+export const getById = async (id, signal) => {
+    const pet = await fetch(`${baseUrl}/pets/${id}`, { signal });
     return await pet.json();
+};
+
+export const getMyPets = async (ownerId) => {
+    const query = encodeURIComponent(`_ownerId="${ownerId}"`);
+    return await request.get(`${baseUrl}/pets?where=${query}`);
 };
 
 export const create = async (petData, token) => {
@@ -32,16 +37,5 @@ export const remove = (id, token) => {
         headers: {
             'X-Authorization': token
         }
-    }).then(res => res.json());
-};
-
-export const like = (petData, token) => {
-    return fetch(`${baseUrl}/pets/${petData._id}`, {
-        method: 'PUT',
-        headers: {
-            'content-type': 'application/json',
-            'X-Authorization': token
-        },
-        body: JSON.stringify(petData)
     }).then(res => res.json());
 };
