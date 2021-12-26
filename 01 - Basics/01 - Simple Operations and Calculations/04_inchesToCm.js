@@ -1,5 +1,6 @@
-function inchesToCm(inches) {
-    return inches * 2.54;
+function printCentimeters(inches) {
+    console.log(inches * 2.54);
 }
 
-console.log(inchesToCm('5'));
+printCentimeters(5);
+printCentimeters('5');

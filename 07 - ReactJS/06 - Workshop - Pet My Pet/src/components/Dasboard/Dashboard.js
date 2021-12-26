@@ -34,6 +34,8 @@ const Dashboard = () => {
     );
 }
 
+// export default isAuth(Dashboard);
+// export const PrivateDashboard = isAuth(Dashboard);
 export default Dashboard;
 
 /* <li className="otherPet">

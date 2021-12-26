@@ -1,35 +1,27 @@
-function getSpeedInfo(speed) {
+function printSpeedInfo(speed) {
     speed = Number(speed);
 
-    if (speed <= 10) {
-        return 'slow';
-    } else if (speed <= 50) {
-        return 'average';
-    } else if (speed <= 150) {
-        return 'fast';
-    } else if (speed <= 1000) {
-        return 'ultra fast';
-    } else if (speed > 1000) {
-        return 'extremely fast';
-    }
+    if (speed <= 10) console.log('slow');
+    else if (speed <= 50) console.log('average');
+    else if (speed <= 150) console.log('fast');
+    else if (speed <= 1000) console.log('ultra fast');
+    else if (speed > 1000) console.log('extremely fast');
 }
 
-function getSpeedInfoObj(speed) {
+function printSpeedInfoArray(speed) {
     speed = Number(speed);
 
-    const speedType = {
-        slow: 10,
-        average: 50,
-        fast: 150,
-        'ultra fast': 1000,
-        'extremely fast': Number.MAX_SAFE_INTEGER
-    };
+    const range = [
+        { condition: speed <= 10, output: 'slow' },
+        { condition: speed <= 50, output: 'average' },
+        { condition: speed <= 150, output: 'fast' },
+        { condition: speed <= 1000, output: 'ultra fast' },
+        { condition: speed > 1000, output: 'extremely fast' }
+    ];
 
-    return Object.entries(speedType).find(([k, v]) => speed <= v)[0];
+    console.log(range.find(x => x.condition).output);
 }
 
-console.log(getSpeedInfo('8'));
-
+printSpeedInfo('8');
 console.log('====================');
-
-console.log(getSpeedInfoObj('50'));
+printSpeedInfoArray('150');

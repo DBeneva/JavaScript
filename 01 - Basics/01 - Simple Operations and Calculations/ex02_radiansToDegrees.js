@@ -1,5 +1,6 @@
-function radiansToDegrees(radians) {
-    return (Number(radians) * 180 / Math.PI).toFixed(0);
+function printDegrees(radians) {
+    console.log(radians * 180 / Math.PI);
 }
 
-console.log(radiansToDegrees(0.5236));
+printDegrees(0.5236);
+printDegrees('0.5236');

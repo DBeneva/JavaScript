@@ -1,17 +1,12 @@
-function evenOrOdd(num) {
-    if (Number(num) % 2 == 0) {
-        return 'even';
-    } else {
-        return 'odd';
-    }
+function printEvenOdd(num) {
+    if (num % 2 == 0) console.log('even');
+    else console.log('odd');
 }
 
-function evenOrOddTern(num) {
-    return Number(num) % 2 == 0 ? 'even' : 'odd';
+function printEvenOddTernary(num) {
+    console.log(num % 2 == 0 ? 'even' : 'odd');
 }
 
-console.log(evenOrOdd('68'));
-
+printEvenOdd('68');
 console.log('====================');
-
-console.log(evenOrOddTern('68'));
+printEvenOddTernary('69');

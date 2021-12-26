@@ -22,9 +22,9 @@ export const NotificationProvider = ({
         setTimeout(() => {
             setNotification(initialNotificationState);
         }, 2000);
-    }, []);
+    }, [initialNotificationState]);
 
-    const hideNotification = useCallback(() => setNotification(initialNotificationState));
+    const hideNotification = useCallback(() => setNotification(initialNotificationState), [initialNotificationState]);
 
     return (
         <NotificationContext.Provider value={{ notification, addNotification, hideNotification }}>

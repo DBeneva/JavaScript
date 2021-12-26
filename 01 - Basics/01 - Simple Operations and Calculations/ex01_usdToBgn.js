@@ -1,5 +1,6 @@
-function usdToBgn(usd) {
-    return (Number(usd) * 1.79549).toFixed(2);
+function printBGN(usd) {
+    console.log(usd * 1.79549);
 }
 
-console.log(usdToBgn('12.5'));
+printBGN(12.5);
+printBGN('12.5');

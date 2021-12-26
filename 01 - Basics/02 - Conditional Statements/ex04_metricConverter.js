@@ -2,30 +2,29 @@ function convertUnits([num, from, to]) {
     num = Number(num);
     let result = 0;
 
-    if (from == 'mm') {
-        if (to == 'cm') {
-            result = num / 10;
-        } else if (to == 'm') {
-            result = num / 1000;
-        }
-    } else if (from == 'cm') {
-        if (to == 'mm') {
-            result = num * 10;
-        } else if (to == 'm') {
-            result = num / 100;
-        }
-    } else {
-        if (to == 'mm') {
-            result = num * 1000;
-        } else if (to == 'cm') {
-            result = num * 100;
-        }
+    if (from == 'mm') result = convertFromMm();
+    else if (from == 'cm') result = convertFromCm(); 
+    else if (from == 'm') result = convertFromM();
+    
+    console.log(result.toFixed(3));
+    
+    function convertFromMm() {
+        if (to == 'cm') return num / 10;
+        else if (to == 'm') return num / 1000;
     }
-
-    return result.toFixed(3);
+    
+    function convertFromCm() {
+        if (to == 'mm') return num * 10;
+        else if (to == 'm') return num / 100;
+    }
+    
+    function convertFromM() {
+        if (to == 'mm') return num * 1000;
+        else if (to == 'cm') return num * 100;
+    }
 }
 
-function convertUnitsObj([num, from, to]) {
+function convertUnitsObject([num, from, to]) {
     num = Number(num);
 
     const units = {
@@ -43,11 +42,9 @@ function convertUnitsObj([num, from, to]) {
         }
     };
 
-    return units[from][to].toFixed(3);
+    console.log(units[from][to].toFixed(3));
 }
 
-console.log(convertUnits([12, 'mm', 'm']));
-
+convertUnits([12, 'mm', 'm']);
 console.log('====================');
-
-console.log(convertUnitsObj([12, 'mm', 'm']));
+convertUnitsObject([12, 'mm', 'm']);

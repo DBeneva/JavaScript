@@ -1,33 +1,19 @@
-function getTimeIn15Minutes([hours, minutes]) {
-    hours = Number(hours);
-    minutes = Number(minutes) + 15;
-
-    if (minutes >= 60) {
-        hours += 1;
-        minutes -= 60;
-    }
-
-    if (hours >= 24) {
-        hours -= 24;
-    }
+function printTimeIn15Minutes([hours, minutes]) {
+    const minutesTotal = hours * 60 + Number(minutes) + 15;
+    const hoursin15Mins = getHours();
+    const minutesIn15Mins = getMinutes();
     
-    if (minutes < 10) {
-        minutes = '0' + minutes;
+    console.log(`${hoursin15Mins}:${minutesIn15Mins}`);
+
+    function getHours() {
+        if (Math.floor(minutesTotal / 60) == 24) return 0;
+        else return Math.floor(minutesTotal / 60);
     }
-    
-    return `${hours}:${minutes}`;
+
+    function getMinutes() {
+        return (minutesTotal % 60).toString().padStart(2, '0');
+    }
 }
 
-function getTimeIn15MinutesTern(input) {
-    let [hours, minutes] = input.map(Number);
-    let minutesPlus15 = hours * 60 + minutes + 15;
-    let hoursIn15Mins = Math.floor(minutesPlus15 / 60) == 24 ? 0 : Math.floor(minutesPlus15 / 60);
-    
-    return `${hoursIn15Mins}:${(minutesPlus15 % 60).toString().padStart(2, '0')}`;
-}
-
-console.log(getTimeIn15Minutes([23, 50]));
-
-console.log('====================');
-
-console.log(getTimeIn15MinutesTern([23, 59]));
+printTimeIn15Minutes([23, 50]);
+printTimeIn15Minutes(['23', '50']);

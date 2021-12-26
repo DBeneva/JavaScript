@@ -12,8 +12,9 @@ import MyPets from './components/MyPets/MyPets';
 import Register from './components/Register/Register';
 import Details from './components/Details/Details';
 import Logout from './components/Logout/Logout';
-import Notification from './components/common/Notification';
-
+import Notification from './components/common/Notification/Notification';
+import PrivateRoute from './components/common/PrivateRoute/PrivateRoute';
+import GuardedRoute from './components/common/GuardedRoute/GuardedRoute';
 
 function App() {
   return (
@@ -29,11 +30,14 @@ function App() {
               <Route path="/dashboard/*" element={<Dashboard />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/my-pets" element={<MyPets />} />
-              <Route path="/create" element={<Create />} />
-              <Route path="/edit/:petId" element={<Edit />} />
+              <Route path="/my-pets" element={<PrivateRoute><MyPets /></PrivateRoute>} />
               <Route path="/details/:petId" element={<Details />} />
               <Route path="/logout" element={<Logout />} />
+              
+              <Route element={<GuardedRoute />}>
+                <Route path="/create" element={<Create />} />
+                <Route path="/edit/:petId" element={<Edit />} />
+              </Route>
             </Routes>
           </main>
 

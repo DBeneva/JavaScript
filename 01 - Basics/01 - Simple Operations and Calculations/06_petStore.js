@@ -1,7 +1,8 @@
-function getPetFood(dogs, other) {
+function printPetFoodPrice([dogs, other]) {
     const totalPrice = dogs * 2.5 + other * 4;
 
-    return `${totalPrice.toFixed(2)} lv.`;
+    console.log(`${totalPrice.toFixed(2)} lv.`);
 }
 
-console.log(getPetFood(5, 4));
+printPetFoodPrice([5, 4]);
+printPetFoodPrice(['5', '4']);

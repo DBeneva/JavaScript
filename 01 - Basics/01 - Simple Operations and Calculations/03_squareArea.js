@@ -1,21 +1,17 @@
-function getSquareArea(a) {
-    return a * a;
+function printSquareArea(a) {
+    console.log(a * a);
 }
 
-function getSquareAreaExp(a) {
-    return a ** 2;
+function printSquareAreaExpOperator(a) {
+    console.log(a ** 2);
 }
 
-function getSquareAreaPow(a) {
-    return Math.pow(a, 2);
+function printSquareAreaMath(a) {
+    console.log(Math.pow(a, 2));
 }
 
-console.log(getSquareArea(5));
-
+printSquareArea(5);
 console.log('====================');
-
-console.log(getSquareAreaExp(5));
-
+printSquareAreaExpOperator(15);
 console.log('====================');
-
-console.log(getSquareAreaPow(5));
+printSquareAreaMath(32);

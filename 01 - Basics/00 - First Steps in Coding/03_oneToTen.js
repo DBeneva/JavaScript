@@ -1,15 +1,26 @@
-function getOneToTen() {
-    return '1\n2\n3\n4\n5\n6\n7\n8\n9\n10';
+function printOneToTen() {
+    console.log(1);
+    console.log(2);
+    console.log(3);
+    console.log(4);
+    console.log(5);
+    console.log(6);
+    console.log(7);
+    console.log(8);
+    console.log(9);
+    console.log(10);
 }
 
-function getOneToTenArr() {
-    return Array
-        .from(Array(10), (_, i) => i + 1)
-        .join('\n');
+function printOneToTenString() {
+    console.log('1\n2\n3\n4\n5\n6\n7\n8\n9\n10');
 }
 
-console.log(getOneToTen());
+function printOneToTenArray() {
+    console.log(Array.from(Array(10), (_, i) => i + 1).join('\n'));
+}
 
+printOneToTen();
 console.log('====================');
-
-console.log(getOneToTenArr());
+printOneToTenString();
+console.log('====================');
+printOneToTenArray();

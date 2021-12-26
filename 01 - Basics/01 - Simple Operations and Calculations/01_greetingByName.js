@@ -1,13 +1,11 @@
-function greet(name) {
-    return 'Hello, ' + name + '!';
+function greetConcatenation(name) {
+    console.log('Hello, ' + name + '!');
 }
 
-function greetInt(name) {
-    return `Hello, ${name}!`;
+function greetInterpolation(name) {
+    console.log(`Hello, ${name}!`);
 }
 
-console.log(greet('Mark'));
-
+greetConcatenation('Mark');
 console.log('====================');
-
-console.log(greetInt('John'));
+greetInterpolation('John');

@@ -1,24 +1,13 @@
-function getDancers(hallLength, hallWidth, wardrobeSide) {
-    hallLength = Number(hallLength);
-    hallWidth = Number(hallWidth);
-    wardrobeSide = Number(wardrobeSide);
+function printNumberOfDancers(hallLength, hallWidth, wardrobeSide) {
+    const hallAreaCm = hallLength * hallWidth * 10000;
+    const wardrobeAreaCm = (wardrobeSide * 100) ** 2;
+    const benchArea = hallAreaCm * 0.1;
+    const freeArea = hallAreaCm - wardrobeAreaCm - benchArea;
+    const areaPerDancer = 7040;
+    const numberOfDancers = Math.floor(freeArea / areaPerDancer);
 
-    const freeAreaCm = (hallLength * hallWidth - wardrobeSide ** 2) * 0.9;
-    const areaPerDancer = 7040 / 10000;
-
-    return Math.floor(freeAreaCm / areaPerDancer);
+    console.log(numberOfDancers);
 }
 
-function getDancersArr(...input) {
-    const [hallLength, hallWidth, wardrobeSide] = input.map(Number);
-    const freeAreaCm = (hallLength * hallWidth - wardrobeSide ** 2) * 0.9;
-    const areaPerDancer = 7040 / 10000;
-
-    return Math.floor(freeAreaCm / areaPerDancer);
-}
-
-console.log(getDancers(50, 25, 2));
-
-console.log('====================');
-
-console.log(getDancersArr(50, 25, 2));
+printNumberOfDancers('50', '25', '2');
+printNumberOfDancers(50, 25, 2);

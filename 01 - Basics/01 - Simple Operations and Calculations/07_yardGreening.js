@@ -1,10 +1,13 @@
-function getYardGreening(area) {
+function printGreeningPrice([area]) {
     const price = area * 7.61;
-    const discount = 0.18 * price;
+    const discount = price * 0.18;
     const finalPrice = price - discount;
 
-    return `The final price is: ${finalPrice.toFixed(2)} lv.
-The discount is: ${discount.toFixed(2)} lv.`;
+    console.log(
+        `The final price is: ${finalPrice} lv.\n` +
+        `The discount is: ${discount} lv.`
+    );
 }
 
-console.log(getYardGreening(540));
+printGreeningPrice([540]);
+printGreeningPrice(['540']);
