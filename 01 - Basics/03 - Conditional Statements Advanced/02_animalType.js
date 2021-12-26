@@ -1,26 +1,25 @@
-function getAnimalType(animal) {
+function printAnimalType([animal]) {
     switch (animal) {
-        case 'dog': return 'mammal';
+        case 'dog': console.log('mammal'); break;
         case 'crocodile':
         case 'tortoise':
-        case 'snake': return 'reptile';
-        default: return 'unknown';
+        case 'snake': console.log('reptile'); break;
+        default: console.log('unknown'); break;
     }
 }
 
-function getAnimalTypeObj(animal) {
-    const types = {
+function printAnimalTypeObject([animal]) {
+    const animals = {
         mammal: ['dog'],
-        reptile: ['crocodile', 'tortoise', 'snake']
+        reptile: ['crocodile', 'tortoise', 'snake'],
     };
+    
+    const existingType = Object.entries(animals).find(x => x[1].includes(animal));
+    const type = existingType ? existingType[0] : 'unknown';
 
-    const type = Object.keys(types).find(x => types[x].includes(animal));
-
-    return type || 'unknown';
+    console.log(type);
 }
 
-console.log(getAnimalType('crocodile'));
-
+printAnimalType(['crocodile']);
 console.log('====================');
-
-console.log(getAnimalTypeObj('snake'));
+printAnimalTypeObject(['snake']);

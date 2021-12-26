@@ -1,22 +1,21 @@
-function getPersonalTitle([age, sex]) {
+function printPersonalTitle([age, sex]) {
     age = Number(age);
 
-    if (sex == 'm') {
-        if (age < 16) {
-            return 'Master';
-        } else {
-            return 'Mr.';
-        }
-    } else if (sex == 'f') {
-        if (age < 16) {
-            return 'Miss';
-        } else {
-            return 'Ms.';
-        }
+    if (sex == 'm') console.log(getMaleTitle());
+    else if (sex == 'f') console.log(getFemaleTitle());
+    
+    function getMaleTitle() {
+        if (age < 16) return 'Master';
+        else return 'Mr.';
+    }
+    
+    function getFemaleTitle() {
+        if (age < 16) return 'Miss';
+        else return 'Ms.';
     }
 }
 
-function getPersonalTitleObj([age, sex]) {
+function printPersonalTitleObject([age, sex]) {
     age = Number(age);
 
     const titles = {
@@ -24,11 +23,9 @@ function getPersonalTitleObj([age, sex]) {
         f: age < 16 ? 'Miss' : 'Ms.'
     };
 
-    return titles[sex];
+    console.log(titles[sex]);
 }
 
-console.log(getPersonalTitle([17, 'm']));
-
+printPersonalTitle([17, 'm']);
 console.log('====================');
-
-console.log(getPersonalTitleObj([17, 'm']));
+printPersonalTitleObject([17, 'm']);

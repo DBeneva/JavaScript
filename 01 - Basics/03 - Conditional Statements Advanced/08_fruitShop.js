@@ -1,70 +1,63 @@
-function getPrice([fruit, dayOfTheWeek, qty]) {
+function printPrice([fruit, day, qty]) {
     qty = Number(qty);
-    let price = 0;
-
-    switch (dayOfTheWeek) {
-        case 'Monday':
-        case 'Tuesday':
-        case 'Wednesday':
-        case 'Thursday':
-        case 'Friday':
-            switch (fruit) {
-                case 'banana': price = 2.5; break;
-                case 'apple': price = 1.2; break;
-                case 'orange': price = 0.85; break;
-                case 'grapefruit': price = 1.45; break;
-                case 'kiwi': price = 2.7; break;
-                case 'pineapple': price = 5.5; break;
-                case 'grapes': price = 3.85; break;
-            }
-            break;
-
-        case 'Saturday':
-        case 'Sunday':
-            switch (fruit) {
-                case 'banana': price = 2.7; break;
-                case 'apple': price = 1.25; break;
-                case 'orange': price = 0.9; break;
-                case 'grapefruit': price = 1.6; break;
-                case 'kiwi': price = 3; break;
-                case 'pineapple': price = 5.6; break;
-                case 'grapes': price = 4.2; break;
-            }
-            break;
+    const price = getPricePerProduct();
+    
+    console.log(price ? (price * qty).toFixed(2) : 'error');
+    
+    function getPricePerProduct() {
+        switch (fruit) {
+            case 'banana': return getPricePerDay(2.5, 2.7);
+            case 'apple': return getPricePerDay(1.2, 1.25);
+            case 'orange': return getPricePerDay(0.85, 0.9);
+            case 'grapefruit': return getPricePerDay(1.45, 1.6);
+            case 'kiwi': return getPricePerDay(2.7, 3);
+            case 'pineapple': return getPricePerDay(5.5, 5.6);
+            case 'grapes': return getPricePerDay(3.85, 4.2);
+            default: return 0;
+        }
     }
+    
+    function getPricePerDay(weekdayPrice, weekendPrice) {
+        const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+        const weekend = ['Saturday', 'Sunday'];
 
-    return price.toFixed(2) * qty || 'error';
+        if (weekdays.includes(day)) return weekdayPrice;
+        else if (weekend.includes(day)) return weekendPrice;
+        else return 0;
+    }
 }
 
-function getPriceObj([fruit, day, qty]) {
+function printPriceObject([fruit, day, qty]) {
     const fruits = {
-        banana: createFruit('banana', 2.5, 2.7),
-        apple: createFruit('apple', 1.2, 1.25),
-        orange: createFruit('orange', 0.85, 0.9),
-        grapefruit: createFruit('grapefruit', 1.45, 1.6),
-        kiwi: createFruit('kiwi', 2.7, 3),
-        pineapple: createFruit('pineapple', 5.5, 5.6),
-        grapes: createFruit('grapes', 3.85, 4.2)
+        banana: createFruit(2.5, 2.7),
+        apple: createFruit(1.2, 1.25),
+        orange: createFruit(0.85, 0.9),
+        grapefruit: createFruit(1.45, 1.6),
+        kiwi: createFruit(2.7, 3),
+        pineapple: createFruit(5.5, 5.6),
+        grapes: createFruit(3.85, 4.2)
     };
-    
-    const result = fruits[fruit] && fruits[fruit].price ?
-    (fruits[fruit].price * qty).toFixed(2) : 'error';
-    
-    return result;
-    
-    function createFruit(name, weekdayPrice, weekendPrice) {
-        return {
-            name,
-            price: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) ?
-                weekdayPrice :
-                ['Saturday', 'Sunday'].includes(day) ? weekendPrice :
-                    0
+
+    const output = fruits[fruit] && fruits[fruit].price
+        ? (fruits[fruit].price * qty).toFixed(2)
+        : 'error';
+
+    console.log(output);
+
+    function createFruit(weekdayPrice, weekendPrice) {
+        const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+        const weekend = ['Saturday', 'Sunday'];
+
+        return { price: getPrice() };
+
+        function getPrice() {
+            if (weekdays.includes(day)) return weekdayPrice;
+            else if (weekend.includes(day)) return weekendPrice;
+            else return 0;
         }
     }
 }
 
-console.log(getPrice(['grapes', 'Tuesday', 1.200]));
-
+printPrice(['tomato', 'Monday', 0.5]);
 console.log('====================');
-
-console.log(getPriceObj(['grapes', 'Tuesday', 1.200]));
+printPriceObject(['grapes', 'Tuesday', 1.200]);

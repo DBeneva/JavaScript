@@ -1,42 +1,58 @@
-function getPrice([product, city, qty]) {
+function printPrice([product, city, qty]) {
     let price = 0;
 
-    switch (city) {
-        case 'Sofia':
-            switch (product) {
-                case 'coffee': price = 50; break;
-                case 'water': price = 80; break;
-                case 'beer': price = 120; break;
-                case 'sweets': price = 145; break;
-                case 'peanuts': price = 160; break;
-            }
-            break;
-
-        case 'Plovdiv':
-            switch (product) {
-                case 'coffee': price = 40; break;
-                case 'water': price = 70; break;
-                case 'beer': price = 115; break;
-                case 'sweets': price = 130; break;
-                case 'peanuts': price = 150; break;
-            }
-            break;
-
-        case 'Varna':
-            switch (product) {
-                case 'coffee': price = 45; break;
-                case 'water': price = 70; break;
-                case 'beer': price = 110; break;
-                case 'sweets': price = 135; break;
-                case 'peanuts': price = 155; break;
-            }
-            break;
+    switch (product) {
+        case 'coffee': price = getCoffeePrice(); break;
+        case 'water': price = getWaterPrice(); break;
+        case 'beer': price = getBeerPrice(); break;
+        case 'sweets': price = getSweetsPrice(); break;
+        case 'peanuts': price = getPeanutsPrice(); break;
     }
 
-    return price * Number(qty) / 100;
+    console.log(price * Number(qty) / 100);
+
+    function getCoffeePrice() {
+        switch (city) {
+            case 'Sofia': return 50;
+            case 'Plovdiv': return 40;
+            case 'Varna': return 45;
+        }
+    }
+    
+    function getWaterPrice() {
+        switch (city) {
+            case 'Sofia': return 80;
+            case 'Plovdiv': return 70;
+            case 'Varna': return 70;
+        }
+    }
+
+    function getBeerPrice() {
+        switch (city) {
+            case 'Sofia': return 120;
+            case 'Plovdiv': return 115;
+            case 'Varna': return 110;
+        }
+    }
+
+    function getSweetsPrice() {
+        switch (city) {
+            case 'Sofia': return 145;
+            case 'Plovdiv': return 130;
+            case 'Varna': return 135;
+        }
+    }
+
+    function getPeanutsPrice() {
+        switch (city) {
+            case 'Sofia': return 160;
+            case 'Plovdiv': return 150;
+            case 'Varna': return 155;
+        }
+    }
 }
 
-function getPriceObj([product, city, qty]) {
+function printPriceObject([product, city, qty]) {
     const products = {
         coffee: createProduct('coffee', 50, 40, 45),
         water: createProduct('water', 80, 70, 70),
@@ -44,9 +60,9 @@ function getPriceObj([product, city, qty]) {
         sweets: createProduct('sweets', 145, 130, 135),
         peanuts: createProduct('peanuts', 160, 150, 155)
     };
-    
-    return products[product][city] * Number(qty) / 100;
-    
+
+    console.log(products[product][city] * Number(qty) / 100);
+
     function createProduct(name, priceSofia, pricePlovdiv, priceVarna) {
         return {
             name,
@@ -57,8 +73,6 @@ function getPriceObj([product, city, qty]) {
     }
 }
 
-console.log(getPrice(['beer', 'Sofia', 6]));
-
+printPrice(['beer', 'Sofia', 6]);
 console.log('====================');
-
-console.log(getPriceObj(['beer', 'Sofia', 6]));
+printPriceObject(['beer', 'Sofia', 6]);
