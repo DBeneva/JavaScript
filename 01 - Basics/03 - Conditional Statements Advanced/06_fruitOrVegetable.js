@@ -5,27 +5,17 @@ function fruitOrVegetable([product]) {
         case 'kiwi':
         case 'cherry':
         case 'lemon':
-        case 'grapes': console.log('fruit');
+        case 'grapes': console.log('fruit'); break;
 
         case 'tomato':
         case 'cucumber':
         case 'pepper':
-        case 'carrot': console.log('vegetable');
+        case 'carrot': console.log('vegetable'); break;
 
-        default: console.log('unknown');
+        default: console.log('unknown'); break;
     }
 }
 
-function fruitOrVegetableObject([product]) {
-    const products = {
-        fruit: ['banana', 'apple', 'kiwi', 'cherry', 'lemon', 'grapes'],
-        vegetable: ['tomato', 'cucumber', 'pepper', 'carrot']
-    };
-
-    const type = Object.keys(products).find(x => products[x].includes(product));
-    console.log(type || 'unknown');
-}
-
+fruitOrVegetable(['tomato']);
+fruitOrVegetable(['banana']);
 fruitOrVegetable(['banan']);
-console.log('====================');
-fruitOrVegetableObject(['banana']);

@@ -11,23 +11,4 @@ function printInWord(num) {
     else console.log('number too big');
 }
 
-function printInWordArray(num) {
-    const numbersInWord = [
-        'zero',
-        'one',
-        'two',
-        'three',
-        'four',
-        'five',
-        'six',
-        'seven',
-        'eight',
-        'nine'
-    ];
-
-    console.log(numbersInWord[num] || 'number too big');
-}
-
 printInWord('1');
-console.log('====================');
-printInWordArray('37');

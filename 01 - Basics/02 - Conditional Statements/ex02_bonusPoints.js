@@ -17,29 +17,4 @@ function printBonusPoints(num) {
     }
 }
 
-function printBonusPointsTernary(num) {
-    num = Number(num);
-    const bonusPoints = getBonus() + getAdditionalBonus();
-
-    console.log(`${bonusPoints}\n${num + bonusPoints}`);
-
-    function getBonus() {
-        return num <= 100
-            ? 5
-            : num <= 1000
-                ? num * 0.2
-                : num * 0.1;
-    }
-
-    function getAdditionalBonus() {
-        return num % 2 == 0
-            ? 1
-            : num % 5 == 0
-                ? 2
-                : 0;
-    }
-}
-
 printBonusPoints('2703');
-console.log('====================');
-printBonusPointsTernary('20');

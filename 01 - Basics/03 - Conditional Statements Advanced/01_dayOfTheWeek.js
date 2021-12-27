@@ -13,20 +13,4 @@ function printDayOfTheWeek(num) {
     }
 }
 
-function printDayOfTheWeekArray(num) {
-    const days = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-    ];
-
-    console.log(days[num - 1] || 'Error');
-}
-
 printDayOfTheWeek(58);
-console.log('====================');
-printDayOfTheWeekArray('5');
