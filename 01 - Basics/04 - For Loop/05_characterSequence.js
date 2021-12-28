@@ -1,19 +1,15 @@
-function characterSequence(input) {
-    let result = '';
-    
+function printCharacters([input]) {
     for (let i = 0; i < input.length; i++) {
-        result += input[i] + '\n';
+        console.log(input[i]);
     }
-
-    return result.trim();
 }
 
-function characterSequenceArr(input) {
-    return input.split('').join('\n');
+function printCharactersArray([input]) {
+    const output = input.split('').join('\n');
+    
+    console.log(output);
 }
 
-console.log(characterSequence('ice cream'));
-
+printCharacters(['ice cream']);
 console.log('====================');
-
-console.log(characterSequenceArr('ice cream'));
+printCharactersArray(['ice cream']);

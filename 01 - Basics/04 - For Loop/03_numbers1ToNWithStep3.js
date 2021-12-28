@@ -1,24 +1,20 @@
-function numbers1ToNWithStep3(num) {
+function printNums1ToNStep3(num) {
     num = Number(num);
-    let result = '';
 
     for (let i = 1; i <= num; i += 3) {
-        result += i + '\n';
+        console.log(i);
     }
-
-    return result.trim();
 }
 
-function numbers1ToNWithStep3Arr(num) {
+function printNums1ToNStep3Array(num) {
     const length = Math.floor((Number(num) - 1) / 3) + 1;
-    
-    return Array
+    const output = Array
         .from(Array(length), (v = 1, i) => v + 3 * i)
         .join('\n');
+
+    console.log(output);
 }
 
-console.log(numbers1ToNWithStep3(45));
-
+printNums1ToNStep3(45);
 console.log('====================');
-
-console.log(numbers1ToNWithStep3Arr(45));
+printNums1ToNStep3Array(45);

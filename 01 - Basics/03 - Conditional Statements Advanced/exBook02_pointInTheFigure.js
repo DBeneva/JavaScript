@@ -1,50 +1,25 @@
-function pointInTheFigure(h, x, y) {
-    h = Number(h);
-    x = Number(x);
-    y = Number(y);
+function pointInFigure(h, x, y) {
+    inputParamsToNumbers();
 
-    const insideBottomPart = x > 0 && x < 3 * h && y > 0 && y < h;
-    const insideTopPart = x > h && x < 2 * h && y > 0 && y < 4 * h;
+    const insideBottom = x > 0 && x < 3 * h && y > 0 && y < h;
+    const insideTop = x > h && x < 2 * h && y > 0 && y < 4 * h;
     const commonBorder = y == h && x > h && x < 2 * h;
-    const outsideBottomPart = x < 0 || x > 3 * h || y < 0 || y > h;
-    const outsideTopPart = x < h || x > 2 * h || y < h || y > 4 * h;
-
-    if (insideBottomPart || insideTopPart || commonBorder) {
-        return 'inside';
-    } else if (outsideBottomPart && outsideTopPart) {
-        return 'outside';
-    } else {
-        return 'border';
-    }
-}
-
-function pointInTheFigureObj(...input) {
-    const [h, x, y] = input.map(Number);
-
-    return isInside() || isOutside() || 'border';
+    const outsideBottom = x < 0 || x > 3 * h || y < 0 || y > h;
+    const outsideTop = x < h || x > 2 * h || y < h || y > 4 * h;
     
-    function isInside() {
-        const location = {
-            insideBottomPart: x > 0 && x < 3 * h && y > 0 && y < h,
-            insideTopPart: x > h && x < 2 * h && y > 0 && y < 4 * h,
-            commonBorder: y == h && x > h && x < 2 * h
-        };
-
-        return Object.values(location).some(v => v == true);
+    if (insideBottom || insideTop || commonBorder) {
+        console.log('inside');
+    } else if (outsideBottom && outsideTop) {
+        console.log('outside');
+    } else {
+        console.log('border');
     }
-
-    function isOutside() {
-        const location = {
-            outsideBottomPart: x < 0 || x > 3 * h || y < 0 || y > h,
-            outsideTopPart: x < h || x > 2 * h || y < h || y > 4 * h,
-        };
-
-        return Object.values(location).every(v => v == true);
+    
+    function inputParamsToNumbers() {
+        h = Number(h);
+        x = Number(x);
+        y = Number(y);
     }
 }
 
-console.log(pointInTheFigure(15, 30, 0));
-
-console.log('====================');
-
-console.log(pointInTheFigureObj(15, 30, 0));
+pointInFigure(15, 30, 0);

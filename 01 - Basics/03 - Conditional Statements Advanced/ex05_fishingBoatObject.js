@@ -2,7 +2,14 @@ function printFishingPrice([budget, season, fishermen]) {
     budget = Number(budget);
     fishermen = Number(fishermen);
 
-    const price = getPriceBySeason() * getMultiplier();
+    const prices = {
+        Spring: 3000,
+        Summer: 4200,
+        Autumn: 4200,
+        Winter: 2600
+    };
+
+    const price = prices[season] * getMultiplier();
     const difference = Math.abs(budget - price).toFixed(2);
 
     console.log(
@@ -10,15 +17,6 @@ function printFishingPrice([budget, season, fishermen]) {
             ? `Yes! You have ${difference} leva left.`
             : `Not enough money! You need ${difference} leva.`
     );
-
-    function getPriceBySeason() {
-        switch (season) {
-            case 'Spring': return 3000;
-            case 'Summer':
-            case 'Autumn': return 4200;
-            case 'Winter': return 2600;
-        }
-    }
 
     function getMultiplier() {
         let multiplier = 1;

@@ -9,11 +9,11 @@ function printPrice([fruit, day, qty]) {
         grapes: createFruit(3.85, 4.2)
     };
 
-    const output = fruits[fruit] && fruits[fruit].price
-        ? (fruits[fruit].price * qty).toFixed(2)
-        : 'error';
-
-    console.log(output);
+    console.log(
+        fruits[fruit] && fruits[fruit].price
+            ? (fruits[fruit].price * qty).toFixed(2)
+            : 'error'
+    );
 
     function createFruit(weekdayPrice, weekendPrice) {
         const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];

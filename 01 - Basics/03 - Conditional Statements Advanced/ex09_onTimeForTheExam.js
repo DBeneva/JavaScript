@@ -1,72 +1,52 @@
 function onTimeForTheExam([examHours, examMinutes, arrivalHours, arrivalMinutes]) {
-    examHours = Number(examHours);
-    examMinutes = Number(examMinutes);
-    arrivalHours = Number(arrivalHours);
-    arrivalMinutes = Number(arrivalMinutes);
+    inputParamsToNumbers();
 
     const examTime = examHours * 60 + examMinutes;
     const arrivalTime = arrivalHours * 60 + arrivalMinutes;
     const difference = Math.abs(examTime - arrivalTime);
-    let outputLine = '';
+    const output = getOutput();
 
-    if (examTime < arrivalTime) {
-        outputLine = 'Late';
-
-        if (difference < 60) {
-            outputLine += `\n${difference} minutes after the start`;
+    console.log(output);
+    
+    function getOutput() {
+        if (examTime < arrivalTime) {
+            return createOutput('Late\n', 'after the start');
+        } else if (difference > 30) {
+            return createOutput('Early\n', 'before the start');
+        } else if (difference > 0) {
+            return createOutput('On time\n', 'before the start');
         } else {
-            if (difference % 60 < 10) {
-                outputLine += `\n${Math.trunc(difference / 60)}:0${difference % 60} hours after the start`;
-            } else {
-                outputLine += `\n${Math.trunc(difference / 60)}:${difference % 60} hours after the start`;
-            }
+            return createOutput('On time');
         }
-    } else if (examTime > arrivalTime && difference <= 30) {
-        outputLine = `On time\n${difference} minutes before the start`;
-    } else if (examTime > arrivalTime && difference > 30) {
-        outputLine = 'Early';
-
-        if (difference < 60) {
-            outputLine += `\n${difference} minutes before the start`;
-        } else {
-            if (difference % 60 < 10) {
-                outputLine += `\n${Math.trunc(difference / 60)}:0${difference % 60} hours before the start`;
-            } else {
-                outputLine += `\n${Math.trunc(difference / 60)}:${difference % 60} hours before the start`;
-            }
-        }
-    } else if (examTime == arrivalTime) {
-        outputLine = 'On time';
     }
 
-    return outputLine;
-}
+    function createOutput(earlyOrLate, beforeOrAfter = '') {
+        return earlyOrLate + getTime() + beforeOrAfter;
+    }
 
-function onTimeForTheExamObj(input) {
-    const [examHours, examMinutes, arrivalHours, arrivalMinutes] = input.map(Number);
-    const examTime = examHours * 60 + examMinutes;
-    const arrivalTime = arrivalHours * 60 + arrivalMinutes;
-    const difference = Math.abs(examTime - arrivalTime);
-    const diffHours = `${difference >= 60 ? `${Math.trunc(difference / 60)}:` : ''}`;
-    const diffMins = diffHours ? (difference % 60).toString().padStart(2, '0') : difference % 60;
+    function getTime() {
+        if (difference >= 60) return `${getHours()}:${getMins()} hours `;
+        else if (difference > 0) return `${difference} minutes `;
+        else return '';
+    }
 
-    return `${earlyOrLate()}
-${diffHours}${diffMins} ${difference < 60 ? 'minutes' : 'hours'} \
-${earlyOrLate() == 'Late' ? 'after' : 'before'} the start`;
+    function getHours() {
+        if (difference >= 60) return Math.trunc(difference / 60);
+        else return '';
+    }
 
-    function earlyOrLate() {
-        const arrivalType = {
-            Early: examTime > arrivalTime && difference > 30,
-            'On time': (examTime > arrivalTime && difference <= 30) || examTime == arrivalTime,
-            Late: examTime < arrivalTime
-        };
-
-        return Object.entries(arrivalType).find(([k, v]) => v == true)[0];
+    function getMins() {
+        return (difference % 60).toString().padStart(2, '0');
+    }
+  
+    function inputParamsToNumbers() {
+        examHours = Number(examHours);
+        examMinutes = Number(examMinutes);
+        arrivalHours = Number(arrivalHours);
+        arrivalMinutes = Number(arrivalMinutes);
     }
 }
 
-console.log(onTimeForTheExam([11, 30, 11, 29]));
-
-console.log('====================');
-
-console.log(onTimeForTheExamObj([16, 00, 15, 00]));
+onTimeForTheExam([11, 30, 11, 29]);
+onTimeForTheExam([16, 10, 15, 00]);
+onTimeForTheExam([10, 00, 10, 00]);

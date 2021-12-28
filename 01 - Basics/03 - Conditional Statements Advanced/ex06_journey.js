@@ -1,71 +1,39 @@
-function planTrip([budget, season]) {
+function planJourney([budget, season]) {
     budget = Number(budget);
-    let destination;
-    let accomodation;
-    let multiplier = 0;
-
-    if (budget <= 100) {
-        destination = 'Bulgaria';
-        
-        switch (season) {
-            case 'summer': multiplier = 0.3; break;
-            case 'winter': multiplier = 0.7; break;
-        }
-    } else if (budget <= 1000) {
-        destination = 'Balkans';
-        
-        switch (season) {
-            case 'summer': multiplier = 0.4; break;
-            case 'winter': multiplier = 0.8; break;
-        }
-    } else {
-        destination = 'Europe';
-        multiplier = 0.9;
-    }
-
-    if (season == 'summer' && destination != 'Europe') {
-        accomodation = 'Camp';
-    } else {
-        accomodation = 'Hotel';
-    }
-
-    return `Somewhere in ${destination}\n${accomodation} - ${(multiplier * budget).toFixed(2)}`;
-}
-
-function planTripObj([budget, season]) {
-    const destinations = {
-        Bulgaria: createDestination(0.3, 0.7, 'Camp', 'Hotel'),
-        Balkans: createDestination(0.4, 0.8, 'Camp', 'Hotel'),
-        Europe: createDestination(0.9, 0.9, 'Hotel', 'Hotel')
-    };
     
-    const accomodation = destinations[getDestination()].accomodation;
-    const moneyNeeded = budget * destinations[getDestination()].multiplier;
+    const destination = getDestination();
+    const accomodation = getAccomodation();
+    const multiplier = getMultiplier();
+    const moneyNeeded = (multiplier * budget).toFixed(2); 
     
-    return `Somewhere in ${getDestination()}\n${accomodation} - ${moneyNeeded.toFixed(2)}`;
+    console.log(
+        `Somewhere in ${destination}\n` +
+        `${accomodation} - ${moneyNeeded}`
+    );
     
-    function createDestination(multiplierSummer, multiplierOther, accomodationSummer, accomodationOther) {
-        budget = Number(budget);
-    
-        return {
-            multiplier: season == 'summer' ? multiplierSummer : multiplierOther ,
-            accomodation: season == 'summer' ? accomodationSummer : accomodationOther
-        };
-    }
-
     function getDestination() {
-        const destinations = {
-            Bulgaria: 100,
-            Balkans: 1000,
-            Europe: Number.MAX_SAFE_INTEGER
-        };
+        if (budget <= 100) return 'Bulgaria';
+        else if (budget <= 1000) return 'Balkans';
+        else return 'Europe';
+    }
 
-        return Object.entries(destinations).find(([k, v]) => budget <= v)[0];
+    function getAccomodation() {
+        if (season == 'summer' && destination != 'Europe') return 'Camp';
+        else return 'Hotel';
+    }
+
+    function getMultiplier() {
+        switch (destination) {
+            case 'Bulgaria': return getMultiplierBySeason(0.3, 0.7);
+            case 'Balkans': return getMultiplierBySeason(0.4, 0.8);
+            case 'Europe': return getMultiplierBySeason(0.9);
+        }
+    }
+
+    function getMultiplierBySeason(summer, winter) {
+        if (season == 'summer') return summer;
+        else return winter || summer;
     }
 }
 
-console.log(planTrip([678.53, 'winter']));
-
-console.log('====================');
-
-console.log(planTripObj([678.53, 'winter']));
+planJourney([678.53, 'winter']);

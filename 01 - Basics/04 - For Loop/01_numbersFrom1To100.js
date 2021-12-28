@@ -1,21 +1,15 @@
-function numbers1to100() {
-    let result = '';
-    
+function printNums1to100() {
     for (let i = 1; i <= 100; i++) {
-        result += i + '\n';
+        console.log(i);
     }
-
-    return result.trim();
 }
 
-function numbers1to100Arr() {
-    return Array
-        .from(Array(100), (_, i) => i + 1)
-        .join('\n');
+function printNums1to100Array() {
+    const output = Array.from(Array(100), (_, i) => i + 1).join('\n');
+    
+    console.log(output);
 }
 
-console.log(numbers1to100());
-
+printNums1to100();
 console.log('====================');
-
-console.log(numbers1to100Arr());
+printNums1to100Array();

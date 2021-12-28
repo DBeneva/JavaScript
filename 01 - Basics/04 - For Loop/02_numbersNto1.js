@@ -1,24 +1,18 @@
-function numbersNto1(num) {
+function printNumsNto1(num) {
     num = Number(num);
-    let result = '';
 
     for (let i = num; i >= 1; i--) {
-        result += i + '\n';
+        console.log(i);
     }
-
-    return result.trim();
 }
 
-function numbersNto1Arr(num) {
+function printNumsNto1Array(num) {
     num = Number(num);
+    const output = Array.from(Array(num), (_, i) => num - i).join('\n');
 
-    return Array
-        .from(Array(num), (_, i) => num - i)
-        .join('\n');
+    console.log(output);
 }
 
-console.log(numbersNto1(5));
-
+printNumsNto1(5);
 console.log('====================');
-
-console.log(numbersNto1Arr(5));
+printNumsNto1Array(5);

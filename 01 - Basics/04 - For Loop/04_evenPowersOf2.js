@@ -1,24 +1,20 @@
-function evenPowersOf2(num) {
+function printEvenPowersOf2(num) {
     num = Number(num);
-    let result = '';
 
     for (let i = 0; i <= num; i += 2) {
-        result += Math.pow(2, i) + '\n'; // or 2 ** i        
+        console.log(2 ** i);
     }
-
-    return result.trim();
 }
 
-function evenPowersOf2Arr(num) {
+function printEvenPowersOf2Array(num) {
     const length = Math.floor(Number(num) / 2) + 1;
-
-    return Array
+    const output = Array
         .from(Array(length), (_, i) => Math.pow(2, i * 2))
         .join('\n');
+
+    console.log(output);
 }
 
-console.log(evenPowersOf2(7));
-
+printEvenPowersOf2(7);
 console.log('====================');
-
-console.log(evenPowersOf2Arr(6));
+printEvenPowersOf2Array(6);

@@ -1,21 +1,18 @@
-function numbersEndingIn7() {
-    let result = '';
-
+function printNumbersIn7() {
     for (let i = 0; i < 1000; i++) {
-        if (i % 10 == 7) {
-            result += i + '\n';
-        }
+        if (i % 10 == 7) console.log(i);
     }
-
-    return result.trim();
 }
 
-function numbersEndingIn7Arr() {
-    return Array.from(Array(1000), (_, i) => i + 1).filter(x => x % 10 == 7);
+function printNumbersIn7Array() {
+    const output = Array
+        .from(Array(1000), (_, i) => i + 1)
+        .filter(x => x % 10 == 7)
+        .join('\n');
+    
+    console.log(output);
 }
 
-console.log(numbersEndingIn7());
-
+printNumbersIn7();
 console.log('====================');
-
-console.log(numbersEndingIn7());
+printNumbersIn7Array();
