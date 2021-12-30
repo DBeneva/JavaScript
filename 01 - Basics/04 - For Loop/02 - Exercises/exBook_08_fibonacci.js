@@ -9,17 +9,20 @@ function fibonacci(endPosition) {
         oldNum1 = num;
     }
 
-    return oldNum1;
+    console.log(oldNum1);
 }
 
 function fibonacciArr(endPosition) {
     const sequence = Array.from(Array(endPosition + 1));
-    sequence.forEach((_, i) => i > 1 ? sequence[i] = (sequence[i - 1] + sequence[i - 2]) : sequence[i] = 1);
-    return sequence[endPosition];
+    sequence.forEach((_, i) => {
+        i > 1
+            ? sequence[i] = (sequence[i - 1] + sequence[i - 2])
+            : sequence[i] = 1
+    });
+    
+    console.log(sequence[endPosition]);
 }
 
-console.log(fibonacci(5));
-
+fibonacci(5);
 console.log('====================');
-
-console.log(fibonacciArr(5));
+fibonacciArr(5);
