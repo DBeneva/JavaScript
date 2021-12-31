@@ -1,41 +1,30 @@
-function equalPairs(...input) {
-    let n = Number(input[0]);
-    let sumPair = 0;
-    let equalPairs = 0;
-    let maxDifference = Number.NEGATIVE_INFINITY;
+function equalPairs(input) {
+    inputParamsToNumbers();
 
-    for (let i = 1; i <= n * 2; i += 2) {
-        sumPair = Number(input[i]) + Number(input[i + 1]);
-        let sumPreviousPair = Number(input[i - 2]) + Number(input[i - 1]);
-        let difference = Math.abs(sumPair - sumPreviousPair);
+    let minSum = Number.POSITIVE_INFINITY;
+    let maxSum = Number.NEGATIVE_INFINITY;
 
-        if (difference == 0) {
-            equalPairs += 1;
-        } else if (difference > maxDifference) {
-            maxDifference = difference;
+    for (let i = 1; i <= input[0] * 2; i += 2) {
+        minSum = Math.min(minSum, input[i] + input[i + 1]);
+        maxSum = Math.max(maxSum, input[i] + input[i + 1]);
+    }
+
+    if (minSum == maxSum) console.log(`Yes, value=${minSum}`);
+    else console.log(`No, maxdiff=${maxSum - minSum}`);
+
+    function inputParamsToNumbers() {
+        for (let i = 0; i < input.length; i++) {
+            input[i] = Number(input[i]);
         }
     }
-
-    if (equalPairs == n - 1) {
-        return `Yes, value=${sumPair}`;
-    } else {
-        return `No, maxdiff=${maxDifference}`;
-    }
 }
 
-function equalPairsArr(...input) {
-    input = input.map(Number).slice(1);
-    const sums = input
-        .map((_, i) => i % 2 == 1 ? input[i] + input[i - 1] : '')
-        .filter(x => x != '')
-        .sort((a, b) => a - b);
-
-    return sums.every(x => x == sums[0]) ? `Yes, value=${sums[0]}` :
-        `No, maxdiff=${Math.abs(sums[0] - sums[sums.length - 1])}`;
-}
-
-console.log(equalPairs(2, -1, 2, 0, -1));
-
-console.log('====================');
-
-console.log(equalPairsArr(2, -1, 2, 0, -1));
+equalPairs([4,
+    1,
+    1,
+    3,
+    1,
+    2,
+    2,
+    0,
+    0]);
