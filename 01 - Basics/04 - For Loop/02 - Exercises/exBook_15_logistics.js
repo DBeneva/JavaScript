@@ -8,13 +8,9 @@ function logistics(...input) {
     for (let i = 1; i <= loads; i++) {
         const tons = Number(input[i]);
 
-        if (tons <= 3) {
-            tonsBus += tons;
-        } else if (tons <= 11) {
-            tonsTruck += tons;
-        } else {
-            tonsTrain += tons;
-        }
+        if (tons <= 3) tonsBus += tons;
+        else if (tons <= 11) tonsTruck += tons;
+        else tonsTrain += tons;
     }
 
     const tonsTotal = tonsBus + tonsTruck + tonsTrain;
