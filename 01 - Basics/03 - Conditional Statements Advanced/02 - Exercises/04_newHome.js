@@ -1,6 +1,5 @@
 function printGardenPlanning([flowersType, flowersQty, budget]) {
-    flowersQty = Number(flowersQty);
-    budget = Number(budget);
+    flowersQty = Number(flowersQty), budget = Number(budget);
     
     const price = flowersQty * getPriceByType();
     const difference = Math.abs(budget - price).toFixed(2);

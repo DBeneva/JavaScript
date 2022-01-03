@@ -7,6 +7,7 @@ function printSummerOutfit([degrees, timeOfTheDay]) {
         'T-Shirt', 'Swim Suit',
         'Shirt'
     );
+    
     const shoes = getByTimeOfTheDay(
         'Sneakers', 'Moccasins',
         'Sandals', 'Moccasins',

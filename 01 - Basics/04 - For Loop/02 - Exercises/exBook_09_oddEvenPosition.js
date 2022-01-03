@@ -25,12 +25,12 @@ function oddEvenPosition(input) {
     function getNums(evenOrOdd, num) {
         if (evenOrOdd == 'odd') {
             oddSum += num;
-            if (num < oddMin) oddMin = num;
-            if (num > oddMax) oddMax = num;
+            oddMin = Math.min(num, oddMin);
+            oddMax = Math.max(num, oddMax);
         } else {
             evenSum += num;
-            if (num < evenMin) evenMin = num;
-            if (num > evenMax) evenMax = num;
+            evenMin = Math.min(num, evenMin);
+            evenMax = Math.max(num, evenMax);
         }
     }
 

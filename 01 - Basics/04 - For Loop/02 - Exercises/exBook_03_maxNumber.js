@@ -1,10 +1,8 @@
 function printMaxNum(input) {
-    const n = Number(input[0]);
-    let max = Number.NEGATIVE_INFINITY;
+    let n = Number(input[0]), max = Number.NEGATIVE_INFINITY;
 
     for (let i = 1; i <= n; i++) {
-        const num = Number(input[i]);
-        if (num > max) max = num;
+        max = Math.max(Number(input[i]), max);
     }
 
     console.log(`max = ${max}`);

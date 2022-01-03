@@ -1,6 +1,5 @@
 function printFishingPrice([budget, season, fishermen]) {
-    budget = Number(budget);
-    fishermen = Number(fishermen);
+    budget = Number(budget), fishermen = Number(fishermen);
 
     const price = getPriceBySeason() * getMultiplier();
     const difference = Math.abs(budget - price).toFixed(2);

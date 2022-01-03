@@ -1,27 +1,21 @@
 function maxNumber(input) {
-    const n = Number(input[0]);
-    let max = Number.NEGATIVE_INFINITY;
-    let i = 1;
+    let n = Number(input[0]), max = Number.NEGATIVE_INFINITY;
 
-    while (i <= n) {
-        let currentNumber = Number(input[i]);
-        
-        if (currentNumber > max) {
-            max = currentNumber;
-        }
-
-        i++;
+    for (let i = 1; i <= n && !isNaN(input[i]); i++) {
+        max = Math.max(max, Number(input[i]));
     }
 
-    return max;
+    console.log(max);
 }
 
 function maxNumberArr(input) {
-    return input.slice(1).sort((a, b) => b - a)[0];
+    console.log(
+        input.slice(1)
+            .filter(x => !isNaN(x))
+            .sort((a, b) => b - a)[0]
+    );
 }
 
-console.log(maxNumber([2, 100, 99]));
-
+maxNumber([2, 100, 'a', 99]);
 console.log('====================');
-
-console.log(maxNumberArr([2, 100, 99]));
+maxNumberArr([2, 100, 99]);

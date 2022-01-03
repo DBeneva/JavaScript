@@ -1,7 +1,6 @@
 function fibonacci(endPosition) {
     endPosition = Number(endPosition);
-    let first = 0;
-    let second = 1;
+    let first = 0, second = 1;
 
     for (let position = 0; position <= endPosition; position++) {
         const num = first + second;

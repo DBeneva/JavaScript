@@ -6,7 +6,7 @@ function printCommission([city, sales]) {
         Varna: createCity(0.045, 0.075, 0.1, 0.13),
         Plovdiv: createCity(0.055, 0.08, 0.12, 0.145)
     }
-
+    
     const output = cities[city] && cities[city].commission
         ? (cities[city].commission * sales).toFixed(2)
         : 'error';

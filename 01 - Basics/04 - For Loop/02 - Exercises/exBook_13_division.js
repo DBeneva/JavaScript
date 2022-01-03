@@ -1,6 +1,5 @@
 function division(input) {
-    const n = Number(input[0]);
-    
+    const n = Number(input[0]);    
     let divisibleBy2 = 0, divisibleBy3 = 0, divisibleBy4 = 0;
 
     for (let i = 1; i <= n; i++) {

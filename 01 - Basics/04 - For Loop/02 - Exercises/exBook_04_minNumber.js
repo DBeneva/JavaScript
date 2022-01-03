@@ -1,10 +1,8 @@
 function printMinNum(input) {
-    const n = input[0];
-    let min = Number.POSITIVE_INFINITY;
+    let n = input[0], min = Number.POSITIVE_INFINITY;
     
     for (let i = 1; i <= n; i++) {
-        const num = Number(input[i]);
-        if (num < min) min = num;
+        min = Math.min(Number(input[i]), min);
     }
 
     console.log(min);

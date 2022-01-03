@@ -1,21 +1,22 @@
 function readText(input) {
-    let i = 1;
-    let text = input[i];
+    let i = 0, output = '';
     
-    while (text != 'Stop') {
+    while (input[i] != 'Stop') {
+        output += input[i] + '\n';
         i++;
-        text = input[i];
     }
 
-    return i;
+    console.log(output.trim());
 }
 
 function readTextArr(input) {
-    return input.indexOf('Stop');
+    console.log(
+        input
+            .slice(0, input.indexOf('Stop'))
+            .join('\n')
+    );
 }
 
-console.log(readText(['Nakov', 'SoftUni', 'Sofia', 'Bulgaria', 'SomeText', 'Stop']));
-
+readText(['Nakov', 'SoftUni', 'Sofia', 'Bulgaria', 'SomeText', 'Stop']);
 console.log('===================');
-
-console.log(readText(['Nakov', 'SoftUni', 'Sofia', 'Bulgaria', 'SomeText', 'Stop']));
+readTextArr(['Nakov', 'SoftUni', 'Sofia', 'Bulgaria', 'SomeText', 'Stop']);

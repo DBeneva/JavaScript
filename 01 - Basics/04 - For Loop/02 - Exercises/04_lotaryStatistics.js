@@ -1,10 +1,6 @@
 function printStatistics(n) {
     n = Number(n);
-
-    let oneDigitOdd = 0;
-    let even = 0;
-    let oddNumsIn7 = 0;
-    let dividersOf100 = 0;
+    let oneDigitOdd = 0, even = 0, oddNumsIn7 = 0, dividersOf100 = 0;
 
     for (let i = 1; i <= n; i++) {
         if (i < 10 && i % 2 == 1) oneDigitOdd++;

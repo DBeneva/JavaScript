@@ -1,6 +1,5 @@
 function printFishingPrice([budget, season, fishermen]) {
-    budget = Number(budget);
-    fishermen = Number(fishermen);
+    budget = Number(budget), fishermen = Number(fishermen);
 
     const prices = {
         Spring: 3000,

@@ -1,6 +1,5 @@
 function printVolleyballDays(leapOrNormal, holidays, weekendsHome) {
-    holidays = Number(holidays);
-    weekendsHome = Number(weekendsHome);
+    holidays = Number(holidays), weekendsHome = Number(weekendsHome);
 
     const daysWeekends = weekendsHome + 3 / 4 * (48 - weekendsHome);
     const daysHolidays = 2 / 3 * holidays;

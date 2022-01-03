@@ -19,7 +19,4 @@ function oddEvenPosition(input) {
     );
 }
 
-oddEvenPosition([3,
-    -1,
-    -2,
-    -3]);
+oddEvenPosition([3, -1, -2, -3]);

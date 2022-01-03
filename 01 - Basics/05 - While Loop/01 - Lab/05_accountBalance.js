@@ -1,36 +1,24 @@
 function accountBalance(input) {
-    const numberOfTransactions = Number(input[0]);
+    inputParamsToNumbers();
     let total = 0;
-    let i = 1;
-    let output = '';
 
-    while (i <= numberOfTransactions) {
-        if (Number(input[i]) < 0) {
-            output += `Invalid operation!\n`;
+    for (let i = 1; i < input.length && !isNaN(input[i]); i++) {
+        if (input[i] < 0) {
+            console.log('Invalid operation!');
             break;
         } else {
-            total += Number(input[i]);
-            output += `Increase: ${Number(input[i]).toFixed(2)}\n`;
+            total += input[i];
+            console.log(`Increase: ${input[i].toFixed(2)}`);
         }
-
-        i++;
     }
 
-    return output + `Total: ${total.toFixed(2)}`;
+    console.log(`Total: ${total.toFixed(2)}`);
+
+    function inputParamsToNumbers() {
+        for (let i = 0; i < input.length; i++) {
+            input[i] = Number(input[i]);
+        }
+    }
 }
 
-function accountBalanceArr(input) {
-    const transactions = input.slice(1).map(Number);
-    const total = transactions.reduce((acc, curr) => acc + (curr < 0 ? 0 : curr));
-    
-    return transactions
-        .map(x => x < 0 ? 'Invalid operation!' : `Increase: ${x.toFixed(2)}`)
-        .concat(`Total: ${total.toFixed(2)}`)
-        .join('\n');
-}
-
-console.log(accountBalance([5, 120, 45.55, -150]));
-
-console.log('====================');
-
-console.log(accountBalanceArr([5, 120, 45.55, -150]));
+accountBalance([5, 120, 45.55, -150]);

@@ -1,6 +1,5 @@
 function calculateNumbers([first, second, operator]) {
-    first = Number(first);
-    second = Number(second);
+    first = Number(first), second = Number(second);
     
     const result = getResult();
     const output = getOutput() + evenOrOdd();

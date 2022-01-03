@@ -1,6 +1,5 @@
 function backToThePast([budget, toYear]) {
-    budget = Number(budget);
-    toYear = Number(toYear);
+    budget = Number(budget), toYear = Number(toYear);
 
     for (let i = 1800, age = 18; i <= toYear; i++, age++) {
         if (i % 2 == 0) budget -= 12000;

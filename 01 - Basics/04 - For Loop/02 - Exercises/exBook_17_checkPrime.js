@@ -1,30 +1,25 @@
 function checkPrime(n) {
     n = Number(n);
-    let notPrimeNumber = false;
+    let notPrime = false;
 
-    for (let i = 2; i <= n - 1; i++) {
-        if (n % i == 0) {
-            notPrimeNumber = true;
-        }
+    for (let i = 2; i < n; i++) {
+        if (n % i == 0) notPrime = true; break;
     }
 
-    if (notPrimeNumber || n < 2) {
-        return 'Not prime';
-    } else {
-        return 'Prime';
-    }
+    if (n < 2 || notPrime) console.log('Not prime');
+    else console.log('Prime');
 }
 
-function checkPrimeArr(n) {
+function checkPrimeArray(n) {
     n = Number(n);
 
-    return Array.from(Array(n - 1), (_, i) => i + 1)
-        .filter(x => n % x == 0).length > 1 || n < 2 ?
-        'Not prime' : 'Prime';
+    console.log(
+        Array.from(Array(n - 1), (_, i) => i + 1)
+            .filter(x => n % x == 0)
+            .length > 1 || n < 2 ? 'Not prime' : 'Prime'
+    );
 }
 
-console.log(checkPrime(11));
-
+checkPrime(12);
 console.log('===================');
-
-console.log(checkPrimeArr(11));
+checkPrimeArray(11);

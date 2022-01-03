@@ -1,8 +1,6 @@
 function equalPairs(input) {
     inputParamsToNumbers();
-
-    let minSum = Number.POSITIVE_INFINITY;
-    let maxSum = Number.NEGATIVE_INFINITY;
+    let minSum = Number.POSITIVE_INFINITY, maxSum = Number.NEGATIVE_INFINITY;
 
     for (let i = 1; i <= input[0] * 2; i += 2) {
         minSum = Math.min(minSum, input[i] + input[i + 1]);
@@ -19,12 +17,4 @@ function equalPairs(input) {
     }
 }
 
-equalPairs([4,
-    1,
-    1,
-    3,
-    1,
-    2,
-    2,
-    0,
-    0]);
+equalPairs([2, 1, 1, 3, 1]);

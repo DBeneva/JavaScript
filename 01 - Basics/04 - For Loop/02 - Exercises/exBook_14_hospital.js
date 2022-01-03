@@ -1,6 +1,5 @@
 function hospital(input) {
     const days = Number(input[0]);
-
     let patients = 0, doctors = 7, treatedPatients = 0;
 
     for (i = 1; i <= days; i++) {

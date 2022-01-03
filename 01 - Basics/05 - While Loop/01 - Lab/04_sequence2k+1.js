@@ -1,25 +1,24 @@
 function sequence(n) {
     n = Number(n);
-    let sequenceNumber = 1;
-    let output = '';
+    let current = 1;
 
-    while (sequenceNumber <= n) {
-        output += sequenceNumber + '\n';
-        sequenceNumber = sequenceNumber * 2 + 1;
+    while (current <= n) {
+        console.log(current);
+        current = current * 2 + 1;
     }
-
-    return output.trim();
 }
 
 function sequenceArr(n) {
-    const numbers = Array.from(Array(n).fill(1));    
-    numbers.forEach((_, i) => (i > 0 && numbers[i - 1] * 2 + 1 <= n) ? numbers[i] = numbers[i - 1] * 2 + 1 : numbers[i] = 1);
+    const numbers = Array.from(Array(Number(n)).fill(1));    
+    numbers.forEach((_, i) => {
+        const next = numbers[i] * 2 + 1;
+        if (i >= 0 && next <= Number(n)) numbers[i + 1] = next;
+        else numbers[i + 1] = 1;
+    });
     
-    return numbers.slice(0, numbers.indexOf(1, 1)).join('\n');
+    console.log(numbers.slice(0, numbers.indexOf(1, 1)).join('\n'));
 }
 
-console.log(sequence(31));
-
+sequence(1);
 console.log('====================');
-
-console.log(sequenceArr(31));
+sequenceArr(31);

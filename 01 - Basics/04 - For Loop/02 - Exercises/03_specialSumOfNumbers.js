@@ -1,6 +1,5 @@
 function printSpecialSum(start, end, divider) {
     inputParamsToNumbers();
-
     let sum = 0;
     
     for (let i = start; i <= end; i++) {
