@@ -1,11 +1,8 @@
 function moving(input) {
-    const freeSpace = input[0] * input[1] * input[2];
-    let boxes = 0, i = 3;
-
-    while (input[i] != 'Done' && freeSpace > boxes) {
-        boxes += Number(input[i]);
-        i++;
-    }
+    const freeSpace = input.slice(0, 3).reduce((a, c) => a * c, 1);
+    const boxes = input
+        .slice(3, input.indexOf('Done'))
+        .reduce((a, c) => a + Number(c) < freeSpace ? a + Number(c) : 0, 0);
 
     console.log(
         freeSpace > boxes
