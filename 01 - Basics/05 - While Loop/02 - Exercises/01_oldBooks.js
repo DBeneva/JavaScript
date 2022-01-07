@@ -1,26 +1,19 @@
 function oldBooks(input) {
-    let favoriteBook = input[0];
-    let numberOfBooks = Number(input[1]);
+    const favorite = input[0];
+    const books = Number(input[1]);
     let found = false;
-    let checkedBooks = 0;
 
-    while (checkedBooks <= numberOfBooks) {
-        let currentBook = input[checkedBooks + 2];
-        
-        if (currentBook == favoriteBook) {
+    for (let i = 2; i <= books, !found; i++) {
+        if (input[i] == favorite) {
+            console.log(`You checked ${i - 1} books and found it.`);
             found = true;
-            break;
         }
-        
-        checkedBooks++;
     }
 
-    if (found) {
-        console.log(`You checked ${checkedBooks} books and found it.`);
-    } else {
-        console.log(`The book you search is not here!`);
-        console.log(`You checked ${numberOfBooks} books.`);
-    }
+    if (!found) console.log(
+        `The book you search is not here!` +
+        `You checked ${input.length - 2} books.`
+    );
 }
 
-oldBooks(['The Spot', 4, 'Hunger Games', 'Harry Potter', 'Torronto', 'Spotify']);
+oldBooks(['The Spot', 4, 'Hunger Games', 'The Spot', 'Harry Potter', 'Torronto', 'Spotify']);

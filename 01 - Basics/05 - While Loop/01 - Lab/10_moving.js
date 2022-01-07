@@ -1,18 +1,26 @@
 function moving(input) {
-    const freeSpace = input[0] * input[1] * input[2];
-    let boxes = 0, i = 3;
+    let freeSpace = input[0] * input[1] * input[2];
 
-    while (input[i] != 'Done' && freeSpace > boxes) {
-        boxes += Number(input[i]);
-        i++;
+    for (let i = 3; !isNaN(input[i]); i++) {
+        freeSpace -= Number(input[i]);
     }
 
     console.log(
-        freeSpace > boxes
-            ? `${freeSpace - boxes} Cubic meters left.`
+        freeSpace >= 0
+            ? `${freeSpace} Cubic meters left.`
             : `No more free space! ` +
-                `You need ${boxes - freeSpace} Cubic meters more.`
+                `You need ${-freeSpace} Cubic meters more.`
     );
 }
 
 moving([10, 1, 2, 4, 6, 'Done']);
+moving([
+    10,
+    10,
+    2,
+    20,
+    20,
+    20,
+    20,
+    122
+]);
