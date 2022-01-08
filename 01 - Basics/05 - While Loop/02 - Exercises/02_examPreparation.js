@@ -4,17 +4,17 @@ function examPreparation(input) {
     
     for (let i = 1; poorGrades < poorGradesMax && input[i] != 'Enough'; i += 2) {
         problem = input[i];
-        const currentGrade = Number(input[i + 1]);
-        gradesTotal += currentGrade;
-        poorGrades += currentGrade <= 4 ? 1: 0;
+        const grade = Number(input[i + 1]);
+        gradesTotal += grade;
+        poorGrades += grade <= 4 ? 1: 0;
     }
 
     if (poorGrades < poorGradesMax) {
         const problems = (input.length - 2) / 2;
-        const averageScore = gradesTotal / problems;
+        const average = gradesTotal / problems;
 
         console.log(
-            `Average score: ${averageScore.toFixed(2)}\n` +
+            `Average score: ${average.toFixed(2)}\n` +
             `Number of problems: ${problems}\n` +
             `Last problem: ${problem}`
         );
