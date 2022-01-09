@@ -6,4 +6,14 @@ function multiplicationTable() {
     }
 }
 
+function multiplicationTableArray() {
+    const numbersToTen = Array.from(Array(10), (_, i) => i + 1);
+
+    numbersToTen.forEach(x => {
+        numbersToTen.forEach(y => console.log(`${x} * ${y} = ${x * y}`));
+    });
+}
+
 multiplicationTable();
+console.log('====================');
+multiplicationTableArray();
