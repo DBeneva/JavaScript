@@ -1,9 +1,8 @@
 function walking(input) {
-    let stepsTotal = 0;
-
-    for (let i = 0; i < input.length && stepsTotal < 10000; i++) {
-        stepsTotal += input[i] == 'Going home' ? 0 : Number(input[i]);
-    }
+    const stepsTotal = input
+        .map(Number)
+        .filter(x => !isNaN(x))
+        .reduce((a, c) => a + c, 0);
 
     console.log(
         stepsTotal >= 10000
