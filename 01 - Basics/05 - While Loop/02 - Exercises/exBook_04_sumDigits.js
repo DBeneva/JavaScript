@@ -1,5 +1,4 @@
-function sumDigits(n) {
-    n = Number(n);
+function printSumDigits(n) {
     let sum = 0;
 
     do {
@@ -10,4 +9,11 @@ function sumDigits(n) {
     console.log(sum);
 }
 
-sumDigits(158);
+function printSumDigitsArray(n) {
+    const sum = n.toString().split('').reduce((a, c) => a + Number(c), 0);
+    console.log(sum);
+}
+
+printSumDigits(158);
+console.log('====================');
+printSumDigitsArray(159);

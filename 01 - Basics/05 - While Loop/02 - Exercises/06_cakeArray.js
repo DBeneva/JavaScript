@@ -1,10 +1,11 @@
 function cake(input) {
-    const pieces = input[0] * input[1];
+    const pieces = input.shift() * input.shift();
     let piecesTaken = 0;
-
-    for (let i = 2; input[i] !== 'STOP' && piecesTaken <= pieces; i++) {
-        piecesTaken += Number(input[i]);
-    }
+    
+    input.every(p => {
+        if (piecesTaken >= pieces || p == 'STOP') return false;
+        else return piecesTaken += Number(p);
+    });
 
     const difference = Math.abs(pieces - piecesTaken);
 

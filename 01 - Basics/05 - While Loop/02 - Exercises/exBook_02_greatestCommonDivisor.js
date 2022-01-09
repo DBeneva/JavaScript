@@ -1,6 +1,5 @@
 function greatestCommonDivisor(input) {
-    let a = Number(input[0]);
-    let b = Number(input[1]);
+    let a = Number(input[0]), b = Number(input[1]);
 
     while (b != 0) {
         let oldB = b;
@@ -11,4 +10,4 @@ function greatestCommonDivisor(input) {
     console.log('GCD = ' + a);
 }
 
-greatestCommonDivisor([0, 67]);
+greatestCommonDivisor([2, 24]);

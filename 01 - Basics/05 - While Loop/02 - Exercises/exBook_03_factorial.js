@@ -1,5 +1,4 @@
 function factorial(n) {
-    n = Number(n);
     let factorialN = 1;
 
     do {

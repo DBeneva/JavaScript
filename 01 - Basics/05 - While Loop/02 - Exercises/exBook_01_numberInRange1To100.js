@@ -1,11 +1,9 @@
 function numberInRange1To100(input) {
-    let i = 0;
-    let num = Number(input[i]);
+    let num = 0;
 
-    while (num < 1 || num > 100) {
-        console.log('Invalid number!');
+    for (let i = 0; num < 1 || num > 100; i++) {
         num = Number(input[i]);
-        i++;
+        console.log('Invalid number!');
     }
 
     console.log(`The number is ${num}`);
