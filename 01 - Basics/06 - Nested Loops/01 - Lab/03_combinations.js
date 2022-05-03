@@ -1,19 +1,16 @@
 function combinations(n) {
     n = Number(n);
-    let combinationsNumber = 0;
+    let combinations = 0;
 
-    for (let x1 = 0; x1 <= n; x1++) {
-        for (let x2 = 0; x2 <= n; x2++) {
-            for (let x3 = 0; x3 <= n; x3++) {
-                
-                if (x1 + x2 + x3 == n) {
-                combinationsNumber += 1;
-                }
+    for (let x = 0; x <= n; x++) {
+        for (let y = 0; y <= n; y++) {
+            for (let z = 0; z <= n; z++) {
+                if (x + y + z == n) combinations++;
             }
         }
     }
-    
-    console.log(combinationsNumber);
+
+    console.log(combinations);
 }
 
-combinations('25');
+combinations('2');

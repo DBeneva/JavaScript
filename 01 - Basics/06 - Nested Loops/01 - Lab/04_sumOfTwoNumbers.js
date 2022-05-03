@@ -1,29 +1,30 @@
-function sumOfTwoNumbers(input) {
-    let n = Number(input[0]);
-    let m = Number(input[1]);
-    let stop = Number(input[2]);
-    let combinations = 0;
-    let isFound = false;
+function sumOfTwoNumbers([n, m, stop]) {
+    inputParamsToNumbers();
+    let combinations = 0, isFound = false;
 
-    for (let i = n; i <= m; i++) {
-        for (let j = n; j <= m; j++) {
+    for (let i = n; i <= m && !isFound; i++) {
+        for (let j = n; j <= m && !isFound; j++) {
             combinations++;
-            
-            if (i + j == stop) {
-                isFound = true;
-                console.log(`Combination N:${combinations} (${i} + ${j} = ${i + j})`);
-                break;
-            }
-        }
-
-        if (isFound) {
-            break;
+            if (i + j == stop) printCombination(combinations, i, j);
         }
     }
 
-    if (isFound == false) {
+    if (isFound == false) printNoCombination();
+    
+    function inputParamsToNumbers() {
+        n = Number(n);
+        m = Number(m);
+        stop = Number(stop);
+    }
+    
+    function printCombination(combinations, i, j) {
+        console.log(`Combination N:${combinations} (${i} + ${j} = ${i + j})`);
+        isFound = true;
+    }
+    
+    function printNoCombination() {
         console.log(`${combinations} combinations - neither equals ${stop}`);
     }
 }
 
-sumOfTwoNumbers(['23', '24', '20']);
+sumOfTwoNumbers(['1', '10', '5']);
