@@ -349,7 +349,7 @@ describe("E2E tests", function () {
                 logoutBtn.click()
             ]);
 
-            const token = request.headers()["x-authorization"];
+            const token = request.headers()["X-Authorization"];
             expect(request.method()).to.equal("GET");
             expect(token).to.equal(data.accessToken);
         });

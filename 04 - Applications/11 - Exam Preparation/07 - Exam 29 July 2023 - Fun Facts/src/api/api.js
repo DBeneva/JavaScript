@@ -34,10 +34,10 @@ function createOptions(method = 'get', body) {
         options.body = JSON.stringify(body);
     }
 
-    const token = sessionStorage.getItem('userToken');
+    const accessToken = sessionStorage.getItem('accessToken');
     
-    if (token != null) {
-        options.headers['X-Authorization'] = token;
+    if (accessToken != null) {
+        options.headers['X-Authorization'] = accessToken;
     }
     
     return options;
@@ -62,7 +62,7 @@ async function del(url) {
 async function login(email, password) {
     const response = await post(settings.host + '/users/login', { email, password });
 
-    sessionStorage.setItem('userToken', response.accessToken);
+    sessionStorage.setItem('accessToken', response.accessToken);
     sessionStorage.setItem('userId', response._id);
     sessionStorage.setItem('userEmail', response.email);
 
@@ -72,7 +72,7 @@ async function login(email, password) {
 async function register(email, password) {
     const response = await post(settings.host + '/users/register', { email, password });
 
-    sessionStorage.setItem('userToken', response.accessToken);
+    sessionStorage.setItem('accessToken', response.accessToken);
     sessionStorage.setItem('userId', response._id);
     sessionStorage.setItem('userEmail', response.email);
 
@@ -80,9 +80,9 @@ async function register(email, password) {
 }
 
 async function logout() {
-    const response = await get(settings.host + '/users/logout');
+    const response = await get(settings.host + '/users/logout', createOptions());
 
-    sessionStorage.removeItem('userToken');
+    sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('userEmail');
 

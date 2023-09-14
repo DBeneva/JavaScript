@@ -24,7 +24,7 @@ page('/', decorateContext, homePage);
 page('/dashboard', decorateContext, dashboardPage);
 page('/details/:id', decorateContext, detailsPage);
 page('/create', decorateContext, createPage);
-page('/events/:id', decorateContext, editPage);
+page('/facts/:id', decorateContext, editPage);
 page('/register', decorateContext, registerPage);
 page('/login', decorateContext, loginPage);
 

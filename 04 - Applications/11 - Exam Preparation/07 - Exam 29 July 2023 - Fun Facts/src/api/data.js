@@ -8,54 +8,54 @@ const register = api.register;
 const logout = api.logout;
 const getUserId = api.getUserId;
 
-async function getAllEvents() {
-    return await api.get(host + '/data/events?sortBy=_createdOn%20desc');
+async function getAllFacts() {
+    return await api.get(host + '/data/facts?sortBy=_createdOn%20desc');
 }
 
-async function getEventById(id) {
-    return await api.get(host + '/data/events/' + id);
+async function getFactById(id) {
+    return await api.get(host + '/data/facts/' + id);
 }
 
-async function getEventsBySearch(search) {
-    return await api.get(host + `/data/events?where=name%20LIKE%20%22${search}%22`);
+async function getFactsBySearch(search) {
+    return await api.get(host + `/data/facts?where=name%20LIKE%20%22${search}%22`);
 }
 
-async function goToEvent(event) {
-    return await api.post(host + `/data/going`, event);
+async function likeFact(fact) {
+    return await api.post(host + `/data/likes`, fact);
 }
 
-async function getPeopleGoingToEvent(eventId) {
-    return await api.get(host + `/data/going?where=eventId%3D%22${eventId}%22&distinct=_ownerId&count`);
+async function getPeopleLikedFact(factId) {
+    return await api.get(host + `/data/likes?where=factId%3D%22${factId}%22&distinct=_ownerId&count`);
 }
 
-async function isUserGoingToEvent(eventId, userId) {
-    return await api.get(host + `/data/going?where=eventId%3D%22${eventId}%22%20and%20_ownerId%3D%22${userId}%22&count`);
+async function hasUserLikedFact(factId, userId) {
+    return await api.get(host + `/data/likes?where=factId%3D%22${factId}%22%20and%20_ownerId%3D%22${userId}%22&count`);
 }
 
-async function createEvent(event) {
-    return await api.post(host + '/data/events', event);
+async function createFact(fact) {
+    return await api.post(host + '/data/facts', fact);
 }
 
-async function editEvent(id, event) {
-    return await api.put(host + '/data/events/' + id, event);
+async function editFact(id, fact) {
+    return await api.put(host + '/data/facts/' + id, fact);
 }
 
-async function deleteEvent(id) {
-    return await api.del(host + '/data/events/' + id);
+async function deleteFact(id) {
+    return await api.del(host + '/data/facts/' + id);
 }
 
 export {
     login,
     register,
     logout,
-    getAllEvents,
-    getEventById,
-    getEventsBySearch,
-    goToEvent,
-    getPeopleGoingToEvent,
-    isUserGoingToEvent,
-    createEvent,
-    editEvent,
-    deleteEvent,
+    getAllFacts,
+    getFactById,
+    getFactsBySearch,
+    likeFact,
+    getPeopleLikedFact,
+    hasUserLikedFact,
+    createFact,
+    editFact,
+    deleteFact,
     getUserId
 };

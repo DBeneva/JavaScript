@@ -1,8 +1,63 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 import * as api from '../api/data.js';
 
-const detailsTemplate = (event, onDelete, isOwner, goToEvent, userId) => html`
-    <section id="details">
+const detailsTemplate = (fact, onDelete, isOwner, likeFact, userId) => html`
+<section id="details">
+    <div id="details-wrapper">
+      <img id="details-img" src="${fact.imageUrl}" alt="example1" />
+      <p id="details-category">${fact.category}</p>
+      <div id="info-wrapper">
+        <div id="details-description">
+          <p id="description">${fact.description}</p>
+          <p id ="more-info">${fact.moreInfo}</p>
+        </div>
+
+        <h3>Likes:<span id="likes">${fact.peopleLiked}</span></h3>
+
+         <!--Edit and Delete are only for creator-->
+         
+    <div id="action-buttons">
+    ${isOwner
+        ? html`
+            <a href=${`/facts/${fact._id}`} id="edit-btn">Edit</a>
+            <a @click=${onDelete} href="javascript:void(0)" id="delete-btn">Delete</a>
+          `
+        : !fact.hasUserLiked && userId
+            ? html`<a @click=${likeFact} href="javascript:void(0)" id="like-btn">Like</a>`
+            : ''
+    }
+    </div>
+      </div>
+  </div>
+</section>   
+`;
+
+export async function detailsPage(ctx) {
+    const id = ctx.params.id;
+    const fact = await api.getFactById(id);
+    const userId = api.getUserId();
+
+    fact.peopleLiked = await api.getPeopleLikedFact(id);
+    fact.hasUserLiked = await api.hasUserLikedFact(id, userId);
+
+    ctx.render(detailsTemplate(fact, onDelete, fact._ownerId == userId, likeFact, userId));
+
+    async function onDelete() {
+        const confirmed = confirm('Are you sure you want to delete this fun fact?');
+
+        if (confirmed) {
+            await api.deleteFact(fact._id);
+            ctx.page.redirect('/dashboard');
+        }
+    }
+
+    async function likeFact() {
+        await api.likeFact({ factId: id });
+        ctx.page.redirect(`/details/${id}`);
+    }
+}
+
+{/* <section id="details">
         <div id="details-wrapper">
             <img id="details-img" src="${event.imageUrl}" alt="example1" />
             <p id="details-title">${event.name}</p>
@@ -28,30 +83,4 @@ const detailsTemplate = (event, onDelete, isOwner, goToEvent, userId) => html`
                 }
             </div>
         </div>
-    </section> 
-`;
-
-export async function detailsPage(ctx) {
-    const id = ctx.params.id;
-    const event = await api.getEventById(id);
-    const userId = api.getUserId();
-
-    event.peopleGoing = await api.getPeopleGoingToEvent(id);
-    event.isUserGoing = await api.isUserGoingToEvent(id, userId);
-
-    ctx.render(detailsTemplate(event, onDelete, event._ownerId == userId, goToEvent, userId));
-
-    async function onDelete() {
-        const confirmed = confirm('Are you sure you want to delete this event?');
-
-        if (confirmed) {
-            await api.deleteEvent(event._id);
-            ctx.page.redirect('/dashboard');
-        }
-    }
-
-    async function goToEvent() {
-        await api.goToEvent({ eventId: id });
-        ctx.page.redirect(`/details/${id}`);
-    }
-}
+    </section>  */}

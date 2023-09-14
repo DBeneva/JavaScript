@@ -1,46 +1,41 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 import { getUserId } from '../api/api.js';
-import { createEvent } from '../api/data.js';
+import { createFact } from '../api/data.js';
 
 const createTemplate = (onSubmit) => html`
 <section id="create">
-    <div class="form">
-        <h2>Add Event</h2>
-        <form class="create-form" @submit=${onSubmit}>
-            <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Event"
-            />
-            <input
-                type="text"
-                name="imageUrl"
-                id="event-image"
-                placeholder="Event Image URL"
-            />
-            <input
-                type="text"
-                name="category"
-                id="event-category"
-                placeholder="Category"
-            />
-            <textarea
-                id="event-description"
-                name="description"
-                placeholder="Description"
-                rows="5"
-                cols="50"
-            ></textarea>
-            <input
-                type="text"
-                name="date"
-                id="date"
-                placeholder="When?"
-            />
-            <button type="submit">Add</button>
-        </form>
-    </div>
+  <div class="form">
+    <h2>Add Fact</h2>
+    <form class="create-form" @submit=${onSubmit}>
+      <input
+        type="text"
+        name="category"
+        id="category"
+        placeholder="Category"
+      />
+      <input
+        type="text"
+        name="image-url"
+        id="image-url"
+        placeholder="Image URL"
+      />
+      <textarea
+      id="description"
+      name="description"
+      placeholder="Description"
+      rows="10"
+      cols="50"
+    ></textarea>
+    <textarea
+      id="additional-info"
+      name="additional-info"
+      placeholder="Additional Info"
+      rows="10"
+      cols="50"
+    ></textarea>
+      <button type="submit">Add Fact</button>
+    </form>
+  </div>
 </section>
 `;
 
@@ -52,28 +47,26 @@ export async function createPage(ctx) {
 
         const formData = new FormData(ev.target);
 
-        const event = {
-            name: formData.get('name'),
-            imageUrl: formData.get('imageUrl'),
+        const fact = {
             category: formData.get('category'),
+            imageUrl: formData.get('image-url'),
             description: formData.get('description'),
-            date: formData.get('date'),
+            moreInfo: formData.get('additional-info'),
         };
 
-        if (event.name == '' || event.imageUrl == '' || event.category == '' || event.description == '' || event.date == '') {
+        if (fact.imageUrl == '' || fact.category == '' || fact.description == '' || fact.moreInfo == '') {
             return alert('Please fill in all mandatory fields!');
         }
 
-        event.name = event.name.trim();
-        event.imageUrl = event.imageUrl.trim();
-        event.category = event.category.trim();
-        event.description = event.description.trim();
-        event.date = event.date.trim();
-        event._ownerId = getUserId();
+        fact.imageUrl = fact.imageUrl.trim();
+        fact.category = fact.category.trim();
+        fact.description = fact.description.trim();
+        fact.moreInfo = fact.moreInfo.trim();
+        fact._ownerId = getUserId();
 
-        console.log(event);
+        console.log(fact);
 
-        await createEvent(event);
+        await createFact(fact);
         ctx.page.redirect('/dashboard');
     }
 }
