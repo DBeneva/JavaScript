@@ -1,0 +1,32 @@
+[
+  {
+    "title": "The Little Mermaid",
+    "genre": "bbb",
+    "director": "Ben Johnson",
+    "year": 1987,
+    "imageURL": "https://upload.wikimedia.org/wikipedia/en/c/c0/The_Little_Mermaid_%28Official_1989_Film_Poster%29.png",
+    "rating": 2,
+    "description": "bla bla",
+    "id": 1
+  },
+  {
+    "title": "Titanic",
+    "genre": "romance",
+    "director": "someone",
+    "year": 1998,
+    "imageURL": "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg",
+    "rating": 3,
+    "description": "classic",
+    "id": 2
+  },
+  {
+    "title": "The Last Holiday",
+    "genre": "nice one",
+    "director": "John Doe",
+    "year": 2005,
+    "imageURL": "https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/S/pv-target-images/b4a969c57bdab0040a6cdab9e095a1d604b678070c2b599e7fbc109eb5768cd3.jpg",
+    "rating": 6,
+    "description": "Just watch it!",
+    "id": 3
+  }
+]
