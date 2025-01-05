@@ -1,0 +1,41 @@
+<article class="product-detail">
+    <img src="{{cosmetic.image}}">
+    <h2>{{cosmetic.name}}</h2>
+    <p>{{cosmetic.description}}</p>
+
+    <h3>|~|~|~|~|~|~|~|~|~|~|~|~|~|~|~|</h3>
+
+    <h3>Key Ingredients:</h3>
+    <p>{{cosmetic.ingredients}}</p>
+
+    <h3>|~|~|~|~|~|~|~|~|~|~|~|~|~|~|~|</h3>
+
+    <h3>Benefits:</h3>
+    <p>{{cosmetic.benefits}}</p>
+
+    <h3>|~|~|~|~|~|~|~|~|~|~|~|~|~|~|~|</h3>
+
+    <h3>Skin Type:</h3>
+    <p>Suitable for: {{cosmetic.skin}}.</p>
+
+    <h3>|~|~|~|~|~|~|~|~|~|~|~|~|~|~|~|</h3>
+
+    <h3>Price: ${{cosmetic.price}}</h3>
+
+    <h3>|~|~|~|~|~|~|~|~|~|~|~|~|~|~|~|</h3>
+
+    <h3>People Who Recommend: {{cosmetic.recommendList.length}}</h3>
+</article>
+
+<div class="command">
+    {{#if cosmetic.isOwner}}
+    <a href="/cosmetics/edit/{{cosmetic._id}}">Edit</a>
+    <a href="/cosmetics/delete/{{cosmetic._id}}">Delete</a>
+    {{else if cosmetic.hasRecommended}}
+    {{else if cosmetic.isUser}}
+    <a href="/cosmetics/recommend/{{cosmetic._id}}">Recommend</a>
+    {{/if}}
+    {{#if cosmetic.hasRecommended}}
+    <p>You've already recommended this product!</p>
+    {{/if}}
+</div>
